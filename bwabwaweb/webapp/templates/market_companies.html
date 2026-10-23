@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Company Explorer · Bwabwa{% endblock %}
+{% block subnav %}{% include "partials/subnav_market.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Company Explorer</h1>
+    <span class="badge">{{ items | length }} item</span>
+  </div>
+  <p class="text-muted footnote">Item produksi diurutkan dari yang paling banyak company.</p>
+  {% if items %}
+  <div class="table-scroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th class="num">Companies</th>
+          <th class="num">Total Workers</th>
+          <th class="num">Dengan AE</th>
+          <th>Update Terakhir</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in items %}
+        <tr>
+          <td><a href="/market/companies/{{ row.item_code | urlencode }}">{{ row.item_label }}</a></td>
+          <td class="num mono">{{ row.companies }}</td>
+          <td class="num mono">{{ row.total_workers }}</td>
+          <td class="num mono">{{ row.with_ae }}</td>
+          <td class="mono">{% if row.last_updated %}{{ row.last_updated | wib }}{% else %}-{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">Belum ada data company.</p>
+  {% endif %}
+</section>
+{% endblock %}

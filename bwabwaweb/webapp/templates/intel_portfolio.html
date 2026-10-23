@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Portofolio · Tools{% endblock %}
+{% block subnav %}{% include "partials/subnav_intel.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+  <h1 class="section-title">Portofolio pemain</h1>
+  <form class="form-stack" method="get" action="/intel/portfolio">
+    <div class="fs-field">
+      <label class="fs-label" for="pf-q">Username</label>
+      <input class="input" id="pf-q" type="text" name="q" value="{{ query }}" placeholder="Username / ID WarEra" required autocomplete="off">
+    </div>
+    <div class="fs-row">
+      <label class="fs-inline">
+        <input class="input fs-num" type="number" name="days" value="{{ days }}" min="1" placeholder="20">
+        <span class="fs-unit">hari</span>
+      </label>
+      <label class="fs-inline">
+        <input type="checkbox" name="all_history" value="true" {% if all_history %}checked{% endif %}>
+        <span class="fs-unit">Semua riwayat</span>
+      </label>
+    </div>
+    <button type="submit" class="button">Lihat</button>
+  </form>
+  <p class="text-muted footnote">Data dari cache bot (sync incremental per request).</p>
+</section>
+
+{% if report %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">{{ report.username }}</h2>
+    <span class="badge">{% if report.all_history %}All History{% else %}{{ report.days }} hari{% endif %} · {{ report.total.tx_count }} tx</span>
+  </div>
+  <div class="kv-grid">
+    <div><span class="text-muted">Total profit</span><span class="mono {{ report.total.profit | trend }}">{{ report.total.profit | amount }}</span></div>
+    <div><span class="text-muted">ROI</span><span class="mono">{{ report.total.roi_pct }}%</span></div>
+    <div><span class="text-muted">Volume</span><span class="mono">{{ report.total.volume | amount }}</span></div>
+    <div><span class="text-muted">Win rate</span><span class="mono">{{ report.total.win_rate_pct }}%</span></div>
+    <div><span class="text-muted">W / L</span><span class="mono">{{ report.total.wins }} / {{ report.total.losses }}</span></div>
+    <div><span class="text-muted">Biggest loss</span><span class="mono {{ report.total.biggest_loss | trend }}">{{ report.total.biggest_loss | amount }}</span></div>
+  </div>
+</section>
+
+{% if report.citizenship_history %}
+<section class="card">
+  <h2 class="subhead">Riwayat kewarganegaraan</h2>
+  <ul class="rank-list">
+    {% for c in report.citizenship_history %}
+    <li class="rank-row">
+      <span class="rank-name">{{ c.country_name }}<span class="rank-sub mono">{{ c.first_seen }} → {{ c.last_seen }}</span></span>
+      <span class="rank-value mono">{{ c.tx_count }} tx</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if report.per_country %}
+<section class="card">
+  <h2 class="subhead">Per negara</h2>
+  <ul class="rank-list">
+    {% for c in report.per_country %}
+    <li class="rank-row">
+      <span class="rank-name">{{ c.country_name }}<span class="rank-sub mono">ROI {{ c.roi_pct }}% · vol {{ c.volume | amount }} · {{ c.wins }}W/{{ c.losses }}L · {{ c.tx_count }} tx{% if c.date_range %} · {{ c.date_range[0] }} → {{ c.date_range[1] }}{% endif %}</span></span>
+      <span class="rank-value mono {{ c.profit | trend }}">{{ c.profit | amount }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endif %}
+{% endblock %}

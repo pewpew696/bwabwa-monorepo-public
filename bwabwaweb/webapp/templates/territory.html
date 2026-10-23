@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Territory · Bwabwa{% endblock %}
+{% block subnav %}{% include "partials/subnav_territory.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Pajak wage</h1>
+    <span class="badge">{{ data.from }} → {{ data.to }}</span>
+  </div>
+  <form class="filter-form" method="get" action="/territory">
+    <input class="input" type="date" name="from" value="{{ data.from }}">
+    <input class="input" type="date" name="to" value="{{ data.to }}">
+    <button type="submit" class="button">Terapkan</button>
+  </form>
+  {% if data.leaderboard %}
+  <ul class="rank-list">
+    {% for row in data.leaderboard %}
+    <li class="rank-row">
+      <a class="rank-name" href="/territory/country/{{ row.country_name | urlencode }}">
+        {{ row.country_name }}
+        <span class="rank-sub mono">{{ row.tx_count }} tx · {{ row.gross_tax_total | amount }} gross</span>
+      </a>
+      <span class="rank-value mono">{{ row.tax_collected | amount }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Belum ada data pada rentang ini.</p>
+  {% endif %}
+</section>
+{% endblock %}

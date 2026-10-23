@@ -1,0 +1,38 @@
+[
+  {
+    "file": "market/items.py",
+    "kind": "function",
+    "name": "_label",
+    "body_normalized": "FunctionDef(name='_label', args=arguments(posonlyargs=[], args=[arg(arg='item_id', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Name(id='ITEM_LABELS', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='item_id', ctx=Load()), Call(func=Attribute(value=Call(func=Attribute(value=Name(id='item_id', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value='_'), Constant(value=' ')], keywords=[]), attr='title', ctx=Load()), args=[], keywords=[])], keywords=[]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])",
+    "transform": {
+      "reason": "pindah ke services/economy/items.py (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/items.py",
+      "to_kind": "function",
+      "to_name": "_label"
+    }
+  },
+  {
+    "file": "market/items.py",
+    "kind": "function",
+    "name": "_item_id_from_api_key",
+    "body_normalized": "FunctionDef(name='_item_id_from_api_key', args=arguments(posonlyargs=[], args=[arg(arg='key', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Name(id='API_KEY_TO_ITEM_ID', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='key', ctx=Load())], keywords=[]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])",
+    "transform": {
+      "reason": "pindah ke services/economy/items.py (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/items.py",
+      "to_kind": "function",
+      "to_name": "_item_id_from_api_key"
+    }
+  },
+  {
+    "file": "market/items.py",
+    "kind": "function",
+    "name": "_api_key_from_item_id",
+    "body_normalized": "FunctionDef(name='_api_key_from_item_id', args=arguments(posonlyargs=[], args=[arg(arg='item_id', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Name(id='ITEM_ID_TO_API_KEY', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='item_id', ctx=Load())], keywords=[]))], decorator_list=[], returns=BinOp(left=Name(id='str', ctx=Load()), op=BitOr(), right=Constant(value=None)), type_params=[])",
+    "transform": {
+      "reason": "pindah ke services/economy/items.py (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/items.py",
+      "to_kind": "function",
+      "to_name": "_api_key_from_item_id"
+    }
+  }
+]

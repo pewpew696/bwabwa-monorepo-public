@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Tax Calc · Territory{% endblock %}
+{% block subnav %}{% include "partials/subnav_territory.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Fiscal Monitor</h1>
+    <span class="badge">{{ overview.window }}</span>
+  </div>
+  <p class="text-muted footnote">Tax income from wage transactions across all countries. Data from our own collector.</p>
+
+  <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+    {% for w in overview.windows %}
+    <a class="badge{% if w == overview.window %} is-active{% endif %}" style="{% if w == overview.window %}color:var(--accent);border-color:var(--accent){% endif %};text-decoration:none" href="/territory/tax-calc?window={{ w }}">{{ w }}</a>
+    {% endfor %}
+  </div>
+
+  <div class="kv-grid">
+    <div><span class="text-muted">Tax income</span><span class="mono">{{ overview.summary.tax_income|price }}</span></div>
+    <div><span class="text-muted">Wages paid</span><span class="mono">{{ overview.summary.wages_paid|price }}</span></div>
+    <div><span class="text-muted">Transactions</span><span class="mono">{{ overview.summary.transactions|amount }}</span></div>
+    <div><span class="text-muted">Countries</span><span class="mono">{{ overview.summary.countries|amount }}</span></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2 class="section-title">Hourly trend</h2>
+  <div class="chart-wrap"><div id="trend-chart" style="height:100%"></div></div>
+  <p class="text-muted footnote" id="trend-status"></p>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Tax leaderboard</h2>
+    <span class="badge">{{ overview.leaderboard|length }} countries</span>
+  </div>
+  <div class="table-scroll">
+    <table class="table">
+      <thead>
+        <tr><th>#</th><th>Country</th><th class="num">Tax income</th><th class="num">Wages</th><th class="num">Tx</th></tr>
+      </thead>
+      <tbody>
+        {% for r in overview.leaderboard %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td><a href="/territory/tax-calc/{{ r.country_id }}?window={{ overview.window }}">{{ r.country_name }}</a></td>
+          <td class="num mono">{{ r.tax_income|price }}</td>
+          <td class="num mono">{{ r.wages_paid|price }}</td>
+          <td class="num mono">{{ r.transactions|amount }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted footnote">Click a country for hourly detail + foreign/domestic split.</p>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script src="/static/lightweight-charts.umd.js" defer></script>
+<script defer nonce="{{ csp_nonce }}">
+(function(){
+  var el = document.getElementById('trend-chart');
+  var st = document.getElementById('trend-status');
+  if (!el || typeof LightweightCharts === 'undefined') {
+    if (st) st.textContent = 'Chart library not loaded.';
+    return;
+  }
+  var data = [
+    {% for p in overview.trend %}
+    { time: {{ p.ts }}, value: {{ p.tax_income }} },
+    {% endfor %}
+  ];
+  if (!data.length) { if (st) st.textContent = 'No data for this window.'; return; }
+  var chart = LightweightCharts.createChart(el, {
+    layout: { background: { color: 'transparent' }, textColor: '#9a9a9a' },
+    grid: { vertLines: { visible: false }, horzLines: { color: '#2a2a2a' } },
+    timeScale: { timeVisible: true },
+  });
+  var series = chart.addAreaSeries({ lineColor: '#4a9eff', topColor: 'rgba(74,158,255,0.4)', bottomColor: 'rgba(74,158,255,0)' });
+  series.setData(data);
+  chart.timeScale().fitContent();
+})();
+</script>
+{% endblock %}

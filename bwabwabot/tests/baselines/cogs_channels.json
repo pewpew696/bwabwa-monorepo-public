@@ -1,0 +1,99 @@
+[
+  {
+    "file": "cogs/channels.py",
+    "kind": "constant",
+    "name": "EXEMPT_COMMANDS",
+    "body_normalized": "Set(elts=[Constant(value='channel')])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "class",
+    "name": "ChannelsCog"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "method",
+    "name": "ChannelsCog.__init__",
+    "body_normalized": "FunctionDef(name='__init__', args=arguments(posonlyargs=[], args=[arg(arg='bot', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Bot', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='self', ctx=Load()), attr='bot', ctx=Store())], value=Name(id='bot', ctx=Load())), AnnAssign(target=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Store()), annotation=Subscript(value=Name(id='dict', ctx=Load()), slice=Tuple(elts=[Name(id='str', ctx=Load()), Subscript(value=Name(id='set', ctx=Load()), slice=Name(id='int', ctx=Load()), ctx=Load())], ctx=Load()), ctx=Load()), value=Call(func=Name(id='defaultdict', ctx=Load()), args=[Name(id='set', ctx=Load())], keywords=[]), simple=0)], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.cog_load",
+    "body_normalized": "AsyncFunctionDef(name='cog_load', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='self', ctx=Load()), attr='_load_from_db', ctx=Load()), args=[], keywords=[])))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog._can_manage",
+    "body_normalized": "AsyncFunctionDef(name='_can_manage', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='author', ctx=Load()), attr='id', ctx=Load()), ops=[Eq()], comparators=[Name(id='OWNER_ID', ctx=Load())]), body=[Return(value=Constant(value=True))], orelse=[]), If(test=Await(value=Call(func=Name(id='is_bot_admin', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='author', ctx=Load()), attr='id', ctx=Load())], keywords=[])), body=[Return(value=Constant(value=True))], orelse=[]), Return(value=Call(func=Name(id='bool', ctx=Load()), args=[Attribute(value=Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='author', ctx=Load()), attr='guild_permissions', ctx=Load()), attr='administrator', ctx=Load())], keywords=[]))], decorator_list=[], returns=Name(id='bool', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.cog_check",
+    "body_normalized": "AsyncFunctionDef(name='cog_check', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=UnaryOp(op=Not(), operand=Await(value=Call(func=Attribute(value=Name(id='self', ctx=Load()), attr='_can_manage', ctx=Load()), args=[Name(id='ctx', ctx=Load())], keywords=[]))), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[Constant(value='🚫 Only server admins or bot admins can use this.')], keywords=[]))), Return(value=Constant(value=False))], orelse=[]), Return(value=Constant(value=True))], decorator_list=[], returns=Name(id='bool', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog._load_from_db",
+    "body_normalized": "AsyncFunctionDef(name='_load_from_db', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Try(body=[Assign(targets=[Name(id='res', ctx=Store())], value=Await(value=Call(func=Attribute(value=Name(id='asyncio', ctx=Load()), attr='to_thread', ctx=Load()), args=[Lambda(args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='allowed_channels')], keywords=[]), attr='select', ctx=Load()), args=[Constant(value='*')], keywords=[]), attr='execute', ctx=Load()), args=[], keywords=[]))], keywords=[])))], handlers=[ExceptHandler(type=Name(id='Exception', ctx=Load()), name='exc', body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='error', ctx=Load()), args=[JoinedStr(values=[Constant(value='channels _load_from_db: '), FormattedValue(value=Name(id='exc', ctx=Load()), conversion=-1)])], keywords=[])), Return()])], orelse=[], finalbody=[]), Expr(value=Call(func=Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load()), attr='clear', ctx=Load()), args=[], keywords=[])), For(target=Name(id='row', ctx=Store()), iter=BoolOp(op=Or(), values=[Name(id='res', ctx=Load()), List(elts=[], ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Subscript(value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load()), slice=Subscript(value=Name(id='row', ctx=Load()), slice=Constant(value='guild_id'), ctx=Load()), ctx=Load()), attr='add', ctx=Load()), args=[Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='row', ctx=Load()), slice=Constant(value='channel_id'), ctx=Load())], keywords=[])], keywords=[]))], orelse=[]), Assign(targets=[Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='bot', ctx=Load()), attr='_allowed_channels', ctx=Store())], value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load())), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[JoinedStr(values=[Constant(value='allowed_channels loaded: '), FormattedValue(value=Call(func=Name(id='len', ctx=Load()), args=[BoolOp(op=Or(), values=[Name(id='res', ctx=Load()), List(elts=[], ctx=Load())])], keywords=[]), conversion=-1), Constant(value=' rows, '), FormattedValue(value=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load())], keywords=[]), conversion=-1), Constant(value=' guild(s) restricted')])], keywords=[]))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog._add",
+    "body_normalized": "AsyncFunctionDef(name='_add', args=arguments(posonlyargs=[], args=[arg(arg='guild_id', annotation=Name(id='int', ctx=Load())), arg(arg='channel_id', annotation=Name(id='int', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='asyncio', ctx=Load()), attr='to_thread', ctx=Load()), args=[Lambda(args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='allowed_channels')], keywords=[]), attr='upsert', ctx=Load()), args=[Dict(keys=[Constant(value='guild_id'), Constant(value='channel_id')], values=[Call(func=Name(id='str', ctx=Load()), args=[Name(id='guild_id', ctx=Load())], keywords=[]), Call(func=Name(id='str', ctx=Load()), args=[Name(id='channel_id', ctx=Load())], keywords=[])])], keywords=[keyword(arg='on_conflict', value=Constant(value='guild_id,channel_id'))]), attr='execute', ctx=Load()), args=[], keywords=[]))], keywords=[]))), Expr(value=Call(func=Attribute(value=Subscript(value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load()), slice=Call(func=Name(id='str', ctx=Load()), args=[Name(id='guild_id', ctx=Load())], keywords=[]), ctx=Load()), attr='add', ctx=Load()), args=[Name(id='channel_id', ctx=Load())], keywords=[]))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog._remove",
+    "body_normalized": "AsyncFunctionDef(name='_remove', args=arguments(posonlyargs=[], args=[arg(arg='guild_id', annotation=Name(id='int', ctx=Load())), arg(arg='channel_id', annotation=Name(id='int', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='asyncio', ctx=Load()), attr='to_thread', ctx=Load()), args=[Lambda(args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='allowed_channels')], keywords=[]), attr='delete', ctx=Load()), args=[], keywords=[]), attr='eq', ctx=Load()), args=[Constant(value='guild_id'), Call(func=Name(id='str', ctx=Load()), args=[Name(id='guild_id', ctx=Load())], keywords=[])], keywords=[]), attr='eq', ctx=Load()), args=[Constant(value='channel_id'), Call(func=Name(id='str', ctx=Load()), args=[Name(id='channel_id', ctx=Load())], keywords=[])], keywords=[]), attr='execute', ctx=Load()), args=[], keywords=[]))], keywords=[]))), Expr(value=Call(func=Attribute(value=Subscript(value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load()), slice=Call(func=Name(id='str', ctx=Load()), args=[Name(id='guild_id', ctx=Load())], keywords=[]), ctx=Load()), attr='discard', ctx=Load()), args=[Name(id='channel_id', ctx=Load())], keywords=[]))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog._reset",
+    "body_normalized": "AsyncFunctionDef(name='_reset', args=arguments(posonlyargs=[], args=[arg(arg='guild_id', annotation=Name(id='int', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='asyncio', ctx=Load()), attr='to_thread', ctx=Load()), args=[Lambda(args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='allowed_channels')], keywords=[]), attr='delete', ctx=Load()), args=[], keywords=[]), attr='eq', ctx=Load()), args=[Constant(value='guild_id'), Call(func=Name(id='str', ctx=Load()), args=[Name(id='guild_id', ctx=Load())], keywords=[])], keywords=[]), attr='execute', ctx=Load()), args=[], keywords=[]))], keywords=[]))), Expr(value=Call(func=Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load()), attr='pop', ctx=Load()), args=[Call(func=Name(id='str', ctx=Load()), args=[Name(id='guild_id', ctx=Load())], keywords=[]), Constant(value=None)], keywords=[]))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.channel_group",
+    "body_normalized": "AsyncFunctionDef(name='channel_group', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='e', ctx=Store())], value=Call(func=Name(id='_embed', ctx=Load()), args=[Constant(value='🔒 Channel Restriction'), Call(func=Attribute(value=Attribute(value=Name(id='discord', ctx=Load()), attr='Color', ctx=Load()), attr='dark_gold', ctx=Load()), args=[], keywords=[])], keywords=[])), Assign(targets=[Attribute(value=Name(id='e', ctx=Load()), attr='description', ctx=Store())], value=Constant(value='Prefix **`x`** — Server admins & bot admins only\\n\\n**`xchannel allow [#channel]`**\\nAllow the bot to respond here (or in the given channel/VC).\\nFirst `allow` in a server switches it into restricted mode.\\n\\n**`xchannel deny [#channel]`**\\nRemove a channel from the allowlist.\\n\\n**`xchannel list`**\\nShow every channel currently allowed in this server.\\n\\n**`xchannel reset`**\\nClear the allowlist entirely — bot becomes usable everywhere again in this server.')), Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[], keywords=[keyword(arg='embed', value=Name(id='e', ctx=Load()))])))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.channel_allow",
+    "body_normalized": "AsyncFunctionDef(name='channel_allow', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load())), arg(arg='channel', annotation=Attribute(value=Attribute(value=Name(id='discord', ctx=Load()), attr='abc', ctx=Load()), attr='GuildChannel', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=None)]), body=[Assign(targets=[Name(id='channel', ctx=Store())], value=BoolOp(op=Or(), values=[Name(id='channel', ctx=Load()), Attribute(value=Name(id='ctx', ctx=Load()), attr='channel', ctx=Load())])), Expr(value=Await(value=Call(func=Attribute(value=Name(id='self', ctx=Load()), attr='_add', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='guild', ctx=Load()), attr='id', ctx=Load()), Attribute(value=Name(id='channel', ctx=Load()), attr='id', ctx=Load())], keywords=[]))), Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[JoinedStr(values=[Constant(value='✅ Bot commands now allowed in '), FormattedValue(value=Attribute(value=Name(id='channel', ctx=Load()), attr='mention', ctx=Load()), conversion=-1), Constant(value='.')])], keywords=[])))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.channel_deny",
+    "body_normalized": "AsyncFunctionDef(name='channel_deny', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load())), arg(arg='channel', annotation=Attribute(value=Attribute(value=Name(id='discord', ctx=Load()), attr='abc', ctx=Load()), attr='GuildChannel', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=None)]), body=[Assign(targets=[Name(id='channel', ctx=Store())], value=BoolOp(op=Or(), values=[Name(id='channel', ctx=Load()), Attribute(value=Name(id='ctx', ctx=Load()), attr='channel', ctx=Load())])), Expr(value=Await(value=Call(func=Attribute(value=Name(id='self', ctx=Load()), attr='_remove', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='guild', ctx=Load()), attr='id', ctx=Load()), Attribute(value=Name(id='channel', ctx=Load()), attr='id', ctx=Load())], keywords=[]))), Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[JoinedStr(values=[Constant(value='❌ Bot commands no longer allowed in '), FormattedValue(value=Attribute(value=Name(id='channel', ctx=Load()), attr='mention', ctx=Load()), conversion=-1), Constant(value='.')])], keywords=[])))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.channel_list",
+    "body_normalized": "AsyncFunctionDef(name='channel_list', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='ids', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='allowed', ctx=Load()), attr='get', ctx=Load()), args=[Call(func=Name(id='str', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='guild', ctx=Load()), attr='id', ctx=Load())], keywords=[])], keywords=[])), If(test=UnaryOp(op=Not(), operand=Name(id='ids', ctx=Load())), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[Constant(value='🔓 No restriction set — bot works in every channel here.')], keywords=[]))), Return()], orelse=[]), Assign(targets=[Name(id='mentions', ctx=Store())], value=Call(func=Attribute(value=Constant(value=', '), attr='join', ctx=Load()), args=[GeneratorExp(elt=JoinedStr(values=[Constant(value='<#'), FormattedValue(value=Name(id='i', ctx=Load()), conversion=-1), Constant(value='>')]), generators=[comprehension(target=Name(id='i', ctx=Store()), iter=Name(id='ids', ctx=Load()), ifs=[], is_async=0)])], keywords=[])), Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[JoinedStr(values=[Constant(value='🔒 Allowed channels: '), FormattedValue(value=Name(id='mentions', ctx=Load()), conversion=-1)])], keywords=[])))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_method",
+    "name": "ChannelsCog.channel_reset",
+    "body_normalized": "AsyncFunctionDef(name='channel_reset', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='self', ctx=Load()), attr='_reset', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='guild', ctx=Load()), attr='id', ctx=Load())], keywords=[]))), Expr(value=Await(value=Call(func=Attribute(value=Name(id='ctx', ctx=Load()), attr='send', ctx=Load()), args=[Constant(value='♻️ Restriction cleared — bot works in every channel here again.')], keywords=[])))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "cogs/channels.py",
+    "kind": "async_function",
+    "name": "setup",
+    "body_normalized": "AsyncFunctionDef(name='setup', args=arguments(posonlyargs=[], args=[arg(arg='bot', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Bot', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Await(value=Call(func=Attribute(value=Name(id='bot', ctx=Load()), attr='add_cog', ctx=Load()), args=[Call(func=Name(id='ChannelsCog', ctx=Load()), args=[Name(id='bot', ctx=Load())], keywords=[])], keywords=[])))], decorator_list=[], returns=Constant(value=None), type_params=[])",
+    "duplicate_allowed": true,
+    "duplicate_reason": "setup() boilerplate Discord cog — bukan duplikat nyata"
+  }
+]

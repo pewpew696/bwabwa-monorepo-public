@@ -1,0 +1,61 @@
+[
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "constant",
+    "name": "SCORE_MIN_HISTORY_DAYS",
+    "body_normalized": "Constant(value=7)"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "constant",
+    "name": "SCORE_ESTABLISHED_DAYS",
+    "body_normalized": "Constant(value=30)"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "constant",
+    "name": "MARGIN_HIGH",
+    "body_normalized": "Tuple(elts=[Constant(value=5.0), Constant(value=15.0)], ctx=Load())"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "constant",
+    "name": "MARGIN_LOW",
+    "body_normalized": "Tuple(elts=[Constant(value=5.0), Constant(value=15.0)], ctx=Load())"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "constant",
+    "name": "WEIGHT_TECH_LOW",
+    "body_normalized": "Tuple(elts=[Constant(value=0.2), Constant(value=0.6)], ctx=Load())"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "constant",
+    "name": "WEIGHT_TECH_HIGH",
+    "body_normalized": "Tuple(elts=[Constant(value=0.2), Constant(value=0.6)], ctx=Load())"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "class",
+    "name": "LiquidityScoreResult"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "function",
+    "name": "_score_to_params",
+    "body_normalized": "FunctionDef(name='_score_to_params', args=arguments(posonlyargs=[], args=[arg(arg='score', annotation=Name(id='float', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='margin_pct, weight_tech, weight_intr dari score [0,1] — formula linear.')), Assign(targets=[Name(id='margin_pct', ctx=Store())], value=BinOp(left=Name(id='MARGIN_LOW', ctx=Load()), op=Sub(), right=BinOp(left=BinOp(left=Name(id='MARGIN_LOW', ctx=Load()), op=Sub(), right=Name(id='MARGIN_HIGH', ctx=Load())), op=Mult(), right=Name(id='score', ctx=Load())))), Assign(targets=[Name(id='weight_tech', ctx=Store())], value=BinOp(left=Name(id='WEIGHT_TECH_LOW', ctx=Load()), op=Add(), right=BinOp(left=BinOp(left=Name(id='WEIGHT_TECH_HIGH', ctx=Load()), op=Sub(), right=Name(id='WEIGHT_TECH_LOW', ctx=Load())), op=Mult(), right=Name(id='score', ctx=Load())))), Assign(targets=[Name(id='weight_intr', ctx=Store())], value=BinOp(left=Constant(value=1.0), op=Sub(), right=Name(id='weight_tech', ctx=Load()))), Return(value=Tuple(elts=[Name(id='margin_pct', ctx=Load()), Name(id='weight_tech', ctx=Load()), Name(id='weight_intr', ctx=Load())], ctx=Load()))], decorator_list=[], returns=Subscript(value=Name(id='tuple', ctx=Load()), slice=Tuple(elts=[Name(id='float', ctx=Load()), Name(id='float', ctx=Load()), Name(id='float', ctx=Load())], ctx=Load()), ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "function",
+    "name": "_anchor_age_days",
+    "body_normalized": "FunctionDef(name='_anchor_age_days', args=arguments(posonlyargs=[], args=[arg(arg='anchor', annotation=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='dict', ctx=Load()), ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Umur anchor (hari) sejak calibrated_at. None = tidak diketahui.')), If(test=UnaryOp(op=Not(), operand=Name(id='anchor', ctx=Load())), body=[Return(value=Constant(value=None))], orelse=[]), Assign(targets=[Name(id='calibrated', ctx=Store())], value=Call(func=Attribute(value=Name(id='anchor', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='calibrated_at')], keywords=[])), If(test=UnaryOp(op=Not(), operand=Name(id='calibrated', ctx=Load())), body=[Return(value=Constant(value=None))], orelse=[]), Try(body=[If(test=Call(func=Name(id='isinstance', ctx=Load()), args=[Name(id='calibrated', ctx=Load()), Name(id='str', ctx=Load())], keywords=[]), body=[Assign(targets=[Name(id='calibrated', ctx=Store())], value=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='fromisoformat', ctx=Load()), args=[Call(func=Attribute(value=Name(id='calibrated', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value='Z'), Constant(value='+00:00')], keywords=[])], keywords=[]))], orelse=[]), Return(value=Attribute(value=BinOp(left=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[]), op=Sub(), right=Name(id='calibrated', ctx=Load())), attr='days', ctx=Load()))], handlers=[ExceptHandler(type=Tuple(elts=[Name(id='ValueError', ctx=Load()), Name(id='TypeError', ctx=Load())], ctx=Load()), body=[Return(value=Constant(value=None))])], orelse=[], finalbody=[])], decorator_list=[], returns=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='int', ctx=Load()), ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/liquidity.py",
+    "kind": "function",
+    "name": "_compute_liquidity_score",
+    "body_normalized": "FunctionDef(name='_compute_liquidity_score', args=arguments(posonlyargs=[], args=[arg(arg='item', annotation=Name(id='str', ctx=Load())), arg(arg='history_days', annotation=Name(id='int', ctx=Load())), arg(arg='median_notional_30d', annotation=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='float', ctx=Load()), ctx=Load())), arg(arg='anchor', annotation=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='dict', ctx=Load()), ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Data item + anchor -> skor liquidity + parameter turunan.\\n\\n    Kegagalan data = skor None (item disembunyikan dari analisis), bukan\\n    error dan bukan nilai darurat.\\n    ')), AnnAssign(target=Name(id='empty', ctx=Store()), annotation=Name(id='LiquidityScoreResult', ctx=Load()), value=Dict(keys=[Constant(value='score'), Constant(value='raw_score'), Constant(value='margin_pct'), Constant(value='weight_tech'), Constant(value='weight_intr'), Constant(value='liquidity_basis'), Constant(value='liquidity_history_days')], values=[Constant(value=None), Constant(value=None), Constant(value=None), Constant(value=None), Constant(value=None), Constant(value=None), Name(id='history_days', ctx=Load())]), simple=1), If(test=Compare(left=Name(id='history_days', ctx=Load()), ops=[Lt()], comparators=[Name(id='SCORE_MIN_HISTORY_DAYS', ctx=Load())]), body=[Return(value=Name(id='empty', ctx=Load()))], orelse=[]), If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='median_notional_30d', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), Compare(left=Name(id='median_notional_30d', ctx=Load()), ops=[LtE()], comparators=[Constant(value=0)])]), body=[Return(value=Name(id='empty', ctx=Load()))], orelse=[]), If(test=Compare(left=Name(id='anchor', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[JoinedStr(values=[Constant(value='_compute_liquidity_score('), FormattedValue(value=Name(id='item', ctx=Load()), conversion=-1), Constant(value='): tidak ada baris liquidity_anchors — treated sebagai insufficient data. Kalau ini muncul terus, jalankan recalibrate_liquidity_anchors(force=True) / SQL bootstrap §F.')])], keywords=[])), Return(value=Name(id='empty', ctx=Load()))], orelse=[]), Assign(targets=[Name(id='min_a', ctx=Store())], value=Call(func=Attribute(value=Name(id='anchor', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='min_anchor_log10')], keywords=[])), Assign(targets=[Name(id='max_a', ctx=Store())], value=Call(func=Attribute(value=Name(id='anchor', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='max_anchor_log10')], keywords=[])), If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='min_a', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), Compare(left=Name(id='max_a', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), Compare(left=Name(id='max_a', ctx=Load()), ops=[LtE()], comparators=[Name(id='min_a', ctx=Load())])]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='error', ctx=Load()), args=[JoinedStr(values=[Constant(value='_compute_liquidity_score('), FormattedValue(value=Name(id='item', ctx=Load()), conversion=-1), Constant(value='): anchor korup (max<=min), skip.')])], keywords=[])), Return(value=Name(id='empty', ctx=Load()))], orelse=[]), Assign(targets=[Name(id='raw', ctx=Store())], value=BinOp(left=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='log10', ctx=Load()), args=[Name(id='median_notional_30d', ctx=Load())], keywords=[]), op=Sub(), right=Name(id='min_a', ctx=Load())), op=Div(), right=BinOp(left=Name(id='max_a', ctx=Load()), op=Sub(), right=Name(id='min_a', ctx=Load())))), Assign(targets=[Name(id='score', ctx=Store())], value=Call(func=Name(id='max', ctx=Load()), args=[Constant(value=0.0), Call(func=Name(id='min', ctx=Load()), args=[Constant(value=1.0), Name(id='raw', ctx=Load())], keywords=[])], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='margin_pct', ctx=Store()), Name(id='weight_tech', ctx=Store()), Name(id='weight_intr', ctx=Store())], ctx=Store())], value=Call(func=Name(id='_score_to_params', ctx=Load()), args=[Name(id='score', ctx=Load())], keywords=[])), Assign(targets=[Name(id='basis', ctx=Store())], value=IfExp(test=Compare(left=Name(id='history_days', ctx=Load()), ops=[GtE()], comparators=[Name(id='SCORE_ESTABLISHED_DAYS', ctx=Load())]), body=Constant(value='established'), orelse=Constant(value='provisional'))), Return(value=Dict(keys=[Constant(value='score'), Constant(value='raw_score'), Constant(value='margin_pct'), Constant(value='weight_tech'), Constant(value='weight_intr'), Constant(value='liquidity_basis'), Constant(value='liquidity_history_days')], values=[Name(id='score', ctx=Load()), Name(id='raw', ctx=Load()), Name(id='margin_pct', ctx=Load()), Name(id='weight_tech', ctx=Load()), Name(id='weight_intr', ctx=Load()), Name(id='basis', ctx=Load()), Name(id='history_days', ctx=Load())]))], decorator_list=[], returns=Name(id='LiquidityScoreResult', ctx=Load()), type_params=[])"
+  }
+]

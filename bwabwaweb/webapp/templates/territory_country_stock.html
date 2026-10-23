@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Country Stock · Tools{% endblock %}
+{% block subnav %}{% include "partials/subnav_territory.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+  <h1 class="section-title">Stok negara</h1>
+  <form class="filter-form" method="get" action="/territory/country-stock">
+    <input class="input" type="text" name="q" value="{{ query }}" placeholder="Nama / ID negara" required autocomplete="off">
+    <input class="input" type="number" name="days" value="{{ days }}" min="1" placeholder="Hari">
+    <button type="submit" class="button">Lihat</button>
+  </form>
+  <p class="text-muted footnote">Open stock (FIFO) + riwayat tx negara.</p>
+</section>
+
+{% if report %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">{{ report.country_name }}</h2>
+    <span class="badge">{{ report.days }} hari · {{ report.transactions | length }} tx</span>
+  </div>
+
+  <h3 class="subhead">Open stock</h3>
+  {% if report.open_stock %}
+  <ul class="rank-list">
+    {% for s in report.open_stock %}
+    <li class="rank-row">
+      <span class="rank-name">{{ s.item }}<span class="rank-sub mono">avg {{ s.avg_buy_price | amount }} · oldest {{ s.oldest_batch | wib }}</span></span>
+      <span class="rank-value mono">{{ s.qty | amount }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Tidak ada open stock.</p>
+  {% endif %}
+</section>
+
+{% if report.transactions %}
+<section class="card">
+  <h2 class="subhead">Riwayat transaksi</h2>
+  <div class="table-scroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Side</th>
+          <th>Item</th>
+          <th class="num">Qty</th>
+          <th class="num">Harga</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tx in report.transactions %}
+        <tr>
+          <td class="mono">{{ tx.dt | wib }}</td>
+          <td class="mono {{ 'is-up' if tx.side == 'BUY' else 'is-down' }}">{{ tx.side }}</td>
+          <td>{{ tx.item }}</td>
+          <td class="num mono">{{ tx.qty | amount }}</td>
+          <td class="num mono">{{ tx.price | amount }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endif %}
+{% endblock %}

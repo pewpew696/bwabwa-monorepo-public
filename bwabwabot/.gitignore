@@ -1,0 +1,79 @@
+# === Secrets & credentials (JANGAN PERNAH DI-TRACK) ===
+.env
+.env.*
+!.env.example
+cookies.txt
+*.crt
+*.pem
+*.key
+private_photos/
+root.crt
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+ENV/
+pip-log.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# === Backup files ===
+*.bak
+*.bak_*
+*.bak-*
+*.pre_*
+*.old
+*.orig
+
+# === Data & dumps ===
+backup/
+dumps/
+logs/
+services/territory/data_exports/
+*.dump
+*.log
+
+# === OS ===
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# === IDE ===
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.sublime-*
+
+# === Node legacy (dari .gitignore lama, tetap dipertahankan) ===
+node_modules/
+dist/
+build/
+out-tsc
+*.tsbuildinfo
+.expo/
+.expo-shared/
+
+# === Files aneh hasil typo command ===
+'udo *
+'ystemctl *
+"udo *
+"ystemctl *
+.coverage*
+htmlcov/
+
+# Test venv (dev-only)
+.venv-test/
+.venv-test2/
+
+# Backup files dengan timestamp (.bak.YYYYMMDD_HHMMSS)
+*.bak.*
+*.bak2*

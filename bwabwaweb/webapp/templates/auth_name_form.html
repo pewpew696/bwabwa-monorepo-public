@@ -1,0 +1,6 @@
+<h1 class="modal-title">Nama perangkat</h1>
+<p class="text-muted">Masukkan nama untuk perangkat ini (maksimal 24 karakter).</p>
+<form class="modal-form" hx-post="/auth/name" hx-target="#auth-panel" hx-swap="innerHTML" autocomplete="off">
+  <input class="input" type="text" name="name" required maxlength="24" autocomplete="off" placeholder="Nama" autofocus>
+  <button type="submit" class="button">Simpan</button>
+</form>

@@ -1,0 +1,154 @@
+[
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "PILL_BONUS",
+    "body_normalized": "Constant(value=0.6)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "GOLD_TX_TYPES",
+    "body_normalized": "Set(elts=[Constant(value='wage'), Constant(value='trading'), Constant(value='itemMarket'), Constant(value='donation'), Constant(value='articleTip'), Constant(value='battleLoot')])"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_ONLY_TX_TYPES",
+    "body_normalized": "Set(elts=[Constant(value='openCase'), Constant(value='craftItem'), Constant(value='dismantleItem')])"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "UNRESOLVED_TX_TYPES",
+    "body_normalized": "Set(elts=[Constant(value='applicationFee')])"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "CASE_REWARD_MAX_GOLD",
+    "body_normalized": "Constant(value=75.0)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "CASE_OPEN_QUEST_LIMIT_PER_WEEK",
+    "body_normalized": "Constant(value=10)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "TX_PAGE_LIMIT",
+    "body_normalized": "Constant(value=100)",
+    "duplicate_allowed": true,
+    "duplicate_reason": "duplikat di web_api/hub_intel.py — sengaja (isolasi modul web vs spy)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "TX_MAX_PAGES",
+    "body_normalized": "Constant(value=50)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_SCAN_INTERVAL_HOURS",
+    "body_normalized": "Constant(value=12)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_STALE_DAYS",
+    "body_normalized": "Constant(value=30)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "TAX_ESTIMATE_MAX_COMPANIES",
+    "body_normalized": "Constant(value=150)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "WORKER_FETCH_CONCURRENCY",
+    "body_normalized": "Constant(value=8)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "ENERGY_HOURS_PER_DAY",
+    "body_normalized": "Constant(value=24)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "CLICK_ENERGY_COST",
+    "body_normalized": "Constant(value=10)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_PRODUCTION_MAX_ROWS",
+    "body_normalized": "Constant(value=30)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_ESTIMATED_TOTAL",
+    "body_normalized": "Constant(value=100000)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "PLAYER_ACTIVE_DAYS",
+    "body_normalized": "Constant(value=3)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "PLAYER_ACTIVE_DAYS_WIDE",
+    "body_normalized": "Constant(value=30)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "PLAYER_ACTIVITY_INTERVAL_MIN",
+    "body_normalized": "Constant(value=10)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "PLAYER_ACTIVITY_BATCH_OWNERS",
+    "body_normalized": "Constant(value=3000)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "PLAYER_ACTIVITY_BOOT_DELAY_S",
+    "body_normalized": "Constant(value=300)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_OWNER_REFRESH_INTERVAL_MIN",
+    "body_normalized": "Constant(value=180)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_OWNER_REFRESH_LOOKBACK_MIN",
+    "body_normalized": "Constant(value=190)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_OWNER_REFRESH_BATCH_OWNERS",
+    "body_normalized": "Constant(value=500)"
+  },
+  {
+    "file": "cogs/spy/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_OWNER_REFRESH_BOOT_DELAY_S",
+    "body_normalized": "Constant(value=300)"
+  }
+]

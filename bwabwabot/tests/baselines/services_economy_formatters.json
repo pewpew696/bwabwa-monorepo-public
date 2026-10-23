@@ -1,0 +1,32 @@
+[
+  {
+    "file": "services/economy/formatters.py",
+    "kind": "function",
+    "name": "_fmt_price",
+    "body_normalized": "FunctionDef(name='_fmt_price', args=arguments(posonlyargs=[], args=[arg(arg='v', annotation=Name(id='float', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Call(func=Attribute(value=JoinedStr(values=[FormattedValue(value=Name(id='v', ctx=Load()), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.4f')]))]), attr='rstrip', ctx=Load()), args=[Constant(value='0')], keywords=[]), attr='rstrip', ctx=Load()), args=[Constant(value='.')], keywords=[]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/formatters.py",
+    "kind": "function",
+    "name": "_fmt_pct",
+    "body_normalized": "FunctionDef(name='_fmt_pct', args=arguments(posonlyargs=[], args=[arg(arg='v', annotation=Name(id='float', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Call(func=Attribute(value=JoinedStr(values=[FormattedValue(value=Name(id='v', ctx=Load()), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.2f')]))]), attr='rstrip', ctx=Load()), args=[Constant(value='0')], keywords=[]), attr='rstrip', ctx=Load()), args=[Constant(value='.')], keywords=[]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/formatters.py",
+    "kind": "function",
+    "name": "_fmt_money",
+    "body_normalized": "FunctionDef(name='_fmt_money', args=arguments(posonlyargs=[], args=[arg(arg='v', annotation=Name(id='float', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Call(func=Attribute(value=JoinedStr(values=[FormattedValue(value=Name(id='v', ctx=Load()), conversion=-1, format_spec=JoinedStr(values=[Constant(value=',.3f')]))]), attr='rstrip', ctx=Load()), args=[Constant(value='0')], keywords=[]), attr='rstrip', ctx=Load()), args=[Constant(value='.')], keywords=[]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/formatters.py",
+    "kind": "function",
+    "name": "_format_remaining",
+    "body_normalized": "FunctionDef(name='_format_remaining', args=arguments(posonlyargs=[], args=[arg(arg='expires_at', annotation=Name(id='datetime', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='remaining', ctx=Store())], value=BinOp(left=Name(id='expires_at', ctx=Load()), op=Sub(), right=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[]))), Assign(targets=[Name(id='minutes', ctx=Store())], value=Call(func=Name(id='max', ctx=Load()), args=[Constant(value=0), Call(func=Name(id='int', ctx=Load()), args=[BinOp(left=Call(func=Attribute(value=Name(id='remaining', ctx=Load()), attr='total_seconds', ctx=Load()), args=[], keywords=[]), op=FloorDiv(), right=Constant(value=60))], keywords=[])], keywords=[])), Return(value=JoinedStr(values=[FormattedValue(value=Name(id='minutes', ctx=Load()), conversion=-1), Constant(value=' min')]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/formatters.py",
+    "kind": "function",
+    "name": "_format_duration",
+    "body_normalized": "FunctionDef(name='_format_duration', args=arguments(posonlyargs=[], args=[arg(arg='expires_at', annotation=Name(id='datetime', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value=\"Sisa waktu ke expires_at, format ringkas: '2d 5h', '13h 20m', '<1h'.\\n    Beda dari _format_remaining (menit doang, buat override manual).\")), Assign(targets=[Name(id='seconds', ctx=Store())], value=Call(func=Name(id='max', ctx=Load()), args=[Constant(value=0), Call(func=Name(id='int', ctx=Load()), args=[Call(func=Attribute(value=BinOp(left=Name(id='expires_at', ctx=Load()), op=Sub(), right=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[])), attr='total_seconds', ctx=Load()), args=[], keywords=[])], keywords=[])], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='days', ctx=Store()), Name(id='rem', ctx=Store())], ctx=Store())], value=Call(func=Name(id='divmod', ctx=Load()), args=[Name(id='seconds', ctx=Load()), Constant(value=86400)], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='hours', ctx=Store()), Name(id='rem', ctx=Store())], ctx=Store())], value=Call(func=Name(id='divmod', ctx=Load()), args=[Name(id='rem', ctx=Load()), Constant(value=3600)], keywords=[])), Assign(targets=[Name(id='minutes', ctx=Store())], value=BinOp(left=Name(id='rem', ctx=Load()), op=FloorDiv(), right=Constant(value=60))), If(test=Name(id='days', ctx=Load()), body=[Return(value=JoinedStr(values=[FormattedValue(value=Name(id='days', ctx=Load()), conversion=-1), Constant(value='d '), FormattedValue(value=Name(id='hours', ctx=Load()), conversion=-1), Constant(value='h')]))], orelse=[]), If(test=Name(id='hours', ctx=Load()), body=[Return(value=JoinedStr(values=[FormattedValue(value=Name(id='hours', ctx=Load()), conversion=-1), Constant(value='h '), FormattedValue(value=Name(id='minutes', ctx=Load()), conversion=-1), Constant(value='m')]))], orelse=[]), Return(value=Constant(value='<1h'))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  }
+]

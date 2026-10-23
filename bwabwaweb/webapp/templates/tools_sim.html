@@ -1,0 +1,399 @@
+{% extends "base.html" %}
+{% block title %}Simulator · Tools{% endblock %}
+{% block content %}
+
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Build Optimizer</h2>
+    <span class="badge">Balance</span>
+  </div>
+  <p class="text-muted footnote">Compare builds by net cost per 1K damage.</p>
+  <a class="button" href="/sim/builder">Open builder</a>
+</section>
+
+<section class="card">
+  <h1 class="section-title">Simulator build</h1>
+  <p class="text-muted footnote">Isi skill + equipment (stat mentah). Dua mode: preview stats (cepat) atau simulasi sesi (RNG).</p>
+  <form class="modal-form" method="post" action="/sim" autocomplete="off">
+    <label class="text-muted">Character level (1–50)</label>
+    <input class="input" type="number" name="char_level" min="1" max="50" required
+           value="{{ (preview.char_level if preview else char_level_form) or 1 }}">
+
+    <h2 class="subhead">Skills</h2>
+    <div class="skill-grid">
+      {% for s in skill_options %}
+      <label class="skill-cell">
+        <span class="skill-label">{{ s.name }}<span class="rank-sub">unlock Lv {{ s.unlock }}</span></span>
+        <input class="input" type="number" name="skill_{{ s.skill_key }}"
+               min="0" max="{{ s.max_level }}" value="0">
+      </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="button">Preview stats</button>
+  </form>
+</section>
+
+{% if preview %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Hasil preview</h2>
+    <span class="badge">SP {{ preview.sp_used }} / {{ preview.sp_budget }}</span>
+  </div>
+  <div class="kv-grid">
+    <div><span class="text-muted">Attack</span><span class="mono">{{ preview.stats.attack }}</span></div>
+    <div><span class="text-muted">Precision</span><span class="mono">{{ preview.stats.precision }}</span></div>
+    <div><span class="text-muted">Crit chance</span><span class="mono">{{ preview.stats.crit_chance }}</span></div>
+    <div><span class="text-muted">Crit damage</span><span class="mono">{{ preview.stats.crit_damage }}×</span></div>
+    <div><span class="text-muted">Max HP</span><span class="mono">{{ preview.stats.max_hp }}</span></div>
+    <div><span class="text-muted">Max hunger</span><span class="mono">{{ preview.stats.max_hunger }}</span></div>
+    <div><span class="text-muted">Armor eff.</span><span class="mono">{{ preview.stats.armor_effectiveness }}</span></div>
+    <div><span class="text-muted">Dodge eff.</span><span class="mono">{{ preview.stats.dodge_effectiveness }}</span></div>
+    <div><span class="text-muted">Loot chance</span><span class="mono">{{ preview.stats.loot_chance_pct }}%</span></div>
+  </div>
+</section>
+{% endif %}
+
+<section class="card">
+  <h2 class="section-title">Simulasi sesi</h2>
+  <p class="text-muted footnote">Equipment stat mentah (biarkan 0 kalau tidak ada). Durability default 100. Ammo: standard, pill: none.</p>
+  <form class="modal-form" method="post" action="/sim/session" autocomplete="off">
+    <label class="text-muted">Character level</label>
+    <input class="input" type="number" name="char_level" min="1" max="50" required
+           value="{{ char_level_form or 1 }}">
+    <label class="text-muted">Num hits (1–10000)</label>
+    <input class="input" type="number" name="num_hits" min="1" max="10000"
+           value="{{ num_hits_form or 100 }}">
+
+    <label class="text-muted">Ammo</label>
+    <select class="input" name="ammo_tier">
+      <option value="none" {% if ammo_tier_form == "none" %}selected{% endif %}>Tanpa ammo</option>
+      <option value="light" {% if ammo_tier_form == "light" %}selected{% endif %}>Light Ammo (+10%)</option>
+      <option value="ammo" {% if ammo_tier_form == "ammo" or not ammo_tier_form %}selected{% endif %}>Ammo (+20%)</option>
+      <option value="heavy" {% if ammo_tier_form == "heavy" %}selected{% endif %}>Heavy Ammo (+40%)</option>
+    </select>
+    <label class="text-muted">Pill state</label>
+    <select class="input" name="pill_state">
+      <option value="none" {% if pill_state_form == "none" or not pill_state_form %}selected{% endif %}>Tanpa pill</option>
+      <option value="buff" {% if pill_state_form == "buff" %}selected{% endif %}>Buff (+60% damage)</option>
+      <option value="debuff" {% if pill_state_form == "debuff" %}selected{% endif %}>Debuff (-60% damage)</option>
+    </select>
+    <label class="text-muted">Rank Bonus % (0–37.5)</label>
+    <input class="input" type="number" name="rank_bonus_pct" min="0" max="37.5" step="0.25"
+           value="{{ rank_bonus_form or 0 }}">
+
+    <label class="text-muted">Battle Bonus % (0–95)</label>
+    <input class="input" type="number" name="battle_bonus_pct" min="0" max="95" step="1"
+           value="{{ battle_bonus_form or 0 }}">
+    <label class="text-muted">
+      <input type="checkbox" name="cases_enabled" value="on" {% if cases_enabled_form is undefined or cases_enabled_form %}checked{% endif %}>
+      Hitung income dari Cases
+    </label>
+
+    <h2 class="subhead">Company tiles</h2>
+    <p class="text-muted footnote">Isi AE tier 1–7 atau Inactive. Item produksi dari chain resmi.</p>
+    <div class="company-grid">
+      {% for i in range(3) %}
+      {% set c = company_forms[i] if company_forms and company_forms|length > i else {'ae_level': 0, 'production_target': 'Iron'} %}
+      <div class="company-cell">
+        <span class="rank-sub">Tile {{ i + 1 }}</span>
+        <select class="input" name="company_{{ i }}_ae_level">
+          <option value="0" {% if not c.ae_level %}selected{% endif %}>Inactive</option>
+          {% for lvl in range(1, 8) %}
+          <option value="{{ lvl }}" {% if c.ae_level == lvl %}selected{% endif %}>AE {{ lvl }}</option>
+          {% endfor %}
+        </select>
+        <select class="input" name="company_{{ i }}_production_target">
+          {% for item in production_items %}
+          <option value="{{ item }}" {% if c.production_target == item %}selected{% endif %}>{{ item }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h2 class="subhead">Skills</h2>
+    <div class="skill-grid">
+      {% for s in skill_options %}
+      <label class="skill-cell">
+        <span class="skill-label">{{ s.name }}</span>
+        <input class="input" type="number" name="skill_{{ s.skill_key }}"
+               min="0" max="{{ s.max_level }}" value="0">
+      </label>
+      {% endfor %}
+    </div>
+
+    <h2 class="subhead">Equipment (rarity)</h2>
+    <p class="text-muted footnote">Pilih rarity per slot. Stats = midpoint range resmi. Durability 100.</p>
+    <div class="rarity-grid">
+      {% for slot in (equipment_slots or ["weapon","helmet","chest","pants","boots","gloves"]) %}
+      {% set cur = (equip_rarity_form[slot] if equip_rarity_form is defined and equip_rarity_form and slot in equip_rarity_form else "") %}
+      <label class="rarity-cell">
+        <span class="rank-sub">{{ slot|capitalize }}</span>
+        <select class="input" name="equip_{{ slot }}_rarity">
+          <option value="" {% if not cur %}selected{% endif %}>Kosong</option>
+          {% for rr in (allowed_rarities or ["Putih","Hijau","Biru","Ungu","Oren","Merah"]) %}
+          <option value="{{ rr }}" {% if cur == rr %}selected{% endif %}>{{ rr }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="button">Jalankan simulasi</button>
+  </form>
+</section>
+
+{% if session_result %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Hasil simulasi</h2>
+    <span class="badge">{{ session_result.num_hits }} hits</span>
+  </div>
+  <div class="kv-grid">
+    {% for key, value in session_result.result.items() %}
+    <div><span class="text-muted">{{ key }}</span><span class="mono">{{ value }}</span></div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="card">
+  <h2 class="section-title">Siklus 8h / 16h / 24h</h2>
+  <p class="text-muted footnote">Window 8h = fase buff saja. Window 16h = buff + debuff (knife-only). Window 24h = buff + debuff (knife-only) + none. Net profit bergantung harga market (saat ini 0 — data cache belum dihubungkan).</p>
+  <form class="modal-form" method="post" action="/sim/cycle" autocomplete="off">
+    <label class="text-muted">Character level</label>
+    <input class="input" type="number" name="char_level" min="1" max="50" required
+           value="{{ char_level_form or 1 }}">
+
+    <label class="text-muted">Window</label>
+    <select class="input" name="window">
+      <option value="8h" {% if window_form == "8h" %}selected{% endif %}>8h (fase buff)</option>
+      <option value="16h" {% if window_form == "16h" %}selected{% endif %}>16h (buff + debuff)</option>
+      <option value="24h" {% if window_form == "24h" %}selected{% endif %}>24h (buff + debuff + none)</option>
+    </select>
+
+    <label class="text-muted">Food</label>
+    <select class="input" name="food_type">
+      <option value="Steak" {% if food_form == "Steak" %}selected{% endif %}>Steak (15%)</option>
+      <option value="Bread" {% if food_form == "Bread" %}selected{% endif %}>Bread (10%)</option>
+      <option value="Cooked Fish" {% if food_form == "Cooked Fish" %}selected{% endif %}>Cooked Fish (20%)</option>
+      <option value="none" {% if food_form == "none" %}selected{% endif %}>none</option>
+    </select>
+    <select class="input" name="pill">
+      <option value="buff" {% if pill_form == "buff" %}selected{% endif %}>Pakai pill (buff + debuff)</option>
+      <option value="none" {% if pill_form == "none" %}selected{% endif %}>Tanpa pill</option>
+    </select>
+
+    <h2 class="subhead">Skills</h2>
+    <div class="skill-grid">
+      {% for s in skill_options %}
+      <label class="skill-cell">
+        <span class="skill-label">{{ s.name }}</span>
+        <input class="input" type="number" name="skill_{{ s.skill_key }}"
+               min="0" max="{{ s.max_level }}" value="0">
+      </label>
+      {% endfor %}
+    </div>
+
+    <h2 class="subhead">Equipment</h2>
+    <div class="kv-grid">
+      <div><label class="text-muted">Weapon ATK</label>
+        <input class="input" type="number" name="weapon_weapon_atk" min="0" step="1" value="0"></div>
+      <div><label class="text-muted">Weapon crit %</label>
+        <input class="input" type="number" name="weapon_weapon_crit_chance" min="0" step="0.1" value="0"></div>
+      <div><label class="text-muted">Helmet crit dmg %</label>
+        <input class="input" type="number" name="helmet_helmet_crit_dmg" min="0" step="1" value="0"></div>
+      <div><label class="text-muted">Chest armor</label>
+        <input class="input" type="number" name="chest_armor" min="0" step="1" value="0"></div>
+      <div><label class="text-muted">Pants armor</label>
+        <input class="input" type="number" name="pants_armor" min="0" step="1" value="0"></div>
+      <div><label class="text-muted">Boots dodge</label>
+        <input class="input" type="number" name="boots_dodge" min="0" step="1" value="0"></div>
+      <div><label class="text-muted">Gloves precision %</label>
+        <input class="input" type="number" name="gloves_precision" min="0" step="1" value="0"></div>
+    </div>
+
+    <button type="submit" class="button">Jalankan siklus</button>
+  </form>
+</section>
+
+{% if cycle_result %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Hasil siklus</h2>
+    <span class="badge">{{ cycle_result.window }} · food {{ cycle_result.food_type }} · pill {{ cycle_result.pill }}</span>
+  </div>
+  <div class="kv-grid">
+    <div><span class="text-muted">Target hits</span><span class="mono">{{ cycle_result.summary.total_max_hits_target }}</span></div>
+    <div><span class="text-muted">Hits selesai</span><span class="mono">{{ cycle_result.summary.total_hits_completed }}</span></div>
+    <div><span class="text-muted">Total damage</span><span class="mono">{{ cycle_result.summary.total_damage }}</span></div>
+    <div><span class="text-muted">Net profit</span><span class="mono">{{ cycle_result.summary.total_net_profit }}</span></div>
+    <div><span class="text-muted">Pill cost</span><span class="mono">{{ cycle_result.summary.pill_cost }}</span></div>
+  </div>
+  {% if cycle_result.notes %}
+  <ul class="footnote">
+    {% for note in cycle_result.notes %}<li>{{ note }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+</section>
+{% endif %}
+
+<section class="card">
+  <h2 class="section-title">Optimizer build</h2>
+  <p class="text-muted footnote">Cari kombinasi skill + equipment terbaik. Berat — tunggu ~3-5 detik.</p>
+  <form class="modal-form" method="post" action="/sim/optimize" autocomplete="off">
+    {% set opt = optimize_forms or {} %}
+    <label class="text-muted">Character level</label>
+    <input class="input" type="number" name="char_level" min="1" max="50" required
+           value="{{ opt.char_level or 24 }}">
+
+    <label class="text-muted">Target</label>
+    <select class="input" name="target">
+      {% for t in ["dps","survival","profit","efficiency","balanced"] %}
+      <option value="{{ t }}" {% if opt.target == t %}selected{% endif %}>{{ t }}</option>
+      {% endfor %}
+    </select>
+
+    <label class="text-muted">Rarity gear yang dioptimasi</label>
+    <p class="text-muted footnote">Centang tier mana saja yang boleh dipakai optimizer — bebas kombinasi. Minimal 1.</p>
+    {% set _checked_rarities = opt.allowed_rarities %}
+    <div class="rarity-checklist" role="group" aria-label="Rarity gear">
+      {% for r in ["Putih","Hijau","Biru","Ungu","Oren","Merah"] %}
+      <label class="rarity-check" data-rarity="{{ r }}">
+        <input type="checkbox" name="rarity_check_{{ r }}" value="1"
+               {% if _checked_rarities %}{% if r in _checked_rarities %}checked{% endif %}
+               {% elif r in ["Biru","Ungu","Oren","Merah"] %}checked{% endif %}>
+        <span class="rarity-dot rarity-{{ r|lower }}"></span><span>{{ r }}</span>
+      </label>
+      {% endfor %}
+    </div>
+    <p class="footnote-error" id="rarity-error" hidden>Pilih minimal 1 rarity.</p>
+
+    <label class="text-muted">Rank Bonus % (0-37.5)</label>
+    <input class="input" type="number" name="rank_bonus_pct" min="0" max="37.5" step="0.25"
+           value="{{ opt.rank_bonus_pct or 0 }}">
+
+    <label class="text-muted">Battle Bonus % (0-95)</label>
+    <input class="input" type="number" name="battle_bonus_pct" min="0" max="95" step="1"
+           value="{{ opt.battle_bonus_pct or 0 }}">
+
+    <label class="text-muted">Ammo</label>
+    <select class="input" name="ammo_tier">
+      {% for a in ["none","light","ammo","heavy"] %}
+      <option value="{{ a }}" {% if opt.ammo_tier == a or (not opt.ammo_tier and a == "ammo") %}selected{% endif %}>{{ a }}</option>
+      {% endfor %}
+    </select>
+
+    <label class="text-muted">Pill state</label>
+    <select class="input" name="pill_state">
+      {% for p in ["none","buff","debuff"] %}
+      <option value="{{ p }}" {% if opt.pill_state == p or (not opt.pill_state and p == "none") %}selected{% endif %}>{{ p }}</option>
+      {% endfor %}
+    </select>
+
+    <label class="text-muted">Food</label>
+    <select class="input" name="food_type">
+      {% for f in ["Steak","Bread","Cooked Fish","none"] %}
+      <option value="{{ f }}" {% if opt.food_type == f or (not opt.food_type and f == "Steak") %}selected{% endif %}>{{ f }}</option>
+      {% endfor %}
+    </select>
+
+    <label class="text-muted">
+      <input type="checkbox" name="cases_enabled" value="on" {% if opt.cases_enabled is not defined or opt.cases_enabled %}checked{% endif %}>
+      Hitung income dari Cases
+    </label>
+
+    <label class="text-muted">Max results (1-15)</label>
+    <input class="input" type="number" name="max_results" min="1" max="15" value="{{ opt.max_results or 5 }}">
+
+    <button type="submit" class="button">Cari build optimal</button>
+  </form>
+  <script nonce="{{ csp_nonce }}">
+    (function () {
+      var form = document.querySelector('form[action="/sim/optimize"]');
+      if (!form) return;
+      var err = document.getElementById('rarity-error');
+      form.addEventListener('submit', function (e) {
+        var any = form.querySelectorAll('input[name^="rarity_check_"]:checked').length > 0;
+        if (!any) {
+          e.preventDefault();
+          if (err) err.hidden = false;
+        } else if (err) {
+          err.hidden = true;
+        }
+      });
+    })();
+  </script>
+</section>
+
+{% if optimize_error %}
+<section class="card">
+  <p class="text-muted footnote">⚠️ {{ optimize_error }}</p>
+</section>
+{% endif %}
+
+{% if optimize_result %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Hasil optimizer</h2>
+    <span class="badge">{{ optimize_result.config.target }} · {{ optimize_result.elapsed_seconds }}s · {{ optimize_result.total_candidates }} kandidat</span>
+  </div>
+
+  {% if optimize_result.best %}
+  {% set b = optimize_result.best %}
+  <h3 class="subhead">Best — score {{ b.score }}</h3>
+  <h4 class="subhead" style="font-size:0.8rem;">Skills</h4>
+  <ul class="stat-list">
+    {% for k, v in b.skills.items() if v > 0 %}
+    <li><span class="text-muted">{{ k }}</span><span class="mono">{{ v }}</span></li>
+    {% endfor %}
+  </ul>
+
+  <h4 class="subhead" style="font-size:0.8rem;">Equipment</h4>
+  <ul class="stat-list">
+    {% for slot, eq in b.equipment.items() %}
+    <li><span class="text-muted">{{ slot }}</span><span class="mono">{{ eq.rarity }}</span></li>
+    {% endfor %}
+  </ul>
+
+  <h4 class="subhead" style="font-size:0.8rem;">Stats</h4>
+  <div class="kv-grid">
+    <div><span class="text-muted">Attack</span><span class="mono">{{ b.stats.attack }}</span></div>
+    <div><span class="text-muted">Crit chance</span><span class="mono">{{ b.stats.crit_chance_prob }}</span></div>
+    <div><span class="text-muted">Crit dmg</span><span class="mono">{{ b.stats.crit_dmg_mult }}×</span></div>
+    <div><span class="text-muted">Max HP</span><span class="mono">{{ b.stats.max_hp }}</span></div>
+    <div><span class="text-muted">SP used</span><span class="mono">{{ b.sp_used }} / {{ b.sp_budget }}</span></div>
+  </div>
+
+  {% if b.rng_verified %}
+  <h4 class="subhead" style="font-size:0.8rem;">
+    Hasil simulasi asli (RNG)
+    {% if b.rng_verify_runs %}· {{ b.rng_verify_runs }}×{{ b.rng_verify_hits }} hits, rata-rata{% else %}· {{ b.rng_verify_hits }} hits{% endif %}
+  </h4>
+  <div class="kv-grid">
+    <div><span class="text-muted">Total damage</span><span class="mono">{{ b.rng_verified.total_damage }}{% if b.rng_verified.total_damage_std %} ± {{ b.rng_verified.total_damage_std }}{% endif %}</span></div>
+    <div><span class="text-muted">Hits completed</span><span class="mono">{{ b.rng_verified.hits_completed }}</span></div>
+    <div><span class="text-muted">Net profit</span><span class="mono">{{ b.rng_verified.net_profit }}{% if b.rng_verified.net_profit_std %} ± {{ b.rng_verified.net_profit_std }}{% endif %}</span></div>
+  </div>
+  {% endif %}
+
+  {% if optimize_result.alternatives %}
+  <h4 class="subhead" style="font-size:0.8rem;">Alternatif ({{ optimize_result.alternatives | length }})</h4>
+  <ul class="rank-list">
+    {% for alt in optimize_result.alternatives %}
+    <li class="rank-row">
+      <span class="rank-name">{{ alt.rng_verified.net_profit if alt.rng_verified else alt.score }}{% if alt.rng_verified and alt.rng_verified.net_profit_std %} <small class="text-muted">± {{ alt.rng_verified.net_profit_std }}</small>{% endif %}<span class="rank-sub mono">SP {{ alt.sp_used }}/{{ alt.sp_budget }}</span></span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% else %}
+  <p class="empty">Tidak ada kandidat yang ditemukan.</p>
+  {% endif %}
+</section>
+{% endif %}
+
+
+{% endblock %}

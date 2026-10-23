@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{ detail.item_name }} · Market{% endblock %}
+{% block subnav %}{% include "partials/subnav_market.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">{{ detail.item_name }}</h1>
+    <span class="badge" id="chart-badge">
+      {% if detail.binned %}{{ detail.bin_hours }} jam/bin{% else %}raw{% endif %}
+      · {{ detail.hours }} jam
+    </span>
+  </div>
+
+  <div id="chart-root" data-item="{{ detail.item_name }}" data-hours="{{ detail.hours }}" data-tier="{{ session.tier or 'basic' }}">
+
+    <div class="chart-toolbar" data-group="overlay">
+      <span class="chart-toolbar-label">Overlay</span>
+      <button type="button" class="chart-chip" data-series="ma7">MA7</button>
+      <button type="button" class="chart-chip" data-series="ma30">MA30</button>
+      <button type="button" class="chart-chip" data-series="ema13">EMA13</button>
+      <button type="button" class="chart-chip" data-series="boll">BOLL</button>
+    </div>
+
+    <div class="chart-toolbar" data-group="range">
+      <span class="chart-toolbar-label">Range</span>
+      <button type="button" class="chart-chip" data-range="24">1D</button>
+      <button type="button" class="chart-chip" data-range="168">7D</button>
+      <button type="button" class="chart-chip" data-range="720">30D</button>
+      <button type="button" class="chart-chip" data-range="2160">90D</button>
+    </div>
+
+    <div class="chart-toolbar" data-group="bin">
+      <span class="chart-toolbar-label">Bin</span>
+      <button type="button" class="chart-chip" data-bin="auto">Auto</button>
+      <button type="button" class="chart-chip" data-bin="1">1j</button>
+      <button type="button" class="chart-chip" data-bin="4">4j</button>
+      <button type="button" class="chart-chip" data-bin="24">1h</button>
+    </div>
+
+    <div class="chart-status" id="chart-status">Memuat…</div>
+
+    <div class="chart-wrap">
+      <div id="price-chart" class="lwc-host"></div>
+    </div>
+
+    <div class="chart-panel" id="rsi-panel">
+      <div class="chart-panel-label">RSI14</div>
+      <div id="rsi-chart" class="lwc-host"></div>
+    </div>
+
+    <div class="chart-panel" id="macd-panel">
+      <div class="chart-panel-label">MACD</div>
+      <div id="macd-chart" class="lwc-host"></div>
+    </div>
+
+    <div class="chart-toolbar" data-group="panel">
+      <span class="chart-toolbar-label">Panel</span>
+      <button type="button" class="chart-chip" data-panel="rsi">RSI</button>
+      <button type="button" class="chart-chip" data-panel="macd">MACD</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="card card-flush" id="orderbook-panel">
+  <div class="card-head">
+    <h2 class="section-title">Orderbook</h2>
+    <button class="button button-secondary"
+            hx-get="/market/item/{{ detail.item_name | urlencode }}/orderbook"
+            hx-target="#orderbook-body"
+            hx-swap="innerHTML">Muat</button>
+  </div>
+  <div id="orderbook-body">
+    <p class="text-muted">Data langsung dari API (cache 30 detik).</p>
+  </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script src="/static/lightweight-charts.umd.js" defer></script>
+<script src="/static/market_tv.js?v=5" defer></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+# === Secrets ===
+.env
+.env.*
+!.env.example
+*.crt
+*.pem
+*.key
+private_photos/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# === Backup ===
+*.bak
+*.bak_*
+*.bak-*
+*.bak.*
+
+# === Data exports ===
+data_exports/
+*.dump
+__pycache__/
+*.pyc
+.env
+*.env
+*.bak*
+*.log
+*.db

@@ -1,0 +1,68 @@
+[
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "HOLD_LOW_CONFIDENCE",
+    "body_normalized": "Constant(value='HOLD_LOW_CONFIDENCE')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "HOLD_FAIR_RANGE",
+    "body_normalized": "Constant(value='HOLD_FAIR_RANGE')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "HOLD_INSUFFICIENT_EDGE",
+    "body_normalized": "Constant(value='HOLD_INSUFFICIENT_EDGE')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "MISMATCH_FAIR_BUY",
+    "body_normalized": "Constant(value='MISMATCH_FAIR_BUY')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "MISMATCH_OVERVALUED_BUY",
+    "body_normalized": "Constant(value='MISMATCH_OVERVALUED_BUY')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "BUY_UNDERVALUED",
+    "body_normalized": "Constant(value='BUY_UNDERVALUED')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "constant",
+    "name": "SELL_OVERVALUED",
+    "body_normalized": "Constant(value='SELL_OVERVALUED')"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "function",
+    "name": "_fp_market_confidence",
+    "body_normalized": "FunctionDef(name='_fp_market_confidence', args=arguments(posonlyargs=[], args=[arg(arg='spread_key', annotation=Name(id='str', ctx=Load())), arg(arg='history_len', annotation=Name(id='int', ctx=Load())), arg(arg='has_bid', annotation=Name(id='bool', ctx=Load())), arg(arg='has_ask', annotation=Name(id='bool', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='spread_score', ctx=Store())], value=Call(func=Attribute(value=Dict(keys=[Constant(value='Wide'), Constant(value='Unknown'), Constant(value='Moderate'), Constant(value='Healthy')], values=[Constant(value=0), Constant(value=0), Constant(value=15), Constant(value=30)]), attr='get', ctx=Load()), args=[Name(id='spread_key', ctx=Load()), Constant(value=0)], keywords=[])), Assign(targets=[Name(id='history_score', ctx=Store())], value=IfExp(test=Compare(left=Name(id='history_len', ctx=Load()), ops=[Lt()], comparators=[Constant(value=2)]), body=Constant(value=0), orelse=IfExp(test=Compare(left=Name(id='history_len', ctx=Load()), ops=[Lt()], comparators=[Constant(value=7)]), body=Constant(value=15), orelse=Constant(value=30)))), Assign(targets=[Name(id='bidask_score', ctx=Store())], value=IfExp(test=BoolOp(op=And(), values=[Name(id='has_bid', ctx=Load()), Name(id='has_ask', ctx=Load())]), body=Constant(value=40), orelse=IfExp(test=BoolOp(op=Or(), values=[Name(id='has_bid', ctx=Load()), Name(id='has_ask', ctx=Load())]), body=Constant(value=20), orelse=Constant(value=0)))), Return(value=Call(func=Name(id='min', ctx=Load()), args=[BinOp(left=BinOp(left=Name(id='spread_score', ctx=Load()), op=Add(), right=Name(id='history_score', ctx=Load())), op=Add(), right=Name(id='bidask_score', ctx=Load())), Constant(value=100)], keywords=[]))], decorator_list=[], returns=Name(id='float', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "function",
+    "name": "_fp_reason_key",
+    "body_normalized": "FunctionDef(name='_fp_reason_key', args=arguments(posonlyargs=[], args=[arg(arg='recommendation', annotation=Name(id='str', ctx=Load())), arg(arg='valuation_key', annotation=Name(id='str', ctx=Load())), arg(arg='low_confidence', annotation=Name(id='bool', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Matriks 3x3 (valuasi x rekomendasi) -> kategori reason.')), If(test=Compare(left=Name(id='recommendation', ctx=Load()), ops=[Eq()], comparators=[Constant(value='HOLD')]), body=[If(test=Name(id='low_confidence', ctx=Load()), body=[Return(value=Name(id='HOLD_LOW_CONFIDENCE', ctx=Load()))], orelse=[]), If(test=Compare(left=Name(id='valuation_key', ctx=Load()), ops=[Eq()], comparators=[Constant(value='Fair')]), body=[Return(value=Name(id='HOLD_FAIR_RANGE', ctx=Load()))], orelse=[]), Return(value=Name(id='HOLD_INSUFFICIENT_EDGE', ctx=Load()))], orelse=[]), If(test=Compare(left=Name(id='recommendation', ctx=Load()), ops=[Eq()], comparators=[Constant(value='BUY')]), body=[If(test=Compare(left=Name(id='valuation_key', ctx=Load()), ops=[Eq()], comparators=[Constant(value='Overvalued')]), body=[Return(value=Name(id='MISMATCH_OVERVALUED_BUY', ctx=Load()))], orelse=[]), If(test=Compare(left=Name(id='valuation_key', ctx=Load()), ops=[Eq()], comparators=[Constant(value='Fair')]), body=[Return(value=Name(id='MISMATCH_FAIR_BUY', ctx=Load()))], orelse=[]), Return(value=Name(id='BUY_UNDERVALUED', ctx=Load()))], orelse=[]), Return(value=Name(id='SELL_OVERVALUED', ctx=Load()))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "function",
+    "name": "_fp_model_confidence",
+    "body_normalized": "FunctionDef(name='_fp_model_confidence', args=arguments(posonlyargs=[], args=[arg(arg='cost_info', annotation=Name(id='dict', ctx=Load())), arg(arg='pp_value', annotation=Name(id='float', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='score', ctx=Store())], value=Constant(value=25.0)), If(test=Compare(left=Subscript(value=Name(id='cost_info', ctx=Load()), slice=Constant(value='bonus_source'), ctx=Load()), ops=[NotEq()], comparators=[Constant(value='none')]), body=[AugAssign(target=Name(id='score', ctx=Store()), op=Add(), value=Constant(value=25.0))], orelse=[]), If(test=Compare(left=Name(id='pp_value', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0)]), body=[AugAssign(target=Name(id='score', ctx=Store()), op=Add(), value=Constant(value=25.0))], orelse=[]), If(test=Subscript(value=Name(id='cost_info', ctx=Load()), slice=Constant(value='input_ok'), ctx=Load()), body=[AugAssign(target=Name(id='score', ctx=Store()), op=Add(), value=Constant(value=25.0))], orelse=[]), Return(value=Name(id='score', ctx=Load()))], decorator_list=[], returns=Name(id='float', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/fairprice_reason.py",
+    "kind": "function",
+    "name": "fp_compute_reasons",
+    "body_normalized": "FunctionDef(name='fp_compute_reasons', args=arguments(posonlyargs=[], args=[arg(arg='reason_key', annotation=Name(id='str', ctx=Load())), arg(arg='valuation_key', annotation=Name(id='str', ctx=Load())), arg(arg='valuation_pct', annotation=Name(id='float', ctx=Load())), arg(arg='spread_key', annotation=Name(id='str', ctx=Load())), arg(arg='is_producible', annotation=Name(id='bool', ctx=Load())), arg(arg='liq_key', annotation=Name(id='str', ctx=Load())), arg(arg='liq_score', annotation=BinOp(left=Name(id='float', ctx=Load()), op=BitOr(), right=Constant(value=None))), arg(arg='orderbook_failed', annotation=Name(id='bool', ctx=Load())), arg(arg='trend_opposes', annotation=Name(id='bool', ctx=Load())), arg(arg='trend_key', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Susun list alasan tekstual dari state valuation + market + risk.\\n\\n    Urutan & isi dipertahankan persis dari _fp_analyze (tidak diubah).\\n    ')), AnnAssign(target=Name(id='reasons', ctx=Store()), annotation=Subscript(value=Name(id='list', ctx=Load()), slice=Name(id='str', ctx=Load()), ctx=Load()), value=List(elts=[Name(id='reason_key', ctx=Load())], ctx=Load()), simple=1), If(test=Compare(left=Name(id='reason_key', ctx=Load()), ops=[Eq()], comparators=[Name(id='HOLD_LOW_CONFIDENCE', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value='⚠️ Data quality rendah — confidence di bawah ambang aman')], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='reason_key', ctx=Load()), ops=[Eq()], comparators=[Name(id='MISMATCH_FAIR_BUY', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value='⚠️ BUY inside Fair Range — good buy threshold (cost basis) hit first')], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='reason_key', ctx=Load()), ops=[Eq()], comparators=[Name(id='MISMATCH_OVERVALUED_BUY', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value='⚠️ BUY despite Overvalued — good buy is based on production cost, not fair range')], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='reason_key', ctx=Load()), ops=[Eq()], comparators=[Name(id='HOLD_INSUFFICIENT_EDGE', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value=\"Price is outside Fair Range, but hasn't hit the good buy/sell threshold yet\")], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='valuation_key', ctx=Load()), ops=[Eq()], comparators=[Constant(value='Undervalued')]), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[JoinedStr(values=[FormattedValue(value=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='valuation_pct', ctx=Load())], keywords=[]), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.1f')])), Constant(value='% below Fair Value')])], keywords=[]))], orelse=[If(test=Compare(left=Name(id='valuation_key', ctx=Load()), ops=[Eq()], comparators=[Constant(value='Overvalued')]), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[JoinedStr(values=[FormattedValue(value=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='valuation_pct', ctx=Load())], keywords=[]), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.1f')])), Constant(value='% above Fair Value')])], keywords=[]))], orelse=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value='Price is still within Fair Range')], keywords=[]))])]), Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[JoinedStr(values=[Constant(value='Spread '), FormattedValue(value=Call(func=Attribute(value=Name(id='spread_key', ctx=Load()), attr='lower', ctx=Load()), args=[], keywords=[]), conversion=-1)])], keywords=[])), If(test=Name(id='is_producible', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[JoinedStr(values=[Constant(value='Liquidity '), FormattedValue(value=Call(func=Attribute(value=Name(id='liq_key', ctx=Load()), attr='lower', ctx=Load()), args=[], keywords=[]), conversion=-1), Constant(value=' (score '), FormattedValue(value=Name(id='liq_score', ctx=Load()), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.2f')])), Constant(value=')')])], keywords=[]))], orelse=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value='Liquidity N/A (non-producible)')], keywords=[]))]), If(test=Name(id='orderbook_failed', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[Constant(value='⚠️ Orderbook fetch failed — bid/ask data unavailable')], keywords=[]))], orelse=[]), If(test=Name(id='trend_opposes', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[JoinedStr(values=[Constant(value='⚠️ '), FormattedValue(value=Name(id='trend_key', ctx=Load()), conversion=-1), Constant(value=' trend conflicts with valuation')])], keywords=[]))], orelse=[Expr(value=Call(func=Attribute(value=Name(id='reasons', ctx=Load()), attr='append', ctx=Load()), args=[JoinedStr(values=[Constant(value='Trend '), FormattedValue(value=Call(func=Attribute(value=Name(id='trend_key', ctx=Load()), attr='lower', ctx=Load()), args=[], keywords=[]), conversion=-1)])], keywords=[]))]), Return(value=Name(id='reasons', ctx=Load()))], decorator_list=[], returns=Subscript(value=Name(id='list', ctx=Load()), slice=Name(id='str', ctx=Load()), ctx=Load()), type_params=[])"
+  }
+]

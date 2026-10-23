@@ -1,0 +1,214 @@
+[
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "DONATION_RANGE_WEEKS",
+    "body_normalized": "Dict(keys=[Constant(value='1w'), Constant(value='2w'), Constant(value='3w'), Constant(value='4w'), Constant(value='5w')], values=[Constant(value=1), Constant(value=2), Constant(value=3), Constant(value=4), Constant(value=5)])",
+    "duplicate_allowed": true,
+    "duplicate_reason": "duplikat di cogs/economy/base.py — pre-existing (fallback konstanta)"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_get_spy_cog",
+    "body_normalized": "FunctionDef(name='_get_spy_cog', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=IfExp(test=Name(id='_bot', ctx=Load()), body=Call(func=Attribute(value=Name(id='web_api_state', ctx=Load()), attr='get_cog', ctx=Load()), args=[Constant(value='SpyCog')], keywords=[]), orelse=Constant(value=None)))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_get_econ_cog",
+    "body_normalized": "FunctionDef(name='_get_econ_cog', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=IfExp(test=Name(id='_bot', ctx=Load()), body=Call(func=Attribute(value=Name(id='web_api_state', ctx=Load()), attr='get_cog', ctx=Load()), args=[Constant(value='Economy')], keywords=[]), orelse=Constant(value=None)))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "WEB_API_KEY",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='WEB_API_KEY')], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "ALLOWED_ORIGINS",
+    "body_normalized": "Call(func=Attribute(value=Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='ALLOWED_ORIGIN'), Constant(value='*')], keywords=[]), attr='split', ctx=Load()), args=[Constant(value=',')], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "SERVER_PORT",
+    "body_normalized": "Call(func=Name(id='int', ctx=Load()), args=[Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='SERVER_PORT'), Constant(value='25565')], keywords=[])], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "JWT_SECRET",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='JWT_SECRET')], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "AUTH_VALID_PASSWORDS",
+    "body_normalized": "SetComp(elt=Call(func=Attribute(value=Name(id='p', ctx=Load()), attr='upper', ctx=Load()), args=[], keywords=[]), generators=[comprehension(target=Name(id='p', ctx=Store()), iter=Tuple(elts=[Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='AUTH_PASSWORD_1'), Constant(value='')], keywords=[]), Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='AUTH_PASSWORD_2'), Constant(value='')], keywords=[])], ctx=Load()), ifs=[Name(id='p', ctx=Load())], is_async=0)])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "AUTH_PASSWORD_1",
+    "body_normalized": "Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='AUTH_PASSWORD_1'), Constant(value='')], keywords=[]), attr='strip', ctx=Load()), args=[], keywords=[]), attr='upper', ctx=Load()), args=[], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "AUTH_PASSWORD_VIP",
+    "body_normalized": "Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='AUTH_PASSWORD_VIP'), Constant(value='')], keywords=[]), attr='strip', ctx=Load()), args=[], keywords=[]), attr='upper', ctx=Load()), args=[], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "IDENTITY_COOKIE_NAME",
+    "body_normalized": "Constant(value='bwabwabwa_id')"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "PENDING_COOKIE_NAME",
+    "body_normalized": "Constant(value='bwabwabwa_pending')"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "IDENTITY_TTL_DAYS",
+    "body_normalized": "Call(func=Name(id='int', ctx=Load()), args=[Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='IDENTITY_TTL_DAYS'), Constant(value='30')], keywords=[])], keywords=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "PENDING_TTL_MINUTES",
+    "body_normalized": "Constant(value=10)"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "IDENTITY_NAME_MAX_LENGTH",
+    "body_normalized": "Constant(value=24)"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "UPGRADE_COOKIE_NAME",
+    "body_normalized": "Constant(value='bwabwabwa_upgrade')"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "constant",
+    "name": "UPGRADE_TTL_HOURS",
+    "body_normalized": "Constant(value=24)"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_rate_limit_key",
+    "body_normalized": "FunctionDef(name='_rate_limit_key', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Key function buat rate limiter.\\n\\n    - Kalau request punya identity valid (cookie) -> key = identity:{id}\\n    - Kalau belum ada identity (pre-login)       -> fallback ip:{addr}\\n\\n    Dua user dari 1 IP yang sama dapat limit terpisah.\\n    Satu user yang ganti IP/VPN tetap kena limit yang sama.\\n    ')), Assign(targets=[Name(id='identity', ctx=Store())], value=Call(func=Name(id='_get_identity_from_request', ctx=Load()), args=[], keywords=[])), If(test=Name(id='identity', ctx=Load()), body=[Return(value=JoinedStr(values=[Constant(value='identity:'), FormattedValue(value=Subscript(value=Name(id='identity', ctx=Load()), slice=Constant(value=0), ctx=Load()), conversion=-1)]))], orelse=[]), Return(value=JoinedStr(values=[Constant(value='ip:'), FormattedValue(value=Call(func=Name(id='get_remote_address', ctx=Load()), args=[], keywords=[]), conversion=-1)]))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "init_web_api",
+    "body_normalized": "FunctionDef(name='init_web_api', args=arguments(posonlyargs=[], args=[arg(arg='bot_instance')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Global(names=['_bot', '_loop']), Assign(targets=[Name(id='_bot', ctx=Store())], value=Name(id='bot_instance', ctx=Load())), Expr(value=Call(func=Attribute(value=Name(id='web_api_state', ctx=Load()), attr='set_bot', ctx=Load()), args=[Name(id='bot_instance', ctx=Load())], keywords=[])), Assign(targets=[Name(id='_loop', ctx=Store())], value=Attribute(value=Name(id='bot_instance', ctx=Load()), attr='loop', ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "start_web_server",
+    "body_normalized": "FunctionDef(name='start_web_server', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Import(names=[alias(name='threading')]), FunctionDef(name='serve', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Attribute(value=Name(id='waitress', ctx=Load()), attr='serve', ctx=Load()), args=[Name(id='app', ctx=Load())], keywords=[keyword(arg='host', value=Constant(value='127.0.0.1')), keyword(arg='port', value=Name(id='SERVER_PORT', ctx=Load()))]))], decorator_list=[], type_params=[]), Assign(targets=[Name(id='t', ctx=Store())], value=Call(func=Attribute(value=Name(id='threading', ctx=Load()), attr='Thread', ctx=Load()), args=[], keywords=[keyword(arg='target', value=Name(id='serve', ctx=Load())), keyword(arg='daemon', value=Constant(value=True))])), Expr(value=Call(func=Attribute(value=Name(id='t', ctx=Load()), attr='start', ctx=Load()), args=[], keywords=[]))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_run_async",
+    "body_normalized": "FunctionDef(name='_run_async', args=arguments(posonlyargs=[], args=[arg(arg='coro')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_loop', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Raise(exc=Call(func=Name(id='RuntimeError', ctx=Load()), args=[Constant(value='Event loop not set')], keywords=[]))], orelse=[]), Assign(targets=[Name(id='future', ctx=Store())], value=Call(func=Attribute(value=Name(id='asyncio', ctx=Load()), attr='run_coroutine_threadsafe', ctx=Load()), args=[Name(id='coro', ctx=Load()), Name(id='_loop', ctx=Load())], keywords=[])), Return(value=Call(func=Attribute(value=Name(id='future', ctx=Load()), attr='result', ctx=Load()), args=[], keywords=[]))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_resolve_country",
+    "body_normalized": "FunctionDef(name='_resolve_country', args=arguments(posonlyargs=[], args=[arg(arg='name', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Resolve nama/ID negara -> (country_id, country_name), atau None\\n    kalau gak ketemu / session belum siap. Reuse market.fetch_country_id_by_name\\n    (cache TTL 1 bulan, fuzzy match).')), Assign(targets=[Name(id='session', ctx=Store())], value=Call(func=Attribute(value=Name(id='web_api_state', ctx=Load()), attr='get_session', ctx=Load()), args=[], keywords=[])), If(test=Compare(left=Name(id='session', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Return(value=Constant(value=None))], orelse=[]), Return(value=Call(func=Name(id='_run_async', ctx=Load()), args=[Call(func=Attribute(value=Name(id='market', ctx=Load()), attr='fetch_country_id_by_name', ctx=Load()), args=[Name(id='session', ctx=Load()), Name(id='name', ctx=Load())], keywords=[keyword(arg='with_cache', value=Constant(value=True))])], keywords=[]))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "require_bot_ready",
+    "body_normalized": "FunctionDef(name='require_bot_ready', args=arguments(posonlyargs=[], args=[arg(arg='f')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[FunctionDef(name='decorated', args=arguments(posonlyargs=[], args=[], vararg=arg(arg='args'), kwonlyargs=[], kw_defaults=[], kwarg=arg(arg='kwargs'), defaults=[]), body=[If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='_bot', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), Compare(left=Name(id='_loop', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)])]), body=[Return(value=Tuple(elts=[Call(func=Name(id='jsonify', ctx=Load()), args=[Dict(keys=[Constant(value='error')], values=[Constant(value='Bot not ready')])], keywords=[]), Constant(value=503)], ctx=Load()))], orelse=[]), Return(value=Call(func=Name(id='f', ctx=Load()), args=[Starred(value=Name(id='args', ctx=Load()), ctx=Load())], keywords=[keyword(value=Name(id='kwargs', ctx=Load()))]))], decorator_list=[Call(func=Name(id='wraps', ctx=Load()), args=[Name(id='f', ctx=Load())], keywords=[])], type_params=[]), Return(value=Name(id='decorated', ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_issue_pending_token",
+    "body_normalized": "FunctionDef(name='_issue_pending_token', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='now', ctx=Store())], value=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[])), Assign(targets=[Name(id='payload', ctx=Store())], value=Dict(keys=[Constant(value='pending'), Constant(value='iat'), Constant(value='exp')], values=[Constant(value=True), Name(id='now', ctx=Load()), BinOp(left=Name(id='now', ctx=Load()), op=Add(), right=Call(func=Name(id='timedelta', ctx=Load()), args=[], keywords=[keyword(arg='minutes', value=Name(id='PENDING_TTL_MINUTES', ctx=Load()))]))])), Return(value=Call(func=Attribute(value=Name(id='pyjwt', ctx=Load()), attr='encode', ctx=Load()), args=[Name(id='payload', ctx=Load()), Name(id='JWT_SECRET', ctx=Load())], keywords=[keyword(arg='algorithm', value=Constant(value='HS256'))]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_issue_identity_token",
+    "body_normalized": "FunctionDef(name='_issue_identity_token', args=arguments(posonlyargs=[], args=[arg(arg='identity_id', annotation=Name(id='str', ctx=Load())), arg(arg='identity_name', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='now', ctx=Store())], value=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[])), Assign(targets=[Name(id='payload', ctx=Store())], value=Dict(keys=[Constant(value='identity_id'), Constant(value='identity'), Constant(value='iat'), Constant(value='exp')], values=[Name(id='identity_id', ctx=Load()), Name(id='identity_name', ctx=Load()), Name(id='now', ctx=Load()), BinOp(left=Name(id='now', ctx=Load()), op=Add(), right=Call(func=Name(id='timedelta', ctx=Load()), args=[], keywords=[keyword(arg='days', value=Name(id='IDENTITY_TTL_DAYS', ctx=Load()))]))])), Return(value=Call(func=Attribute(value=Name(id='pyjwt', ctx=Load()), attr='encode', ctx=Load()), args=[Name(id='payload', ctx=Load()), Name(id='JWT_SECRET', ctx=Load())], keywords=[keyword(arg='algorithm', value=Constant(value='HS256'))]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_issue_upgrade_token",
+    "body_normalized": "FunctionDef(name='_issue_upgrade_token', args=arguments(posonlyargs=[], args=[arg(arg='identity_id', annotation=Name(id='str', ctx=Load())), arg(arg='tier', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value='standard')]), body=[Assign(targets=[Name(id='now', ctx=Store())], value=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[])), Assign(targets=[Name(id='payload', ctx=Store())], value=Dict(keys=[Constant(value='identity_id'), Constant(value='upgraded'), Constant(value='tier'), Constant(value='iat'), Constant(value='exp')], values=[Name(id='identity_id', ctx=Load()), Constant(value=True), Name(id='tier', ctx=Load()), Name(id='now', ctx=Load()), BinOp(left=Name(id='now', ctx=Load()), op=Add(), right=Call(func=Name(id='timedelta', ctx=Load()), args=[], keywords=[keyword(arg='hours', value=Name(id='UPGRADE_TTL_HOURS', ctx=Load()))]))])), Return(value=Call(func=Attribute(value=Name(id='pyjwt', ctx=Load()), attr='encode', ctx=Load()), args=[Name(id='payload', ctx=Load()), Name(id='JWT_SECRET', ctx=Load())], keywords=[keyword(arg='algorithm', value=Constant(value='HS256'))]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_decode_token",
+    "body_normalized": "FunctionDef(name='_decode_token', args=arguments(posonlyargs=[], args=[arg(arg='token', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=UnaryOp(op=Not(), operand=Name(id='token', ctx=Load())), body=[Return(value=Constant(value=None))], orelse=[]), Try(body=[Return(value=Call(func=Attribute(value=Name(id='pyjwt', ctx=Load()), attr='decode', ctx=Load()), args=[Name(id='token', ctx=Load()), Name(id='JWT_SECRET', ctx=Load())], keywords=[keyword(arg='algorithms', value=List(elts=[Constant(value='HS256')], ctx=Load()))]))], handlers=[ExceptHandler(type=Attribute(value=Name(id='pyjwt', ctx=Load()), attr='PyJWTError', ctx=Load()), body=[Return(value=Constant(value=None))])], orelse=[], finalbody=[])], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_get_identity_from_request",
+    "body_normalized": "FunctionDef(name='_get_identity_from_request', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Balikin (identity_id, identity_name) kalau cookie identitas valid,\\n    None kalau tidak.')), Assign(targets=[Name(id='payload', ctx=Store())], value=Call(func=Name(id='_decode_token', ctx=Load()), args=[Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='cookies', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='IDENTITY_COOKIE_NAME', ctx=Load())], keywords=[])], keywords=[])), If(test=BoolOp(op=Or(), values=[UnaryOp(op=Not(), operand=Name(id='payload', ctx=Load())), UnaryOp(op=Not(), operand=Call(func=Attribute(value=Name(id='payload', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='identity_id')], keywords=[]))]), body=[Return(value=Constant(value=None))], orelse=[]), Return(value=Tuple(elts=[Subscript(value=Name(id='payload', ctx=Load()), slice=Constant(value='identity_id'), ctx=Load()), Subscript(value=Name(id='payload', ctx=Load()), slice=Constant(value='identity'), ctx=Load())], ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_collect_device_info",
+    "body_normalized": "FunctionDef(name='_collect_device_info', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Kumpulkan info device dari request -- silent, tanpa beban ekstra.\\n    Data ini browser kirim otomatis (UA selalu; Client Hints kalau\\n    Accept-CH aktif di nginx).')), Assign(targets=[Name(id='model', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='headers', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='Sec-CH-UA-Model'), Constant(value='')], keywords=[])), Assign(targets=[Name(id='platform', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='headers', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='Sec-CH-UA-Platform'), Constant(value='')], keywords=[])), Assign(targets=[Name(id='platform_ver', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='headers', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='Sec-CH-UA-Platform-Version'), Constant(value='')], keywords=[])), Assign(targets=[Name(id='ua', ctx=Store())], value=Subscript(value=Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='headers', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='User-Agent'), Constant(value='')], keywords=[]), slice=Slice(upper=Constant(value=120)), ctx=Load())), Assign(targets=[Name(id='parts', ctx=Store())], value=List(elts=[], ctx=Load())), If(test=Name(id='model', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='parts', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='model', ctx=Load())], keywords=[]))], orelse=[]), If(test=Name(id='platform', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='parts', ctx=Load()), attr='append', ctx=Load()), args=[Call(func=Attribute(value=JoinedStr(values=[FormattedValue(value=Name(id='platform', ctx=Load()), conversion=-1), Constant(value=' '), FormattedValue(value=Name(id='platform_ver', ctx=Load()), conversion=-1)]), attr='strip', ctx=Load()), args=[], keywords=[])], keywords=[]))], orelse=[]), If(test=Name(id='ua', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='parts', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='ua', ctx=Load())], keywords=[]))], orelse=[]), Return(value=Call(func=Attribute(value=Constant(value=' | '), attr='join', ctx=Load()), args=[Name(id='parts', ctx=Load())], keywords=[]))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_identity_exists",
+    "body_normalized": "FunctionDef(name='_identity_exists', args=arguments(posonlyargs=[], args=[arg(arg='identity_id', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='True kalau baris identity_id masih ada di web_identities.\\n    Fail-closed: _bot belum siap / DB error / 0 row -> False. Lebih aman\\n    salah nolak (user harus login ulang) daripada salah meloloskan\\n    token yatim (record sudah dihapus tapi JWT masih valid secara\\n    signature -- lihat catatan force-logout 2026-08-30).')), If(test=BoolOp(op=Or(), values=[UnaryOp(op=Not(), operand=Name(id='identity_id', ctx=Load())), UnaryOp(op=Not(), operand=Name(id='_bot', ctx=Load()))]), body=[Return(value=Constant(value=False))], orelse=[]), Try(body=[Assign(targets=[Name(id='row', ctx=Store())], value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='web_identities')], keywords=[]), attr='select', ctx=Load()), args=[Constant(value='id')], keywords=[]), attr='eq', ctx=Load()), args=[Constant(value='id'), Name(id='identity_id', ctx=Load())], keywords=[]), attr='limit', ctx=Load()), args=[Constant(value=1)], keywords=[]), attr='execute', ctx=Load()), args=[], keywords=[])), Return(value=Call(func=Name(id='bool', ctx=Load()), args=[Name(id='row', ctx=Load())], keywords=[]))], handlers=[ExceptHandler(type=Name(id='Exception', ctx=Load()), body=[Return(value=Constant(value=False))])], orelse=[], finalbody=[])], decorator_list=[], returns=Name(id='bool', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "require_session",
+    "body_normalized": "FunctionDef(name='require_session', args=arguments(posonlyargs=[], args=[arg(arg='f')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[FunctionDef(name='decorated', args=arguments(posonlyargs=[], args=[], vararg=arg(arg='args'), kwonlyargs=[], kw_defaults=[], kwarg=arg(arg='kwargs'), defaults=[]), body=[Assign(targets=[Name(id='identity', ctx=Store())], value=Call(func=Name(id='_get_identity_from_request', ctx=Load()), args=[], keywords=[])), If(test=UnaryOp(op=Not(), operand=Name(id='identity', ctx=Load())), body=[Return(value=Tuple(elts=[Call(func=Name(id='jsonify', ctx=Load()), args=[Dict(keys=[Constant(value='error')], values=[Constant(value='Session invalid or expired')])], keywords=[]), Constant(value=401)], ctx=Load()))], orelse=[]), Assign(targets=[Tuple(elts=[Attribute(value=Name(id='request', ctx=Load()), attr='identity_id', ctx=Store()), Attribute(value=Name(id='request', ctx=Load()), attr='identity', ctx=Store())], ctx=Store())], value=Name(id='identity', ctx=Load())), If(test=UnaryOp(op=Not(), operand=Call(func=Name(id='_identity_exists', ctx=Load()), args=[Attribute(value=Name(id='request', ctx=Load()), attr='identity_id', ctx=Load())], keywords=[])), body=[Return(value=Tuple(elts=[Call(func=Name(id='jsonify', ctx=Load()), args=[Dict(keys=[Constant(value='error')], values=[Constant(value='Session invalid or expired')])], keywords=[]), Constant(value=401)], ctx=Load()))], orelse=[]), Try(body=[If(test=Name(id='_bot', ctx=Load()), body=[Assign(targets=[Name(id='now', ctx=Store())], value=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='now', ctx=Load()), args=[Attribute(value=Name(id='timezone', ctx=Load()), attr='utc', ctx=Load())], keywords=[])), Assign(targets=[Name(id='row', ctx=Store())], value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='web_identities')], keywords=[]), attr='select', ctx=Load()), args=[Constant(value='last_seen_at')], keywords=[]), attr='eq', ctx=Load()), args=[Constant(value='id'), Attribute(value=Name(id='request', ctx=Load()), attr='identity_id', ctx=Load())], keywords=[]), attr='limit', ctx=Load()), args=[Constant(value=1)], keywords=[]), attr='execute', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='last', ctx=Store())], value=Call(func=Attribute(value=IfExp(test=Name(id='row', ctx=Load()), body=Subscript(value=Name(id='row', ctx=Load()), slice=Constant(value=0), ctx=Load()), orelse=Dict(keys=[], values=[])), attr='get', ctx=Load()), args=[Constant(value='last_seen_at')], keywords=[])), Assign(targets=[Name(id='should_update', ctx=Store())], value=Constant(value=True)), If(test=Name(id='last', ctx=Load()), body=[Try(body=[Assign(targets=[Name(id='last_dt', ctx=Store())], value=Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='fromisoformat', ctx=Load()), args=[Call(func=Attribute(value=Name(id='last', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value='Z'), Constant(value='+00:00')], keywords=[])], keywords=[])), If(test=Compare(left=Call(func=Attribute(value=BinOp(left=Name(id='now', ctx=Load()), op=Sub(), right=Name(id='last_dt', ctx=Load())), attr='total_seconds', ctx=Load()), args=[], keywords=[]), ops=[Lt()], comparators=[Constant(value=300)]), body=[Assign(targets=[Name(id='should_update', ctx=Store())], value=Constant(value=False))], orelse=[])], handlers=[ExceptHandler(type=Name(id='Exception', ctx=Load()), body=[Pass()])], orelse=[], finalbody=[])], orelse=[]), If(test=Name(id='should_update', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='db_pool', ctx=Load()), attr='table', ctx=Load()), args=[Constant(value='web_identities')], keywords=[]), attr='update', ctx=Load()), args=[Dict(keys=[Constant(value='last_seen_at'), Constant(value='device_info'), Constant(value='last_ip')], values=[Call(func=Attribute(value=Name(id='now', ctx=Load()), attr='isoformat', ctx=Load()), args=[], keywords=[]), Call(func=Name(id='_collect_device_info', ctx=Load()), args=[], keywords=[]), Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='headers', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='X-Real-IP'), BoolOp(op=Or(), values=[Attribute(value=Name(id='request', ctx=Load()), attr='remote_addr', ctx=Load()), Constant(value='')])], keywords=[])])], keywords=[]), attr='eq', ctx=Load()), args=[Constant(value='id'), Attribute(value=Name(id='request', ctx=Load()), attr='identity_id', ctx=Load())], keywords=[]), attr='execute', ctx=Load()), args=[], keywords=[]))], orelse=[])], orelse=[])], handlers=[ExceptHandler(type=Name(id='Exception', ctx=Load()), body=[Pass()])], orelse=[], finalbody=[]), Return(value=Call(func=Name(id='f', ctx=Load()), args=[Starred(value=Name(id='args', ctx=Load()), ctx=Load())], keywords=[keyword(value=Name(id='kwargs', ctx=Load()))]))], decorator_list=[Call(func=Name(id='wraps', ctx=Load()), args=[Name(id='f', ctx=Load())], keywords=[])], type_params=[]), Return(value=Name(id='decorated', ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_is_upgraded",
+    "body_normalized": "FunctionDef(name='_is_upgraded', args=arguments(posonlyargs=[], args=[arg(arg='identity_id', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='payload', ctx=Store())], value=Call(func=Name(id='_decode_token', ctx=Load()), args=[Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='cookies', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='UPGRADE_COOKIE_NAME', ctx=Load())], keywords=[])], keywords=[])), If(test=BoolOp(op=Or(), values=[UnaryOp(op=Not(), operand=Name(id='payload', ctx=Load())), UnaryOp(op=Not(), operand=Call(func=Attribute(value=Name(id='payload', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='upgraded')], keywords=[]))]), body=[Return(value=Constant(value=False))], orelse=[]), Return(value=Compare(left=Call(func=Attribute(value=Name(id='payload', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='identity_id')], keywords=[]), ops=[Eq()], comparators=[Name(id='identity_id', ctx=Load())]))], decorator_list=[], returns=Name(id='bool', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "require_auth_level1",
+    "body_normalized": "FunctionDef(name='require_auth_level1', args=arguments(posonlyargs=[], args=[arg(arg='f')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[FunctionDef(name='decorated', args=arguments(posonlyargs=[], args=[], vararg=arg(arg='args'), kwonlyargs=[], kw_defaults=[], kwarg=arg(arg='kwargs'), defaults=[]), body=[If(test=UnaryOp(op=Not(), operand=Call(func=Name(id='_is_upgraded', ctx=Load()), args=[Attribute(value=Name(id='request', ctx=Load()), attr='identity_id', ctx=Load())], keywords=[])), body=[Return(value=Tuple(elts=[Call(func=Name(id='jsonify', ctx=Load()), args=[Dict(keys=[Constant(value='error')], values=[Constant(value='Requires level 1 access')])], keywords=[]), Constant(value=403)], ctx=Load()))], orelse=[]), Return(value=Call(func=Name(id='f', ctx=Load()), args=[Starred(value=Name(id='args', ctx=Load()), ctx=Load())], keywords=[keyword(value=Name(id='kwargs', ctx=Load()))]))], decorator_list=[Call(func=Name(id='wraps', ctx=Load()), args=[Name(id='f', ctx=Load())], keywords=[])], type_params=[]), Return(value=Name(id='decorated', ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "_get_upgrade_tier",
+    "body_normalized": "FunctionDef(name='_get_upgrade_tier', args=arguments(posonlyargs=[], args=[arg(arg='identity_id', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value=\"Tier dari cookie upgrade sesi ini ('vip'/'standard'). None kalau\\n    invalid / expired / token lama tanpa claim tier / bukan milik identity ini.\")), Assign(targets=[Name(id='payload', ctx=Store())], value=Call(func=Name(id='_decode_token', ctx=Load()), args=[Call(func=Attribute(value=Attribute(value=Name(id='request', ctx=Load()), attr='cookies', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='UPGRADE_COOKIE_NAME', ctx=Load())], keywords=[])], keywords=[])), If(test=BoolOp(op=Or(), values=[UnaryOp(op=Not(), operand=Name(id='payload', ctx=Load())), UnaryOp(op=Not(), operand=Call(func=Attribute(value=Name(id='payload', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='upgraded')], keywords=[]))]), body=[Return(value=Constant(value=None))], orelse=[]), If(test=Compare(left=Call(func=Attribute(value=Name(id='payload', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='identity_id')], keywords=[]), ops=[NotEq()], comparators=[Name(id='identity_id', ctx=Load())]), body=[Return(value=Constant(value=None))], orelse=[]), Return(value=Call(func=Attribute(value=Name(id='payload', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='tier')], keywords=[]))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "web_api/__init__.py",
+    "kind": "function",
+    "name": "require_auth_vip",
+    "body_normalized": "FunctionDef(name='require_auth_vip', args=arguments(posonlyargs=[], args=[arg(arg='f')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[FunctionDef(name='decorated', args=arguments(posonlyargs=[], args=[], vararg=arg(arg='args'), kwonlyargs=[], kw_defaults=[], kwarg=arg(arg='kwargs'), defaults=[]), body=[If(test=Compare(left=Call(func=Name(id='_get_upgrade_tier', ctx=Load()), args=[Attribute(value=Name(id='request', ctx=Load()), attr='identity_id', ctx=Load())], keywords=[]), ops=[NotEq()], comparators=[Constant(value='vip')]), body=[Return(value=Tuple(elts=[Call(func=Name(id='jsonify', ctx=Load()), args=[Dict(keys=[Constant(value='error')], values=[Constant(value='VIP access required')])], keywords=[]), Constant(value=403)], ctx=Load()))], orelse=[]), Return(value=Call(func=Name(id='f', ctx=Load()), args=[Starred(value=Name(id='args', ctx=Load()), ctx=Load())], keywords=[keyword(value=Name(id='kwargs', ctx=Load()))]))], decorator_list=[Call(func=Name(id='wraps', ctx=Load()), args=[Name(id='f', ctx=Load())], keywords=[])], type_params=[]), Return(value=Name(id='decorated', ctx=Load()))], decorator_list=[], type_params=[])"
+  }
+]

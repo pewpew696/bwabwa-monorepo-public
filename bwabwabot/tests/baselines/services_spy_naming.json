@@ -1,0 +1,14 @@
+[
+  {
+    "file": "services/spy/naming.py",
+    "kind": "function",
+    "name": "norm_name",
+    "body_normalized": "FunctionDef(name='norm_name', args=arguments(posonlyargs=[], args=[arg(arg='text', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Normalisasi buat bandingin nama: lowercase + spasi dirapikan.')), Return(value=Call(func=Attribute(value=Constant(value=' '), attr='join', ctx=Load()), args=[Call(func=Attribute(value=Call(func=Attribute(value=Call(func=Attribute(value=BoolOp(op=Or(), values=[Name(id='text', ctx=Load()), Constant(value='')]), attr='strip', ctx=Load()), args=[], keywords=[]), attr='lower', ctx=Load()), args=[], keywords=[]), attr='split', ctx=Load()), args=[], keywords=[])], keywords=[]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/spy/naming.py",
+    "kind": "function",
+    "name": "name_variants",
+    "body_normalized": "FunctionDef(name='name_variants', args=arguments(posonlyargs=[], args=[arg(arg='nama', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Query pertama = input apa adanya. Kalau ada spasi, tambah maks 2 query\\n        ulang (spasi -> `_`, spasi -> `-`) — dipakai HANYA kalau belum ada nama\\n        yang persis sama. Username WarEra sering pakai `_` atau `-`.')), Assign(targets=[Name(id='nama', ctx=Store())], value=Call(func=Attribute(value=Name(id='nama', ctx=Load()), attr='strip', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='variants', ctx=Store())], value=List(elts=[Name(id='nama', ctx=Load())], ctx=Load())), If(test=Compare(left=Constant(value=' '), ops=[In()], comparators=[Name(id='nama', ctx=Load())]), body=[AugAssign(target=Name(id='variants', ctx=Store()), op=Add(), value=List(elts=[Call(func=Attribute(value=Name(id='nama', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value=' '), Constant(value='_')], keywords=[]), Call(func=Attribute(value=Name(id='nama', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value=' '), Constant(value='-')], keywords=[])], ctx=Load()))], orelse=[]), Return(value=Name(id='variants', ctx=Load()))], decorator_list=[], returns=Subscript(value=Name(id='list', ctx=Load()), slice=Name(id='str', ctx=Load()), ctx=Load()), type_params=[])"
+  }
+]

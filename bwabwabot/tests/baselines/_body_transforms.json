@@ -1,0 +1,42 @@
+[
+  {
+    "name": "FairPriceCommands._fp_pp_value",
+    "source_ref": "057101b",
+    "source_file": "cogs/economy/fairprice.py",
+    "source_kind": "method",
+    "source_name": "FairPriceCommands._fp_pp_value",
+    "target_file": "services/economy/fairprice_cost.py",
+    "target_kind": "function",
+    "target_name": "fp_pp_value",
+    "transform": {
+      "substitute": {
+        "self._price_cache": "price_cache"
+      },
+      "drop_stmt": [],
+      "target_args": "price_cache: dict[str, float], exclude: str | None = None",
+      "annotation_style": "pep604",
+      "target_name": "fp_pp_value"
+    }
+  },
+  {
+    "name": "FairPriceCommands._fp_production_cost",
+    "source_ref": "057101b",
+    "source_file": "cogs/economy/fairprice.py",
+    "source_kind": "method",
+    "source_name": "FairPriceCommands._fp_production_cost",
+    "target_file": "services/economy/fairprice_cost.py",
+    "target_kind": "function",
+    "target_name": "fp_production_cost",
+    "transform": {
+      "substitute": {
+        "self._price_cache": "price_cache"
+      },
+      "drop_stmt": [
+        "bonus_pct, bonus_source = self._get_median_bonus(item)"
+      ],
+      "target_args": "price_cache: dict[str, float], item: str, pp_value: float, bonus_pct: float, bonus_source: str",
+      "annotation_style": "pep604",
+      "target_name": "fp_production_cost"
+    }
+  }
+]

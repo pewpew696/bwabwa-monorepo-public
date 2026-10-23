@@ -1,0 +1,17 @@
+discord.py
+cloudscraper
+python-dotenv
+PyJWT
+beautifulsoup4
+lxml
+requests
+supabase
+pandas
+matplotlib
+Pillow
+flask
+flask-cors
+flask-limiter
+waitress
+psutil
+psycopg2

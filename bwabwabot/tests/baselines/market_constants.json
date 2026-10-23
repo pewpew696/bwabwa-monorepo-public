@@ -1,0 +1,188 @@
+[
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "BASE_URL",
+    "body_normalized": "Constant(value='https://api2.warera.io/trpc')"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "PRICES_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/itemTrading.getPrices')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "ORDERS_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/tradingOrder.getTopOrders')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "COUNTRIES_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/country.getAllCountries')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "COUNTRY_BY_ID_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/country.getCountryById')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "REGIONS_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/region.getRegionsObject')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "PARTY_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/party.getById')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "ROUND_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/round.getById')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "COMPANIES_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/company.getCompanies')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "COMPANY_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/company.getById')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "WORKERS_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/worker.getWorkers')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "GOVERNMENT_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/government.getByCountryId')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "ITEM_LABELS",
+    "body_normalized": "Dict(keys=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='mysterious_plant'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='pill'), Constant(value='cooked_fish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='light_ammo'), Constant(value='heavy_ammo'), Constant(value='case1'), Constant(value='case2'), Constant(value='wooden_case')], values=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "ITEM_LABELS"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "ITEM_SHORT",
+    "body_normalized": "Dict(keys=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')], values=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Myst.Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='CookedFish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='LightAmmo'), Constant(value='HeavyAmmo'), Constant(value='Case1'), Constant(value='Case2'), Constant(value='WoodCase')])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "ITEM_SHORT"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "EQUIPMENT_GRADES",
+    "body_normalized": "Dict(keys=[Constant(value='Common'), Constant(value='Uncommon'), Constant(value='Rare'), Constant(value='Epic'), Constant(value='Legendary'), Constant(value='Mythic')], values=[Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=6), Constant(value=1), Constant(value=6)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=18), Constant(value=2), Constant(value=18)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=54), Constant(value=4), Constant(value=54)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=162), Constant(value=8), Constant(value=162)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=486), Constant(value=16), Constant(value=486)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=1458), Constant(value=32), Constant(value=1458)])])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "EQUIPMENT_GRADES"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "API_KEY_TO_ITEM_ID",
+    "body_normalized": "Dict(keys=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='coca'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='cocain'), Constant(value='cookedFish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='lightAmmo'), Constant(value='heavyAmmo'), Constant(value='case1'), Constant(value='case2'), Constant(value='woodenCase')], values=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='mysterious_plant'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='pill'), Constant(value='cooked_fish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='light_ammo'), Constant(value='heavy_ammo'), Constant(value='case1'), Constant(value='case2'), Constant(value='wooden_case')])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "API_KEY_TO_ITEM_ID"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "ITEM_ID_TO_API_KEY",
+    "body_normalized": "DictComp(key=Name(id='v', ctx=Load()), value=Name(id='k', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='k', ctx=Store()), Name(id='v', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Name(id='API_KEY_TO_ITEM_ID', ctx=Load()), attr='items', ctx=Load()), args=[], keywords=[]), ifs=[], is_async=0)])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "ITEM_ID_TO_API_KEY"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "AMMO_OR_CONSTRUCTION_IDS",
+    "body_normalized": "Set(elts=[Constant(value='limestone'), Constant(value='iron'), Constant(value='concrete'), Constant(value='steel'), Constant(value='wood'), Constant(value='paper'), Constant(value='lead'), Constant(value='light_ammo'), Constant(value='ammo'), Constant(value='heavy_ammo'), Constant(value='petroleum'), Constant(value='oil')])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "AMMO_OR_CONSTRUCTION_IDS"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "FOOD_OR_BUFF_IDS",
+    "body_normalized": "Set(elts=[Constant(value='grain'), Constant(value='livestock'), Constant(value='fish'), Constant(value='mysterious_plant')])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "FOOD_OR_BUFF_IDS"
+    }
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "TRANSACTION_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/transaction.getPaginatedTransactions')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "USER_LITE_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/user.getUserLite')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "SEARCH_URL",
+    "body_normalized": "JoinedStr(values=[FormattedValue(value=Name(id='BASE_URL', ctx=Load()), conversion=-1), Constant(value='/search.searchAnything')])"
+  },
+  {
+    "file": "market/constants.py",
+    "kind": "constant",
+    "name": "ITEM_LABEL_TO_CODE",
+    "body_normalized": "DictComp(key=Name(id='v', ctx=Load()), value=Name(id='k', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='k', ctx=Store()), Name(id='v', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Dict(keys=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='coca'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='cocain'), Constant(value='cookedFish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='lightAmmo'), Constant(value='heavyAmmo'), Constant(value='case1'), Constant(value='case2'), Constant(value='woodenCase')], values=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')]), attr='items', ctx=Load()), args=[], keywords=[]), ifs=[], is_async=0)])",
+    "transform": {
+      "reason": "konstanta data murni dipisah dari URL (Tahap 2 §4 prasyarat)",
+      "to_file": "services/economy/constants.py",
+      "to_kind": "constant",
+      "to_name": "ITEM_LABEL_TO_CODE"
+    }
+  }
+]

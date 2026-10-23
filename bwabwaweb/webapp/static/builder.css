@@ -1,0 +1,169 @@
+/* builder.css - Build Optimizer page polish (Fase 8).
+   Hanya pakai CSS vars dari app.css; tanpa warna baru.
+   ASCII-safe biar aman di Termux. */
+
+/* --- segmented control (Mode / Detail) --- */
+.seg {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin: 0.25rem 0 0.75rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+.seg input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.seg label {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.5rem 0.25rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.seg label small {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.6875rem;
+  font-weight: 400;
+}
+.seg input[type="radio"]:checked + label {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+.seg input[type="radio"]:focus-visible + label {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- switch (pin skill) --- */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.switch input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.switch .track {
+  position: relative;
+  flex: none;
+  width: 2rem;
+  height: 1.125rem;
+  border-radius: 999px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+.switch .track::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 0.8125rem;
+  height: 0.8125rem;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.switch input[type="checkbox"]:checked + .track {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.switch input[type="checkbox"]:checked + .track::after {
+  transform: translateX(0.875rem);
+  background: var(--accent-contrast);
+}
+.switch input[type="checkbox"]:focus-visible + .track {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- grid buat rarity cell (selama ini tidak ter-style) --- */
+.rarity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+}
+@media (min-width: 30rem) {
+  .rarity-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+.rarity-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.rarity-grid > .button { align-self: end; }
+
+/* --- skill terkunci (pin aktif) --- */
+.skill-cell.is-locked .input { opacity: 0.55; }
+.skill-cell .switch { margin-top: 0.125rem; }
+
+/* --- section spacing biar form panjang tidak sumpek --- */
+#builder-form > h2.subhead { margin-top: 1.25rem; }
+#builder-form > h2.subhead:first-of-type { margin-top: 0.75rem; }
+#builder-form .footnote { margin-bottom: 0.5rem; }
+
+/* --- sticky action bar (tombol Calculate selalu terjangkau) --- */
+.builder-actions {
+  position: sticky;
+  bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px) + 0.75rem);
+  z-index: 5;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+.builder-actions .button {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+}
+
+/* --- badge Best di tabel compare --- */
+.badge.is-best {
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* --- Company / price-override cards (satu card = satu baris input) --- */
+.company-card,
+.priceov-card {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface-raised);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.company-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.company-num,
+.priceov-num {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.button.small {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}

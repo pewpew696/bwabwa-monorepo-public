@@ -1,0 +1,62 @@
+[
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "set_bot",
+    "body_normalized": "FunctionDef(name='set_bot', args=arguments(posonlyargs=[], args=[arg(arg='bot')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Dipanggil sekali dari web_api.init_web_api() saat startup.')), Global(names=['_bot_ref']), Assign(targets=[Name(id='_bot_ref', ctx=Store())], value=Name(id='bot', ctx=Load()))], decorator_list=[], returns=Constant(value=None), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_bot",
+    "body_normalized": "FunctionDef(name='get_bot', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Akses bot mentah — hindari kalau bisa, pakai accessor spesifik.')), If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_bot() dipanggil sebelum set_bot() — return None')], keywords=[])), Return(value=Constant(value=None))], orelse=[]), Return(value=Name(id='_bot_ref', ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_session",
+    "body_normalized": "FunctionDef(name='get_session', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_session() dipanggil sebelum set_bot() — return None')], keywords=[])), Return(value=Constant(value=None))], orelse=[]), Return(value=Attribute(value=Name(id='_bot_ref', ctx=Load()), attr='_session', ctx=Load()))], decorator_list=[], type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_price_cache",
+    "body_normalized": "FunctionDef(name='get_price_cache', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_price_cache() dipanggil sebelum set_bot() — return {}')], keywords=[])), Return(value=Dict(keys=[], values=[]))], orelse=[]), Return(value=Attribute(value=Name(id='_bot_ref', ctx=Load()), attr='_price_cache', ctx=Load()))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_price_history",
+    "body_normalized": "FunctionDef(name='get_price_history', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_price_history() dipanggil sebelum set_bot() — return {}')], keywords=[])), Return(value=Dict(keys=[], values=[]))], orelse=[]), Return(value=Attribute(value=Name(id='_bot_ref', ctx=Load()), attr='_price_history', ctx=Load()))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_volume_cache",
+    "body_normalized": "FunctionDef(name='get_volume_cache', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_volume_cache() dipanggil sebelum set_bot() — return {}')], keywords=[])), Return(value=Dict(keys=[], values=[]))], orelse=[]), Return(value=BoolOp(op=Or(), values=[Call(func=Name(id='getattr', ctx=Load()), args=[Name(id='_bot_ref', ctx=Load()), Constant(value='_volume_cache'), Dict(keys=[], values=[])], keywords=[]), Dict(keys=[], values=[])]))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_manual_overrides",
+    "body_normalized": "FunctionDef(name='get_manual_overrides', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_manual_overrides() sebelum set_bot() - return {}')], keywords=[])), Return(value=Dict(keys=[], values=[]))], orelse=[]), Return(value=Call(func=Name(id='getattr', ctx=Load()), args=[Name(id='_bot_ref', ctx=Load()), Constant(value='_manual_overrides'), Dict(keys=[], values=[])], keywords=[]))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_bonus_breakdown",
+    "body_normalized": "FunctionDef(name='get_bonus_breakdown', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_bonus_breakdown() sebelum set_bot() - return {}')], keywords=[])), Return(value=Dict(keys=[], values=[]))], orelse=[]), Return(value=Call(func=Name(id='getattr', ctx=Load()), args=[Name(id='_bot_ref', ctx=Load()), Constant(value='_bonus_breakdown_cache'), Dict(keys=[], values=[])], keywords=[]))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_country_tax_cache",
+    "body_normalized": "FunctionDef(name='get_country_tax_cache', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[Constant(value='get_country_tax_cache() sebelum set_bot() - return {}')], keywords=[])), Return(value=Dict(keys=[], values=[]))], orelse=[]), Return(value=Call(func=Name(id='getattr', ctx=Load()), args=[Name(id='_bot_ref', ctx=Load()), Constant(value='_country_tax_cache'), Dict(keys=[], values=[])], keywords=[]))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/web_api_state.py",
+    "kind": "function",
+    "name": "get_cog",
+    "body_normalized": "FunctionDef(name='get_cog', args=arguments(posonlyargs=[], args=[arg(arg='name', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='_bot_ref', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='warning', ctx=Load()), args=[JoinedStr(values=[Constant(value='get_cog('), FormattedValue(value=Name(id='name', ctx=Load()), conversion=114), Constant(value=') dipanggil sebelum set_bot() — return None')])], keywords=[])), Return(value=Constant(value=None))], orelse=[]), Return(value=Call(func=Attribute(value=Name(id='_bot_ref', ctx=Load()), attr='get_cog', ctx=Load()), args=[Name(id='name', ctx=Load())], keywords=[]))], decorator_list=[], type_params=[])"
+  }
+]

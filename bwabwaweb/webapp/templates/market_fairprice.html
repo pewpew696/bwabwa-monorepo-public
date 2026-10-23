@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Fairprice · Tools{% endblock %}
+{% block subnav %}{% include "partials/subnav_market.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+    <h1 class="section-title">Fairprice</h1>
+    <form class="filter-form" method="get" action="/market/fairprice">
+        <input class="input" type="text" name="item" value="{{ query }}"
+               list="item-options" placeholder="Nama item (mis. iron)" required autocomplete="off">
+        <datalist id="item-options">
+            {% for name in item_options %}
+            <option value="{{ name }}"></option>
+            {% endfor %}
+        </datalist>
+        <button type="submit" class="button">Analisis</button>
+    </form>
+    <p class="text-muted footnote">Live fetch + engine murni. Cache 5 menit.</p>
+</section>
+
+{% if report %}
+<section class="card">
+    <div class="card-head">
+        <h2 class="section-title">{{ report.item }}</h2>
+        <span class="badge">{{ report.recommendation }} · {{ report.risk_label }}</span>
+    </div>
+
+    <div class="kv-grid">
+        <div class="kv"><span class="kv-label">Current Price</span><span class="kv-value mono">{{ report.current_price | price }}</span></div>
+        <div class="kv"><span class="kv-label">Fair Price</span><span class="kv-value mono">{{ report.fair_price | price }}</span></div>
+        <div class="kv"><span class="kv-label">Fair Range</span><span class="kv-value mono">{{ report.fair_lower | price }} – {{ report.fair_upper | price }}</span></div>
+        <div class="kv"><span class="kv-label">Valuation</span><span class="kv-value mono">{{ report.valuation_key }}{% if report.valuation_key != "Fair" %} ({{ report.valuation_pct | percent(true) }}){% endif %}</span></div>
+        <div class="kv"><span class="kv-label">Good Buy</span><span class="kv-value mono">{{ report.good_buy | price }}</span></div>
+        <div class="kv"><span class="kv-label">Good Sell</span><span class="kv-value mono">{{ report.good_sell | price }}</span></div>
+        <div class="kv"><span class="kv-label">Spread</span><span class="kv-value mono">{{ report.spread_label }}{% if report.spread_pct is not none %} ({{ report.spread_pct | percent }}){% endif %}</span></div>
+        <div class="kv"><span class="kv-label">Liquidity</span><span class="kv-value mono">{{ report.liquidity_label }}</span></div>
+        <div class="kv"><span class="kv-label">Trend 30d</span><span class="kv-value mono">{{ report.trend_label }}</span></div>
+        <div class="kv"><span class="kv-label">Expected Edge</span><span class="kv-value mono">{{ report.expected_edge | percent(true) }}</span></div>
+    </div>
+
+    <h3 class="subhead">Reasons</h3>
+    <ul class="rank-list">
+        {% for r in report.reasons %}
+        <li class="rank-row"><span class="rank-name">{{ r }}</span></li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <details>
+        <summary class="subhead">Detail lengkap</summary>
+        <div class="kv-grid">
+            <div class="kv"><span class="kv-label">Production Cost</span><span class="kv-value mono">{{ report.production_cost | price }}</span></div>
+            <div class="kv"><span class="kv-label">Break Even</span><span class="kv-value mono">{{ report.break_even | price }}</span></div>
+            <div class="kv"><span class="kv-label">Best Bid</span><span class="kv-value mono">{{ report.best_bid | price }}</span></div>
+            <div class="kv"><span class="kv-label">Best Ask</span><span class="kv-value mono">{{ report.best_ask | price }}</span></div>
+            <div class="kv"><span class="kv-label">Total Qty</span><span class="kv-value mono">{{ report.total_qty | amount }}</span></div>
+            <div class="kv"><span class="kv-label">Weight Tech</span><span class="kv-value mono">{{ report.weight_tech }}</span></div>
+            <div class="kv"><span class="kv-label">Weight Intr</span><span class="kv-value mono">{{ report.weight_intr }}</span></div>
+            <div class="kv"><span class="kv-label">Margin %</span><span class="kv-value mono">{{ report.margin_pct | percent }}</span></div>
+            <div class="kv"><span class="kv-label">Bonus Median</span><span class="kv-value mono">{{ report.bonus_median_pct if report.bonus_median_pct is not none else "—" }}{% if report.bonus_median_pct is not none %} ({{ report.bonus_median_source }}){% endif %}</span></div>
+            <div class="kv"><span class="kv-label">Bonus Best</span><span class="kv-value mono">{{ report.bonus_best_pct if report.bonus_best_pct is not none else "—" }}</span></div>
+        </div>
+
+        {% if report.price_extremes %}
+        <h3 class="subhead">Price Extremes</h3>
+        <ul class="rank-list">
+            <li class="rank-row"><span class="rank-name">High</span><span class="rank-value mono">{{ report.price_extremes.recorded_high | price }} · {{ report.price_extremes.recorded_high_date }}</span></li>
+            <li class="rank-row"><span class="rank-name">Low</span><span class="rank-value mono">{{ report.price_extremes.recorded_low | price }} · {{ report.price_extremes.recorded_low_date }}</span></li>
+            <li class="rank-row"><span class="rank-name">Tracked Since</span><span class="rank-value mono">{{ report.price_extremes.tracked_since }}</span></li>
+        </ul>
+        {% endif %}
+
+        <h3 class="subhead">Data Confidence</h3>
+        <ul class="rank-list">
+            <li class="rank-row"><span class="rank-name">Liquidity Basis</span><span class="rank-value mono">{{ report.data_confidence.liquidity_basis }}</span></li>
+            <li class="rank-row"><span class="rank-name">History Days</span><span class="rank-value mono">{{ report.data_confidence.liquidity_history_days if report.data_confidence.liquidity_history_days is not none else "—" }}</span></li>
+            <li class="rank-row"><span class="rank-name">Anchor Age</span><span class="rank-value mono">{{ report.data_confidence.anchor_age_days if report.data_confidence.anchor_age_days is not none else "—" }}</span></li>
+            <li class="rank-row"><span class="rank-name">Raw Liquidity</span><span class="rank-value mono">{{ report.data_confidence.raw_liquidity_score if report.data_confidence.raw_liquidity_score is not none else "—" }}</span></li>
+        </ul>
+    </details>
+</section>
+{% endif %}
+{% endblock %}

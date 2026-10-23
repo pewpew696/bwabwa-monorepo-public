@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Error {{ status_code }} · Bwabwa{% endblock %}
+{% block nav %}{% endblock %}
+{% block content %}
+<div class="panel-wrap">
+  <p class="panel-brand">Rishuu · Every move leaves a trace</p>
+  <section class="card" id="error-panel">
+    <h1 class="modal-title">{{ status_code }}</h1>
+    <p class="text-muted">{{ message }}</p>
+    <a href="/" class="button">Kembali ke Home</a>
+  </section>
+</div>
+{% endblock %}

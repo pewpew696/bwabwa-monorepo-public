@@ -1,0 +1,20 @@
+[
+  {
+    "file": "services/economy/fairprice_display.py",
+    "kind": "constant",
+    "name": "ITEM_SHORT_NAMES",
+    "body_normalized": "Dict(keys=[Constant(value='Mysterious Plant')], values=[Constant(value='Myst. Plant')])"
+  },
+  {
+    "file": "services/economy/fairprice_display.py",
+    "kind": "constant",
+    "name": "NAME_COL_WIDTH",
+    "body_normalized": "Constant(value=13)"
+  },
+  {
+    "file": "services/economy/fairprice_display.py",
+    "kind": "function",
+    "name": "_short_name",
+    "body_normalized": "FunctionDef(name='_short_name', args=arguments(posonlyargs=[], args=[arg(arg='name', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='short', ctx=Store())], value=Call(func=Attribute(value=Name(id='ITEM_SHORT_NAMES', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='name', ctx=Load()), Name(id='name', ctx=Load())], keywords=[])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='short', ctx=Load())], keywords=[]), ops=[Gt()], comparators=[Name(id='NAME_COL_WIDTH', ctx=Load())]), body=[Assign(targets=[Name(id='short', ctx=Store())], value=BinOp(left=Subscript(value=Name(id='short', ctx=Load()), slice=Slice(upper=BinOp(left=Name(id='NAME_COL_WIDTH', ctx=Load()), op=Sub(), right=Constant(value=1))), ctx=Load()), op=Add(), right=Constant(value='…')))], orelse=[]), Return(value=Name(id='short', ctx=Load()))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  }
+]

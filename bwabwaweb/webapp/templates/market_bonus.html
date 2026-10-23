@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Bonus item · Market{% endblock %}
+{% block subnav %}{% include "partials/subnav_market.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Bonus item</h1>
+    <span class="badge">{{ items | length }} item</span>
+  </div>
+
+  {% if items %}
+  <div class="bonus-list">
+    {% for item in items %}
+    <details class="bonus-item" name="bonus-accordion">
+      <summary class="bonus-summary">
+        <div class="bonus-head">
+          <div class="bonus-name-wrap">
+            <span class="bonus-name">{{ item.item_name }}</span>
+            {% if item.is_stale %}<span class="badge is-stale">basi</span>{% endif %}
+          </div>
+          <span class="bonus-snapshot mono">{{ item.fetched_at | wib }}</span>
+        </div>
+
+        {% if item.rows %}
+        {% set top = item.rows[0] %}
+        <div class="bonus-top">
+          <span class="bonus-top-country">{{ top.country_name }}</span>
+          <span class="bonus-top-right">
+            <span class="bonus-top-pct mono">{{ top.pct | percent }}</span>
+            {% if top.tax_pct is not none %}
+            <span class="bonus-top-tax mono">pajak {{ top.tax_pct | percent }}</span>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+      </summary>
+
+      <div class="bonus-body">
+        <ul class="rank-list">
+          {% for row in item.rows %}
+          <li class="rank-row">
+            <span class="rank-name">
+              {{ row.country_name }}
+              {% if row.tax_pct is not none %}<span class="rank-sub mono">pajak {{ row.tax_pct | percent }}</span>{% endif %}
+            </span>
+            <span class="rank-value mono">
+              {{ row.pct | percent }}
+              {% if row.ends_at %}<span class="rank-sub">sampai {{ row.ends_at | wib }}</span>{% endif %}
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty">Belum ada data bonus aktif.</p>
+  {% endif %}
+</section>
+{% endblock %}

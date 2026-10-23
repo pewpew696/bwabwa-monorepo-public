@@ -1,0 +1,6 @@
+{% set p = request.url.path %}
+<nav class="subnav" aria-label="Sub-navigasi Territory">
+  <a class="subnav-chip{% if p == '/territory' or p.startswith('/territory/country/') %} is-active{% endif %}" href="/territory">Pajak</a>
+  <a class="subnav-chip{% if p == '/territory/country-stock' %} is-active{% endif %}" href="/territory/country-stock">Stock</a>
+  <a class="subnav-chip{% if p.startswith('/territory/tax-calc') %} is-active{% endif %}" href="/territory/tax-calc">Tax Calc</a>
+</nav>

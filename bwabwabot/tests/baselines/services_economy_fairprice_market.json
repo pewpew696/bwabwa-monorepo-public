@@ -1,0 +1,32 @@
+[
+  {
+    "file": "services/economy/fairprice_market.py",
+    "kind": "constant",
+    "name": "SPREAD_HEALTHY_MAX",
+    "body_normalized": "Constant(value=5.0)"
+  },
+  {
+    "file": "services/economy/fairprice_market.py",
+    "kind": "constant",
+    "name": "SPREAD_MODERATE_MAX",
+    "body_normalized": "Constant(value=12.0)"
+  },
+  {
+    "file": "services/economy/fairprice_market.py",
+    "kind": "function",
+    "name": "_fp_spread_pct",
+    "body_normalized": "FunctionDef(name='_fp_spread_pct', args=arguments(posonlyargs=[], args=[arg(arg='best_bid', annotation=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='float', ctx=Load()), ctx=Load())), arg(arg='best_ask', annotation=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='float', ctx=Load()), ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='best_bid', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), Compare(left=Name(id='best_ask', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)])]), body=[Return(value=Constant(value=None))], orelse=[]), Assign(targets=[Name(id='mid', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='best_bid', ctx=Load()), op=Add(), right=Name(id='best_ask', ctx=Load())), op=Div(), right=Constant(value=2))), If(test=Compare(left=Name(id='mid', ctx=Load()), ops=[LtE()], comparators=[Constant(value=0)]), body=[Return(value=Constant(value=None))], orelse=[]), Return(value=BinOp(left=BinOp(left=BinOp(left=Name(id='best_ask', ctx=Load()), op=Sub(), right=Name(id='best_bid', ctx=Load())), op=Div(), right=Name(id='mid', ctx=Load())), op=Mult(), right=Constant(value=100)))], decorator_list=[], returns=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='float', ctx=Load()), ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/fairprice_market.py",
+    "kind": "function",
+    "name": "_fp_spread_label",
+    "body_normalized": "FunctionDef(name='_fp_spread_label', args=arguments(posonlyargs=[], args=[arg(arg='spread_pct', annotation=Subscript(value=Name(id='Optional', ctx=Load()), slice=Name(id='float', ctx=Load()), ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='spread_pct', ctx=Load()), ops=[Is()], comparators=[Constant(value=None)]), body=[Return(value=Tuple(elts=[Constant(value='⚪ Unknown'), Constant(value='Unknown')], ctx=Load()))], orelse=[]), If(test=Compare(left=Name(id='spread_pct', ctx=Load()), ops=[Lt()], comparators=[Name(id='SPREAD_HEALTHY_MAX', ctx=Load())]), body=[Return(value=Tuple(elts=[Constant(value='🟢 Healthy'), Constant(value='Healthy')], ctx=Load()))], orelse=[]), If(test=Compare(left=Name(id='spread_pct', ctx=Load()), ops=[LtE()], comparators=[Name(id='SPREAD_MODERATE_MAX', ctx=Load())]), body=[Return(value=Tuple(elts=[Constant(value='🟡 Moderate'), Constant(value='Moderate')], ctx=Load()))], orelse=[]), Return(value=Tuple(elts=[Constant(value='🔴 Wide'), Constant(value='Wide')], ctx=Load()))], decorator_list=[], returns=Subscript(value=Name(id='tuple', ctx=Load()), slice=Tuple(elts=[Name(id='str', ctx=Load()), Name(id='str', ctx=Load())], ctx=Load()), ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "services/economy/fairprice_market.py",
+    "kind": "function",
+    "name": "fp_parse_orderbook",
+    "body_normalized": "FunctionDef(name='fp_parse_orderbook', args=arguments(posonlyargs=[], args=[arg(arg='orderbook', annotation=BinOp(left=Name(id='dict', ctx=Load()), op=BitOr(), right=Constant(value=None)))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Parse orderbook -> dict bid/ask/volume + spread.\\n\\n    None aman (return nilai default). Sensitivitas \"orderbook error\" sudah\\n    di-handle di caller (dikonversi ke None sebelum dipanggil).\\n    ')), Assign(targets=[Name(id='best_bid', ctx=Store())], value=IfExp(test=Name(id='orderbook', ctx=Load()), body=Call(func=Attribute(value=Name(id='orderbook', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='best_bid')], keywords=[]), orelse=Constant(value=None))), Assign(targets=[Name(id='best_ask', ctx=Store())], value=IfExp(test=Name(id='orderbook', ctx=Load()), body=Call(func=Attribute(value=Name(id='orderbook', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='best_ask')], keywords=[]), orelse=Constant(value=None))), Assign(targets=[Name(id='buy_vol', ctx=Store())], value=IfExp(test=Name(id='orderbook', ctx=Load()), body=Call(func=Attribute(value=Name(id='orderbook', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='buy_vol'), Constant(value=0)], keywords=[]), orelse=Constant(value=0))), Assign(targets=[Name(id='sell_vol', ctx=Store())], value=IfExp(test=Name(id='orderbook', ctx=Load()), body=Call(func=Attribute(value=Name(id='orderbook', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='sell_vol'), Constant(value=0)], keywords=[]), orelse=Constant(value=0))), Assign(targets=[Name(id='total_qty', ctx=Store())], value=BinOp(left=Name(id='buy_vol', ctx=Load()), op=Add(), right=Name(id='sell_vol', ctx=Load()))), Assign(targets=[Name(id='spread_pct', ctx=Store())], value=Call(func=Name(id='_fp_spread_pct', ctx=Load()), args=[Name(id='best_bid', ctx=Load()), Name(id='best_ask', ctx=Load())], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='spread_label', ctx=Store()), Name(id='spread_key', ctx=Store())], ctx=Store())], value=Call(func=Name(id='_fp_spread_label', ctx=Load()), args=[Name(id='spread_pct', ctx=Load())], keywords=[])), Return(value=Dict(keys=[Constant(value='best_bid'), Constant(value='best_ask'), Constant(value='buy_vol'), Constant(value='sell_vol'), Constant(value='total_qty'), Constant(value='spread_pct'), Constant(value='spread_label'), Constant(value='spread_key')], values=[Name(id='best_bid', ctx=Load()), Name(id='best_ask', ctx=Load()), Name(id='buy_vol', ctx=Load()), Name(id='sell_vol', ctx=Load()), Name(id='total_qty', ctx=Load()), Name(id='spread_pct', ctx=Load()), Name(id='spread_label', ctx=Load()), Name(id='spread_key', ctx=Load())]))], decorator_list=[], returns=Name(id='dict', ctx=Load()), type_params=[])"
+  }
+]

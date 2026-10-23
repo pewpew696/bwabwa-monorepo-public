@@ -1,0 +1,55 @@
+{% if result %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">{{ result.name }}</h2>
+    <span class="badge">{{ result.window }} · {{ result.mode|capitalize }}{% if result.detail == "advanced" %} · Advanced{% endif %}</span>
+  </div>
+  <div class="kv-grid">
+    <div><span class="text-muted">Damage</span><span class="mono">{{ result.breakdown.daily_damage|format_amount }} ± {{ result.breakdown.damage_std|format_amount }}</span></div>
+    <div><span class="text-muted">Hits</span><span class="mono">{{ result.breakdown.hits|format_amount }}</span></div>
+    <div><span class="text-muted">Gear cost</span><span class="mono">{{ result.breakdown.gear_cost|format_price }}</span></div>
+    <div><span class="text-muted">Consumables</span><span class="mono">{{ result.breakdown.consumables|format_price }}</span></div>
+    <div><span class="text-muted">Scrap income</span><span class="mono">{{ result.breakdown.scrap_income|format_price }}</span></div>
+    <div><span class="text-muted">Case income</span><span class="mono">{{ result.breakdown.case_income|format_price }}</span></div>
+    <div><span class="text-muted">Battle loot</span><span class="mono">{{ result.breakdown.battle_loot_income|format_price }}</span></div>
+    <div><span class="text-muted">Company income</span><span class="mono">{{ result.breakdown.company_income|format_price }}</span></div>
+    <div><span class="text-muted">Work income</span><span class="mono">{{ result.breakdown.work_income|format_price }}</span></div>
+    <div><span class="text-muted">Net cost</span><span class="mono">{{ result.breakdown.net_cost|format_price }}</span></div>
+    <div><span class="text-muted">Gold per 1K dmg</span><span class="mono">{{ result.breakdown.gold_per_k|format_price }}</span></div>
+  </div>
+  <p class="text-muted footnote">{% if result.mode == "farmer" %}Farmer ranking: highest case income wins.{% elif result.mode == "glass_cannon" %}Glass Cannon ranking: highest damage wins, gold per 1K damage as tiebreak.{% else %}Balance ranking: lowest gold per 1K damage wins.{% endif %} Negative = profit. Damage from 100x Monte Carlo RNG. Battle loot excluded (unmapped).</p>
+  {% if pins %}
+  <p class="text-muted footnote">Pinned: {% for k, v in pins.items() %}{{ k }} {{ v }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+  {% endif %}
+  {% if result.overrides_used %}
+  <p class="text-muted footnote">Price overrides: {% for k, v in result.overrides_used.items() %}{{ k }} {{ v|format_price }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if compare %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Compare ({{ compare|length }}/10)</h2>
+    <button class="button" hx-post="/sim/builder/clear" hx-include="[name='mode']" hx-target="#builder-result" hx-swap="innerHTML">Clear</button>
+  </div>
+  <div class="table-scroll">
+    <table class="table">
+      <thead>
+        <tr><th>Build</th><th class="num">Damage</th><th class="num">Hits</th><th class="num">Net cost</th><th class="num">Gold/1K</th></tr>
+      </thead>
+      <tbody>
+        {% for b in compare %}
+        <tr>
+          <td>{{ b.name }}{% if b.detail == "advanced" %} <span class="badge">Adv</span>{% endif %}{% if loop.first %} <span class="badge is-best">Best</span>{% endif %}</td>
+          <td class="num">{{ b.breakdown.daily_damage|format_amount }}</td>
+          <td class="num">{{ b.breakdown.hits|format_amount }}</td>
+          <td class="num">{{ b.breakdown.net_cost|format_price }}</td>
+          <td class="num">{{ b.breakdown.gold_per_k|format_price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}

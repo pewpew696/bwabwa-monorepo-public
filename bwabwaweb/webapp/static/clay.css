@@ -1,0 +1,1488 @@
+/* webapp/static/clay.css — Soft claymorphism theme (Rishuu).
+   Dimuat setelah app.css. Override selektif, tidak rename class lama. */
+
+:root {
+  /* dark clay (default, mengikuti data-theme="dark" existing) */
+  --clay-bg: #0e0d0c;
+  --clay-bg2: #131211;
+  --clay-card: #1a1917;
+  --clay-card-raised: #211f1d;
+  --clay-border: rgba(255,255,255,0.06);
+  --clay-text: #e8e4dd;
+  --clay-text-muted: #8f8a82;
+  --clay-ink: #f1ece4;
+  --clay-nav-bg: #171614;
+  --clay-nav-active-bg: #f1ece4;
+  --clay-nav-active-fg: #1a1917;
+  --clay-shadow:
+    0 12px 22px -10px rgba(0,0,0,.65),
+    0 4px 8px -3px rgba(0,0,0,.35),
+    -4px -4px 12px rgba(255,255,255,.025),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  --clay-shadow-sm:
+    0 6px 12px -6px rgba(0,0,0,.55),
+    -3px -3px 8px rgba(255,255,255,.03),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  --clay-inset:
+    inset 3px 3px 7px rgba(0,0,0,.55),
+    inset -3px -3px 7px rgba(255,255,255,.03);
+  --clay-nav-shadow:
+    0 18px 28px -14px rgba(0,0,0,.55),
+    0 4px 10px -4px rgba(0,0,0,.3),
+    -5px -5px 14px rgba(255,255,255,.04),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  --clay-sage: #7FA57B;
+  --clay-sage-soft: #2a3a28;
+  --clay-sand: #D9C49A;
+  --clay-sand-soft: #3a3428;
+  --clay-blue: #9DB4D6;
+  --clay-blue-soft: #2a3345;
+  --clay-terra: #C08A78;
+  --clay-terra-soft: #3a2a24;
+}
+
+:root[data-theme="light"] {
+  --clay-bg: #F4F1EB;
+  --clay-bg2: #EFEAE1;
+  --clay-card: #FBF8F3;
+  --clay-card-raised: #F6F2EB;
+  --clay-border: rgba(46,42,38,0.07);
+  --clay-text: #2E2A26;
+  --clay-text-muted: #8A857C;
+  --clay-ink: #2E2A26;
+  --clay-nav-bg: #FBF8F3;
+  --clay-nav-active-bg: #2E2A26;
+  --clay-nav-active-fg: #FBF8F3;
+  --clay-shadow:
+    0 10px 18px -10px rgba(46,42,38,.20),
+    0 3px 6px -2px rgba(46,42,38,.05),
+    -6px -6px 16px rgba(255,255,255,.85),
+    inset 0 1px 0 rgba(255,255,255,.75);
+  --clay-shadow-sm:
+    0 6px 12px -8px rgba(46,42,38,.22),
+    -3px -3px 8px rgba(255,255,255,.85),
+    inset 0 1px 0 rgba(255,255,255,.7);
+  --clay-inset:
+    inset 3px 3px 7px rgba(46,42,38,.09),
+    inset -3px -3px 7px rgba(255,255,255,.92);
+  --clay-nav-shadow:
+    0 18px 28px -14px rgba(46,42,38,.35),
+    0 4px 10px -4px rgba(46,42,38,.08),
+    -5px -5px 14px rgba(255,255,255,.95),
+    inset 0 1px 0 rgba(255,255,255,.95);
+  --clay-sage-soft: #DFE9DD;
+  --clay-sand-soft: #F0E6D2;
+  --clay-blue-soft: #DCE5F1;
+  --clay-terra-soft: #EBD5CC;
+}
+
+body {
+  background: var(--clay-bg);
+  color: var(--clay-text);
+}
+
+/* ---- topbar ---- */
+.topbar {
+  background: var(--clay-bg);
+  border-bottom: 0;
+  padding: calc(0.75rem + env(safe-area-inset-top, 0px)) 1rem 0.5rem;
+  align-items: flex-start;
+}
+.topbar .brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--clay-ink);
+}
+.topbar .brand-sub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--clay-text-muted);
+  text-transform: none;
+}
+
+.icon-button {
+  border: 0;
+  background: var(--clay-card);
+  color: var(--clay-text);
+  border-radius: 999px;
+  box-shadow: var(--clay-shadow-sm);
+}
+
+/* ---- content ---- */
+.content {
+  padding-top: 0.5rem;
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---- cards ---- */
+.card {
+  background: var(--clay-card);
+  border: 0;
+  border-radius: 24px;
+  box-shadow: var(--clay-shadow);
+  padding: 1rem;
+}
+
+/* ---- headings ---- */
+.section-title {
+  color: var(--clay-ink);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.subhead {
+  color: var(--clay-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---- badges ---- */
+.badge {
+  background: var(--clay-card);
+  border: 0;
+  box-shadow: var(--clay-shadow-sm);
+  color: var(--clay-text-muted);
+  font-weight: 700;
+}
+.badge.is-stale {
+  color: #A5604A;
+  background: var(--clay-terra-soft);
+  border: 0;
+}
+
+/* ---- buttons ---- */
+.button {
+  background: linear-gradient(160deg, #8FB18A, #7FA57B);
+  color: #FCFAF6;
+  border-radius: 20px;
+  border: 0;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  box-shadow:
+    0 12px 20px -10px rgba(95,138,91,.85),
+    inset 0 2px 2px rgba(255,255,255,.35),
+    inset 0 -3px 8px rgba(46,42,38,.12);
+}
+.button-secondary {
+  background: var(--clay-card);
+  color: var(--clay-text);
+  border: 0;
+  box-shadow: var(--clay-shadow-sm);
+}
+
+/* ---- inputs ---- */
+.input {
+  background: var(--clay-bg2);
+  color: var(--clay-text);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: var(--clay-inset);
+  padding: 0.7rem 1rem;
+}
+.modal-form textarea.input { border-radius: 20px; }
+.modal-form select.input { border-radius: 20px; }
+
+/* ---- rank rows ---- */
+.rank-row {
+  border-bottom: 1px solid var(--clay-border);
+  padding: 0.6rem 0;
+}
+
+/* ---- bottom nav (floating pill) ---- */
+.bottom-nav {
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  height: 64px;
+  padding-bottom: 0;
+  border-top: 0;
+  background: var(--clay-nav-bg);
+  border-radius: 32px;
+  box-shadow: var(--clay-nav-shadow);
+}
+
+.nav-item {
+  flex-direction: column;
+  gap: 1px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--clay-text-muted);
+  padding: 0;
+}
+.nav-item .ic {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.nav-item .ic svg { width: 19px; height: 19px; }
+.nav-item.is-active {
+  color: var(--clay-ink);
+  font-weight: 700;
+}
+.nav-item.is-active .ic {
+  background: var(--clay-nav-active-bg);
+  color: var(--clay-nav-active-fg);
+  box-shadow:
+    0 8px 14px -6px rgba(46,42,38,.5),
+    inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+/* toast adjust */
+#toast-root {
+  bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---- home summary tiles ---- */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+.tile {
+  background: var(--clay-card);
+  border-radius: 22px;
+  box-shadow: var(--clay-shadow);
+  padding: 0.9rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  text-align: center;
+}
+.tile-icon {
+  width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center;
+  box-shadow:
+    0 6px 12px -5px rgba(46,42,38,.28),
+    inset 0 2px 3px rgba(255,255,255,.55);
+}
+.tile-icon svg { width: 22px; height: 22px; }
+.tile-icon.sage { background: linear-gradient(160deg,#E6EFE3,#CFE0CB); color:#4F7048; }
+.tile-icon.sand { background: linear-gradient(160deg,#F5ECD9,#E5D6B6); color:#8A7440; }
+.tile-icon.blue { background: linear-gradient(160deg,#E4EBF5,#CBD8EA); color:#4A6486; }
+:root[data-theme="dark"] .tile-icon.sage { background: linear-gradient(160deg,#2c3c2a,#243121); color:#c8e0c4; }
+:root[data-theme="dark"] .tile-icon.sand { background: linear-gradient(160deg,#3d3626,#30291c); color:#f0dca8; }
+:root[data-theme="dark"] .tile-icon.blue { background: linear-gradient(160deg,#2a3445,#1f2733); color:#b8cbe4; }
+.tile-label {
+  font-size: 0.68rem; font-weight: 600;
+  color: var(--clay-text-muted); letter-spacing: 0.01em;
+}
+.tile-value {
+  font-size: 1.05rem; font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.1;
+  color: var(--clay-ink);
+  white-space: nowrap;
+}
+
+/* ---- market list: item rows with token circle ---- */
+.item-list { display: flex; flex-direction: column; }
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 2px;
+  border-bottom: 1px solid var(--clay-border);
+}
+.item-row:last-child { border-bottom: none; }
+.item-tok {
+  width: 42px; height: 42px; border-radius: 50%; flex: 0 0 auto;
+  display: grid; place-items: center;
+  font-size: 8.5px; font-weight: 800; letter-spacing: 0.03em;
+  background: linear-gradient(160deg,#F5ECD9,#E5D6B6);
+  color: #6E5B32;
+  box-shadow:
+    0 5px 10px -4px rgba(46,42,38,.22),
+    inset 0 2px 3px rgba(255,255,255,.9),
+    inset 0 -3px 6px rgba(46,42,38,.06);
+}
+:root[data-theme="dark"] .item-tok {
+  background: linear-gradient(160deg,#3a3428,#2a2519);
+  color: #f0dca8;
+}
+.item-meta { flex: 1; min-width: 0; }
+.item-name {
+  font-size: 13.5px; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--clay-ink); text-decoration: none;
+  display: block;
+}
+.item-sub {
+  font-size: 11px; color: var(--clay-text-muted);
+  margin-top: 3px; font-weight: 600;
+}
+.item-val {
+  font-size: 13.5px; font-weight: 800; letter-spacing: -0.01em;
+  text-align: right; color: var(--clay-ink);
+  white-space: nowrap;
+}
+.item-val-sub {
+  font-size: 10px; color: var(--clay-text-muted);
+  margin-top: 3px; font-weight: 700;
+}
+
+/* ---- market item: chart toolbar + panels ---- */
+.chart-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 6px;
+}
+.chart-toolbar-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  margin-right: 2px;
+}
+.chart-chip {
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--clay-card);
+  color: var(--clay-text-muted);
+  box-shadow: var(--clay-shadow-sm);
+  cursor: pointer;
+}
+.chart-chip.is-active {
+  background: var(--clay-nav-active-bg);
+  color: var(--clay-nav-active-fg);
+  box-shadow:
+    0 6px 12px -6px rgba(46,42,38,.55),
+    inset 0 1px 0 rgba(255,255,255,.15);
+}
+.chart-status {
+  display: none;
+  font-size: 0.72rem;
+  color: var(--clay-text-muted);
+  margin: 6px 0 4px;
+  font-weight: 600;
+}
+.chart-wrap {
+  position: relative;
+  height: 240px;
+  margin: 6px 0 8px;
+}
+.chart-panel {
+  position: relative;
+  height: 110px;
+  margin: 6px 0;
+  padding-top: 18px;
+}
+.chart-panel-label {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+}
+
+/* ---- Lightweight Charts host + panel ---- */
+:root {
+  --clay-panel-bg: #050504;
+}
+:root[data-theme="light"] {
+  --clay-panel-bg: #EFEAE1;
+}
+.lwc-host {
+  width: 100%;
+  height: 100%;
+}
+.chart-wrap {
+  height: 300px;
+  padding: 0;
+  background: var(--clay-panel-bg);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.chart-panel {
+  height: 130px;
+  padding: 18px 0 0 0;
+  margin: 10px 0 0 0;
+  background: var(--clay-panel-bg);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Unit 9 — Plus Jakarta Sans (header/subheader) + warna teks & data
+   Brand "Rishuu" tetap pakai var(--clay-ink) = baseline.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/static/fonts/PJS-SemiBold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/static/fonts/PJS-Bold.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/static/fonts/PJS-ExtraBold.woff2') format('woff2');
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+
+/* ---- variable baru ---- */
+:root {
+  --clay-ink-strong: #FFFFFF;
+  --clay-muted-strong: #B8B2A8;
+  --clay-data-blue: #8BB8EC;
+}
+:root[data-theme="light"] {
+  --clay-ink-strong: #000000;
+  --clay-muted-strong: #6A6560;
+  --clay-data-blue: #1E4976;
+}
+
+/* muted lama dipromosikan ke muted-strong (naik kontras) */
+:root { --clay-text-muted: #B8B2A8; }
+:root[data-theme="light"] { --clay-text-muted: #6A6560; }
+
+/* ---- font PJS: header + subheader ---- */
+h1, h2, h3, h4,
+.topbar .brand,
+.section-title,
+.subhead,
+.modal-title,
+.tile-label,
+.chart-toolbar-label,
+.chart-panel-label,
+.item-name,
+.rank-name,
+.pv-brand,
+.pv-section-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+}
+h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.02em; }
+.section-title { font-weight: 700; }
+.subhead { font-weight: 700; }
+.item-name, .rank-name { font-weight: 700; }
+
+/* ---- teks utama dipertegas (kecuali .brand) ---- */
+.section-title,
+.subhead,
+.modal-title,
+.item-name,
+.rank-name,
+.tile-value,
+.pv-section-title,
+h1, h2, h3, h4 {
+  color: var(--clay-ink-strong);
+}
+
+/* ---- angka / data dipertegas (putih/black pekat) ---- */
+.item-val,
+.val,
+.rank-value,
+.tile-value,
+.mono {
+  color: var(--clay-ink-strong);
+}
+
+/* ---- label kecil / sub-info tetap muted tapi lebih kuat ---- */
+.item-sub,
+.rank-sub,
+.item-val-sub,
+.tile-label {
+  color: var(--clay-text-muted);
+}
+
+/* ---- trend tetap hijau/merah, meski rule putih di atas ---- */
+.is-up { color: var(--up); }
+.is-down { color: var(--down); }
+
+/* ---- Unit 10: bid hijau, ask merah ---- */
+:root {
+  --clay-bid: var(--up);
+  --clay-ask: var(--down);
+}
+:root[data-theme="light"] {
+  --clay-bid: #1a8a4a;
+  --clay-ask: #c93030;
+}
+.mono.bid { color: var(--clay-bid); }
+.mono.ask { color: var(--clay-ask); }
+
+/* ---- Unit 11: subnav chips ---- */
+.subnav {
+  display: flex;
+  gap: 6px;
+  padding: 4px 18px 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.subnav::-webkit-scrollbar { display: none; }
+.subnav-chip {
+  flex: 0 0 auto;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--clay-card);
+  color: var(--clay-text-muted);
+  text-decoration: none;
+  box-shadow: var(--clay-shadow-sm);
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.subnav-chip.is-active {
+  background: var(--clay-nav-active-bg);
+  color: var(--clay-nav-active-fg);
+  box-shadow:
+    0 6px 12px -6px rgba(46,42,38,.55),
+    inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+/* ---- Unit 12: bonus accordion ---- */
+.bonus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+.bonus-item {
+  background: var(--clay-bg2);
+  border-radius: 18px;
+  box-shadow: var(--clay-inset);
+  overflow: hidden;
+}
+.bonus-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 14px 12px;
+  display: block;
+}
+.bonus-summary::-webkit-details-marker { display: none; }
+.bonus-summary::marker { content: ""; }
+
+.bonus-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.bonus-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bonus-name {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.015em;
+  color: var(--clay-ink-strong);
+}
+.bonus-snapshot {
+  font-size: 10px;
+  color: var(--clay-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bonus-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 2px 0;
+}
+.bonus-top-country {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--clay-ink-strong);
+}
+.bonus-top-right {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.bonus-top-pct {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--clay-ink-strong);
+  letter-spacing: -0.02em;
+}
+.bonus-top-tax {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--clay-text-muted);
+}
+
+.bonus-item[open] .bonus-top { display: none; }
+.bonus-item[open] .bonus-summary {
+  border-bottom: 1px solid var(--clay-border);
+  padding-bottom: 12px;
+}
+.bonus-item[open] .bonus-head { margin-bottom: 0; }
+
+.bonus-body {
+  padding: 8px 14px 12px;
+}
+.bonus-body .rank-row {
+  border-bottom: 1px solid var(--clay-border);
+}
+.bonus-body .rank-row:last-child { border-bottom: 0; }
+
+/* ---- Unit 12b: samakan ukuran expanded dengan collapsed ---- */
+.bonus-body .rank-row .rank-name {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--clay-ink-strong);
+}
+.bonus-body .rank-row .rank-value {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--clay-ink-strong);
+}
+.bonus-body .rank-row .rank-sub {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--clay-text-muted);
+}
+
+/* ---- Unit 13b: orderbook Ajaib-style ---- */
+.card-flush { padding: 0; }
+.card-flush .card-head { padding: 15px 15px 4px; }
+.card-flush #orderbook-body { padding: 0 0 4px; }
+.card-flush #orderbook-body > .text-muted { padding: 0 15px 15px; margin: 0; }
+
+#orderbook-panel {
+  background: var(--clay-panel-bg);
+  overflow: hidden;
+}
+
+.ob-book {
+  font-size: 11px;
+  padding: 0 4px 8px;
+}
+.ob-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 6px 10px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  border-bottom: 1px solid var(--clay-border);
+}
+.ob-head > span:nth-child(3) { padding-left: 8px; }
+.ob-head .ta-r { text-align: right; }
+
+.ob-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 4px 10px;
+  min-height: 24px;
+  border-bottom: 1px solid rgba(138,133,124,0.06);
+}
+.ob-row:last-of-type { border-bottom: 0; }
+
+.ob-row > .ob-lot,
+.ob-row > .ob-price {
+  position: relative;
+  z-index: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.ob-row > .ob-price:nth-child(4) { padding-left: 8px; }
+.ob-row .ta-r { text-align: right; }
+.ob-row .ob-lot { color: var(--clay-text-muted); font-weight: 600; }
+.ob-row .ob-price { font-weight: 800; letter-spacing: -0.01em; }
+
+.ob-bar {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 3px;
+}
+.ob-bar-bid {
+  right: 50%;
+  background: rgba(38, 166, 154, 0.18);
+}
+.ob-bar-ask {
+  left: 50%;
+  background: rgba(239, 83, 80, 0.16);
+}
+
+.ob-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 10px 6px;
+  margin-top: 6px;
+  border-top: 1px solid var(--clay-border);
+  font-size: 11px;
+}
+.ob-foot-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+}
+.ob-foot-value {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.ob-foot-label:nth-child(3) { padding-left: 8px; }
+
+.ob-spread {
+  padding: 2px 10px 8px;
+  font-size: 10px;
+  color: var(--clay-text-muted);
+  text-align: center;
+}
+.ob-spread .mono { color: var(--clay-ink-strong); font-weight: 700; }
+
+/* ---- Unit 13b: orderbook depth (Ajaib-style) ---- */
+.card-flush { padding: 0; }
+.card-flush .card-head { padding: 15px 15px 4px; }
+.card-flush #orderbook-body { padding: 0 0 4px; }
+.card-flush #orderbook-body > .text-muted { padding: 0 15px 15px; margin: 0; }
+
+#orderbook-panel {
+  background: var(--clay-panel-bg);
+  overflow: hidden;
+}
+
+.obk-book {
+  font-size: 10px;
+  padding: 0 0 6px;
+}
+
+.obk-head,
+.obk-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  column-gap: 2px;
+}
+@media (min-width: 480px) {
+  .obk-head, .obk-row {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  .obk-ord-cell { display: inline !important; }
+}
+.obk-ord-cell { display: none; }
+
+.obk-head {
+  padding: 8px 6px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  border-bottom: 1px solid var(--clay-border);
+}
+.obk-head .obk-l { text-align: left; }
+.obk-head .obk-r { text-align: right; }
+.obk-head .obk-center-l { text-align: right; padding-right: 4px; }
+.obk-head .obk-center-r { text-align: left; padding-left: 4px; }
+
+.obk-row {
+  position: relative;
+  padding: 4px 6px;
+  min-height: 20px;
+  border-bottom: 1px solid rgba(138,133,124,0.05);
+}
+.obk-row:last-of-type { border-bottom: 0; }
+
+.obk-cell {
+  position: relative;
+  z-index: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  color: var(--clay-text-muted);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.obk-cell.obk-l { text-align: left; }
+.obk-cell.obk-r { text-align: right; }
+.obk-cell.obk-center-l { text-align: right; padding-right: 4px; }
+.obk-cell.obk-center-r { text-align: left; padding-left: 4px; }
+.obk-cell.bid { color: #26a69a; font-weight: 800; }
+.obk-cell.ask { color: #ef5350; font-weight: 800; }
+
+/* Divider tengah (di antara kolom price bid & ask) */
+.obk-row::after,
+.obk-head::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 50%;
+  width: 1px;
+  background: rgba(138,133,124,0.18);
+  z-index: 0;
+  pointer-events: none;
+}
+.obk-head::after { background: rgba(138,133,124,0.28); }
+
+/* Bar depth: origin di tengah, melebar keluar */
+.obk-bar {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 2px;
+  width: calc(var(--w) * 50% / 100);
+}
+.obk-bar-bid {
+  right: 50%;
+  background: rgba(38, 166, 154, 0.20);
+}
+.obk-bar-ask {
+  left: 50%;
+  background: rgba(239, 83, 80, 0.18);
+}
+
+.obk-last {
+  padding: 14px 10px 6px;
+  text-align: center;
+  border-top: 1px solid var(--clay-border);
+  margin-top: 4px;
+}
+.obk-last-value {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #26a69a;
+}
+.obk-last-label {
+  font-size: 10px;
+  color: var(--clay-text-muted);
+  font-weight: 600;
+  margin-top: 3px;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Unit 13c: chip gate VIP ---- */
+.chart-chip.is-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: var(--clay-bg2);
+  color: var(--clay-text-muted);
+  box-shadow: var(--clay-inset);
+}
+.chart-chip.is-locked.is-active {
+  background: var(--clay-bg2);
+  color: var(--clay-text-muted);
+  box-shadow: var(--clay-inset);
+}
+.toast {
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--clay-card);
+  color: var(--clay-ink-strong);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: var(--clay-shadow);
+  border: 1px solid var(--clay-border);
+}
+
+/* ---- Unit 14: form-stack (label + input bertumpuk) ---- */
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 8px;
+}
+.form-stack .fs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.form-stack .fs-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.form-stack .fs-label {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  padding-left: 4px;
+}
+.form-stack .input {
+  width: 100%;
+}
+.form-stack .button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* ---- Unit 14 fix: input + unit inline ---- */
+.form-stack .fs-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.form-stack .fs-inline .fs-num {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+}
+.form-stack .fs-inline .fs-unit {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--clay-text-muted);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* ---- Unit 15: item icon di token circle ---- */
+.item-tok {
+  position: relative;
+  overflow: hidden;
+}
+.item-tok-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  z-index: 1;
+  pointer-events: none;
+}
+.item-tok-text {
+  position: relative;
+  z-index: 0;
+}
+
+/* ---- Unit 15 fix: sembunyikan teks + background kalau icon ada ---- */
+.item-tok:has(.item-tok-img) .item-tok-text {
+  display: none;
+}
+.item-tok:has(.item-tok-img) {
+  background: transparent;
+  box-shadow: none;
+}
+.item-tok-img {
+  padding: 0;
+}
+
+/* ============================================================
+   Unit 4a — Auth & Error polish (login + error_page)
+   Append-only. Tidak mengubah rule existing.
+   ============================================================ */
+
+/* Modal backdrop: clay-tinted, blur, ganti legacy hitam */
+.modal-backdrop {
+  background: rgba(14, 13, 12, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+:root[data-theme="light"] .modal-backdrop {
+  background: rgba(46, 42, 38, 0.30);
+}
+
+/* Modal card: match .card clay (radius 24, clay shadow, no border) */
+.modal {
+  background: var(--clay-card);
+  border: 0;
+  border-radius: 24px;
+  box-shadow: var(--clay-shadow);
+  padding: 1.25rem;
+}
+
+.modal-text { color: var(--clay-text-muted); }
+.modal-actions { gap: 0.625rem; }
+
+/* .text-muted konsisten clay (override app.css legacy) */
+.text-muted { color: var(--clay-text-muted); }
+
+/* Wrapper login & error: center di viewport */
+.panel-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  min-height: calc(100vh - 8rem);
+  min-height: calc(100dvh - 8rem);
+  padding: 1rem;
+}
+.panel-wrap .card { width: 100%; max-width: 24rem; }
+.panel-brand {
+  margin: 0;
+  color: var(--clay-text-muted);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ============================================================
+   Unit 4b — Territory polish (leaderboard, country, stock)
+   Append-only. Override legacy app.css. Tidak ubah rule existing.
+   ============================================================ */
+
+/* ---- card-head: layout clay, gap lega ---- */
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.card-head .section-title,
+.card-head .subhead { margin: 0; }
+
+/* ---- rank list & rows: divider clay, spacing lapang ---- */
+.rank-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rank-list > .rank-row:last-child { border-bottom: 0; }
+
+.rank-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--clay-border);
+}
+
+.rank-name {
+  color: var(--clay-ink-strong);
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.25;
+}
+a.rank-name:hover { color: var(--clay-ink-strong); }
+
+.rank-value {
+  color: var(--clay-ink-strong);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rank-sub {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--clay-text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ---- empty & footnote ---- */
+.empty {
+  margin: 0.5rem 0 0.25rem;
+  color: var(--clay-text-muted);
+  font-size: 0.875rem;
+}
+.footnote {
+  margin: 0 0 1rem;
+  color: var(--clay-text-muted);
+  font-size: 0.75rem;
+}
+
+/* ---- filter form: card-in-card clay look ---- */
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin: 0 0 0.75rem;
+  padding: 0.75rem;
+  background: var(--clay-bg2);
+  border-radius: 20px;
+  box-shadow: var(--clay-inset);
+}
+.filter-form .input {
+  flex: 1 1 8rem;
+  min-width: 8rem;
+}
+.filter-form .button { flex: 0 0 auto; }
+
+/* ---- kv-grid (country summary) ---- */
+.kv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.5rem 0.75rem;
+  margin: 0 0 0.75rem;
+}
+.kv-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--clay-bg2);
+  border-radius: 16px;
+  box-shadow: var(--clay-inset);
+}
+.kv-grid .text-muted { font-size: 0.7rem; letter-spacing: 0.02em; }
+.kv-grid .mono {
+  color: var(--clay-ink-strong);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- table (country_stock) ---- */
+.table-scroll {
+  max-height: 24rem;
+  overflow-y: auto;
+  border-radius: 16px;
+}
+.table {
+  width: 100%;
+  font-size: 0.875rem;
+  border-collapse: collapse;
+}
+.table th {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  color: var(--clay-text-muted);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--clay-card);
+  border-bottom: 1px solid var(--clay-border);
+}
+.table td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--clay-border);
+  color: var(--clay-text);
+}
+.table tr:last-child td { border-bottom: 0; }
+.table th.num, .table td.num { text-align: right; }
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  background: var(--clay-card);
+  z-index: 1;
+}
+
+/* ============================================================
+   Unit 4c — Intel polish (player head, stat-list, portfolio form)
+   Append-only. Override legacy app.css. Tidak ubah rule existing.
+   ============================================================ */
+
+/* ---- player head (player + mu) ---- */
+.player-head {
+  display: flex;
+  gap: 0.875rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.player-head > div { min-width: 0; flex: 1 1 auto; }
+.player-head .section-title { margin: 0 0 0.25rem; }
+
+/* ---- player avatar: ring clay ---- */
+.player-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+  box-shadow:
+    0 0 0 2px var(--clay-card),
+    0 0 0 3px var(--clay-border),
+    var(--clay-shadow-sm);
+}
+
+/* ---- stat list (base stats, tbs, gear, upgrade) ---- */
+.stat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+.stat-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--clay-border);
+}
+.stat-list li:last-child { border-bottom: 0; }
+.stat-list .text-muted {
+  color: var(--clay-text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+}
+.stat-list .mono {
+  color: var(--clay-ink-strong);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ---- fs-inline checkbox (portfolio all_history) ---- */
+.form-stack .fs-inline > input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  accent-color: #7FA57B;
+  margin: 0;
+}
+.form-stack .fs-inline > .fs-unit { flex: 0 1 auto; }
+
+/* ============================================================
+   Unit 5c — Company tiles (simulator)
+   Append-only.
+   ============================================================ */
+.company-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.company-cell {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 1.4fr;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--clay-bg2);
+  border-radius: 14px;
+  box-shadow: var(--clay-inset);
+}
+.company-cell .rank-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  font-weight: 700;
+}
+.company-grid .input {
+  min-width: 0;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   Unit 5c — Company tiles (simulator)
+   Append-only.
+   ============================================================ */
+.company-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.company-cell {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 1.4fr;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--clay-bg2);
+  border-radius: 14px;
+  box-shadow: var(--clay-inset);
+}
+.company-cell .rank-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  font-weight: 700;
+}
+.company-grid .input {
+  min-width: 0;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   Unit 5d — Equipment rarity grid (simulator)
+   Append-only.
+   ============================================================ */
+.rarity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.rarity-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--clay-bg2);
+  border-radius: 14px;
+  box-shadow: var(--clay-inset);
+}
+.rarity-cell .rank-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  font-weight: 700;
+}
+.rarity-grid .input {
+  min-width: 0;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   Unit 4d — Simulator polish (modal-form, skill grid)
+   Append-only.
+   ============================================================ */
+.modal-form > label.text-muted {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay-text-muted);
+  margin-top: 0.25rem;
+}
+.modal-form > label.text-muted > input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  accent-color: #7FA57B;
+}
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.skill-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--clay-bg2);
+  border-radius: 14px;
+  box-shadow: var(--clay-inset);
+}
+.skill-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--clay-ink-strong);
+}
+.skill-cell .rank-sub {
+  font-size: 0.65rem;
+  color: var(--clay-text-muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.skill-grid .input {
+  min-width: 0;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+}
+.card > .subhead {
+  margin: 0.75rem 0 0.35rem;
+}
+.card > .subhead + .footnote {
+  margin-top: 0;
+}
+
+/* ---- rarity checklist (optimizer, ceklis bebas per tier) ---- */
+.rarity-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.35rem;
+}
+.rarity-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.8rem;
+  background: var(--clay-bg2);
+  border-radius: 999px;
+  box-shadow: var(--clay-inset);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  user-select: none;
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+.rarity-check:hover {
+  transform: translateY(-1px);
+}
+.rarity-check:has(input:checked) {
+  box-shadow: var(--clay-inset), 0 0 0 2px var(--clay-accent, #8B5CF6);
+}
+.rarity-check input {
+  accent-color: var(--clay-accent, #8B5CF6);
+  margin: 0;
+  cursor: pointer;
+}
+.rarity-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+  flex: none;
+}
+.rarity-dot.rarity-putih  { background: #E8E8E8; }
+.rarity-dot.rarity-hijau  { background: #4CAF50; }
+.rarity-dot.rarity-biru   { background: #3B82F6; }
+.rarity-dot.rarity-ungu   { background: #8B5CF6; }
+.rarity-dot.rarity-oren   { background: #F59E0B; }
+.rarity-dot.rarity-merah  { background: #EF4444; }
+.footnote-error {
+  color: #EF4444;
+  font-size: 0.75rem;
+  margin: 0.15rem 0 0.5rem;
+}

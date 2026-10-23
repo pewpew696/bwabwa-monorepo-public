@@ -1,0 +1,8 @@
+[
+  {
+    "file": "core/formatters.py",
+    "kind": "function",
+    "name": "fmt_compact",
+    "body_normalized": "FunctionDef(name='fmt_compact', args=arguments(posonlyargs=[], args=[arg(arg='v', annotation=Name(id='float', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value=\"Format angka ringkas: B (miliar) / M (juta) / K (ribu).\\n    Contoh: 1_500 -> '1.5K', 2_500_000 -> '2.50M', 3_000_000_000 -> '3.00B'.\\n    \")), If(test=Compare(left=Name(id='v', ctx=Load()), ops=[GtE()], comparators=[Constant(value=1000000000)]), body=[Return(value=JoinedStr(values=[FormattedValue(value=BinOp(left=Name(id='v', ctx=Load()), op=Div(), right=Constant(value=1000000000)), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.2f')])), Constant(value='B')]))], orelse=[]), If(test=Compare(left=Name(id='v', ctx=Load()), ops=[GtE()], comparators=[Constant(value=1000000)]), body=[Return(value=JoinedStr(values=[FormattedValue(value=BinOp(left=Name(id='v', ctx=Load()), op=Div(), right=Constant(value=1000000)), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.2f')])), Constant(value='M')]))], orelse=[]), If(test=Compare(left=Name(id='v', ctx=Load()), ops=[GtE()], comparators=[Constant(value=1000)]), body=[Return(value=JoinedStr(values=[FormattedValue(value=BinOp(left=Name(id='v', ctx=Load()), op=Div(), right=Constant(value=1000)), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.1f')])), Constant(value='K')]))], orelse=[]), Return(value=JoinedStr(values=[FormattedValue(value=Name(id='v', ctx=Load()), conversion=-1, format_spec=JoinedStr(values=[Constant(value='.0f')]))]))], decorator_list=[], returns=Name(id='str', ctx=Load()), type_params=[])"
+  }
+]

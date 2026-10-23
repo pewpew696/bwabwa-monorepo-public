@@ -1,0 +1,38 @@
+[
+  {
+    "file": "services/db/local.py",
+    "kind": "constant",
+    "name": "APP_DB_HOST",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='APP_DB_HOST'), Constant(value='127.0.0.1')], keywords=[])"
+  },
+  {
+    "file": "services/db/local.py",
+    "kind": "constant",
+    "name": "APP_DB_PORT",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='APP_DB_PORT'), Constant(value='5432')], keywords=[])"
+  },
+  {
+    "file": "services/db/local.py",
+    "kind": "constant",
+    "name": "APP_DB_DBNAME",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='APP_DB_DBNAME'), Constant(value='app_db')], keywords=[])"
+  },
+  {
+    "file": "services/db/local.py",
+    "kind": "constant",
+    "name": "APP_DB_USER",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='APP_DB_USER'), Constant(value='')], keywords=[])"
+  },
+  {
+    "file": "services/db/local.py",
+    "kind": "constant",
+    "name": "APP_DB_PASSWORD",
+    "body_normalized": "Call(func=Attribute(value=Attribute(value=Name(id='os', ctx=Load()), attr='environ', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='APP_DB_PASSWORD'), Constant(value='')], keywords=[])"
+  },
+  {
+    "file": "services/db/local.py",
+    "kind": "function",
+    "name": "_local_connect",
+    "body_normalized": "FunctionDef(name='_local_connect', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Attribute(value=Name(id='psycopg2', ctx=Load()), attr='connect', ctx=Load()), args=[], keywords=[keyword(arg='host', value=Name(id='APP_DB_HOST', ctx=Load())), keyword(arg='port', value=Name(id='APP_DB_PORT', ctx=Load())), keyword(arg='dbname', value=Name(id='APP_DB_DBNAME', ctx=Load())), keyword(arg='user', value=Name(id='APP_DB_USER', ctx=Load())), keyword(arg='password', value=Name(id='APP_DB_PASSWORD', ctx=Load())), keyword(arg='connect_timeout', value=Constant(value=10))]))], decorator_list=[], type_params=[])"
+  }
+]

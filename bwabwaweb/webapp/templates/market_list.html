@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Market · Bwabwa{% endblock %}
+{% block subnav %}{% include "partials/subnav_market.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Market</h1>
+    <span class="badge">{{ items | length }} item</span>
+  </div>
+  {% if items %}
+  <div class="item-list">
+    {% for row in items %}
+    <div class="item-row">
+      <div class="item-tok">
+        <img class="item-tok-img" src="{{ row.item_name | item_icon }}" alt="" loading="lazy" decoding="async">
+        <span class="item-tok-text">{{ row.item_name | upper | replace(' ', '') | truncate(4, True, '') }}</span>
+      </div>
+      <div class="item-meta">
+        <a class="item-name" href="/market/item/{{ row.item_name | urlencode }}">{{ row.item_name }}</a>
+        <div class="item-sub">Vol {{ row.volume | amount }}</div>
+      </div>
+      <div style="text-align: right;">
+        <div class="item-val">{{ row.price | price }}</div>
+        {% if row.spread_pct is not none %}
+        <div class="item-val-sub">spread {{ row.spread_pct | percent }}</div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty">Belum ada data harga.</p>
+  {% endif %}
+</section>
+{% endblock %}

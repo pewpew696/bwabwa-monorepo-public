@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}{{ detail.item_label }} · Company Explorer{% endblock %}
+{% block subnav %}{% include "partials/subnav_market.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">{{ detail.item_label }}</h1>
+    <span class="badge">{{ detail.per_ae | map(attribute='companies') | sum }} company</span>
+  </div>
+  <p class="text-muted footnote">Breakdown per AE level dan per negara untuk item <span class="mono">{{ detail.item_code }}</span>.</p>
+  <p><a href="/market/companies">← kembali ke daftar item</a></p>
+</section>
+
+<section class="card">
+  <h2 class="subhead">Per AE level</h2>
+  {% if detail.per_ae %}
+  <div class="table-scroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>AE Level</th>
+          <th class="num">Companies</th>
+          <th class="num">Total Workers</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in detail.per_ae %}
+        <tr>
+          <td class="mono">{% if row.ae_level == 0 %}0 (tanpa AE){% else %}{{ row.ae_level }}{% endif %}</td>
+          <td class="num mono">{{ row.companies }}</td>
+          <td class="num mono">{{ row.total_workers }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">Tidak ada data AE untuk item ini.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2 class="subhead">Per negara</h2>
+  {% if detail.per_country %}
+  <div class="table-scroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Negara</th>
+          <th class="num">Companies</th>
+          <th class="num">Total Workers</th>
+          <th class="num">Region</th>
+          <th class="num">Bonus Produksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in detail.per_country %}
+        <tr>
+          <td>{{ row.country_name }}</td>
+          <td class="num mono">{{ row.companies }}</td>
+          <td class="num mono">{{ row.total_workers }}</td>
+          <td class="num mono">{{ row.region_count }}</td>
+          <td class="num mono">{{ row.bonus_pct | percent }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted footnote">Bonus = country bonus + deposit bonus (TODO: bonus party belum dihitung).</p>
+  {% else %}
+  <p class="empty">Tidak ada data negara untuk item ini.</p>
+  {% endif %}
+</section>
+{% endblock %}

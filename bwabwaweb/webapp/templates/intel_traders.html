@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Traders · Tools{% endblock %}
+{% block subnav %}{% include "partials/subnav_intel.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Leaderboard trader</h1>
+    <span class="badge">{{ report.total }} total · top {{ report.rows | length }}</span>
+  </div>
+  <p class="text-muted footnote">Diurutkan net profit dari cache bot. Hanya trader dengan transaksi tertutup.</p>
+
+  {% if report.rows %}
+  <ul class="rank-list">
+    {% for r in report.rows %}
+    <li class="rank-row">
+      <span class="rank-name">
+        {{ r.username }}
+        <span class="rank-sub mono">
+          {{ r.wins }}W / {{ r.losses }}L
+          {% if r.win_rate is not none %} · win {{ r.win_rate | percent }}{% endif %}
+          {% if r.best_item_code %} · best {{ r.best_item_code }}{% endif %}
+        </span>
+      </span>
+      <span class="rank-value mono {{ r.net_profit | trend }}">{{ r.net_profit | amount }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Belum ada data trader. Bot belum pernah scan.</p>
+  {% endif %}
+</section>
+{% endblock %}

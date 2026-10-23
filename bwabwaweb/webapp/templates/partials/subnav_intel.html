@@ -1,0 +1,7 @@
+{% set p = request.url.path %}
+<nav class="subnav" aria-label="Sub-navigasi Intel">
+  <a class="subnav-chip{% if p == '/intel' or p.startswith('/intel/player/') or p.startswith('/intel/mu/') %} is-active{% endif %}" href="/intel">Pemain</a>
+  <a class="subnav-chip{% if p == '/intel/open-orders' %} is-active{% endif %}" href="/intel/open-orders">Open Orders</a>
+  <a class="subnav-chip{% if p == '/intel/top-traders' %} is-active{% endif %}" href="/intel/top-traders">Top Traders</a>
+  <a class="subnav-chip{% if p == '/intel/portfolio' %} is-active{% endif %}" href="/intel/portfolio">Portfolio</a>
+</nav>

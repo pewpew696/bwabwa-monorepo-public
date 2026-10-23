@@ -1,0 +1,13 @@
+[
+  {
+    "file": "cogs/spy/api/__init__.py",
+    "kind": "async_function",
+    "name": "_bot_admin_check",
+    "body_normalized": "AsyncFunctionDef(name='_bot_admin_check', args=arguments(posonlyargs=[], args=[arg(arg='ctx', annotation=Attribute(value=Name(id='commands', ctx=Load()), attr='Context', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='Sama seperti AdminCog._is_admin: pakai tabel bot_admins + OWNER_ID,\\n    BUKAN izin `administrator` bawaan Discord — supaya konsisten dengan\\n    xadmin dan seluruh command admin-only lainnya.\\n    Delegasi ke core.permissions.is_bot_admin (satu implementasi terpusat).')), ImportFrom(module='core.permissions', names=[alias(name='is_bot_admin')], level=0), Return(value=Await(value=Call(func=Name(id='is_bot_admin', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='ctx', ctx=Load()), attr='author', ctx=Load()), attr='id', ctx=Load())], keywords=[])))], decorator_list=[], returns=Name(id='bool', ctx=Load()), type_params=[])"
+  },
+  {
+    "file": "cogs/spy/api/__init__.py",
+    "kind": "class",
+    "name": "ApiMixin"
+  }
+]

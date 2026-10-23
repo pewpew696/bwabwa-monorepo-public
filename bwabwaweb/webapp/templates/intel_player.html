@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}{{ report.username }} · Intel{% endblock %}
+{% block subnav %}{% include "partials/subnav_intel.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="player-head">
+    {% if report.avatar_url %}<img class="player-avatar" src="{{ report.avatar_url }}" alt="">{% endif %}
+    <div>
+      <h1 class="section-title">{{ report.username }}</h1>
+      <p class="text-muted">{{ report.build }} · Level {{ report.level }} · {{ report.status }}</p>
+      <p class="text-muted">{{ report.location }} · MU {{ report.mu }}</p>
+      <p class="text-muted">{{ report.buff_debuff }} · Terakhir {{ report.last_seen }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2 class="subhead">Damage</h2>
+  <div class="kv-grid">
+    <div><span class="text-muted">Mingguan</span><span class="mono">{{ report.weekly_dmg | amount }}</span></div>
+    <div><span class="text-muted">Total</span><span class="mono">{{ report.total_dmg | amount }}</span></div>
+    <div><span class="text-muted">Mil rank</span><span class="mono">{{ report.mil_rank }}</span></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2 class="subhead">Base stats</h2>
+  <ul class="stat-list">
+    {% for key, value in report.base_stats.items() %}
+    <li><span class="text-muted">{{ key }}</span><span class="mono">{{ value[0] }} · {{ value[1] }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2 class="subhead">Total bonus stats</h2>
+  <ul class="stat-list">
+    {% for key, value in report.tbs.items() %}
+    <li><span class="text-muted">{{ key }}</span><span class="mono">{{ value }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2 class="subhead">Gear</h2>
+  <ul class="stat-list">
+    {% for slot, g in report.gear.items() %}
+    <li><span class="text-muted">{{ slot }}</span><span class="mono">{{ g.rarity }} · {{ g.stat }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% if report.companies %}
+<section class="card">
+  <h2 class="subhead">Perusahaan ({{ report.companies | length }})</h2>
+  <ul class="rank-list">
+    {% for c in report.companies %}
+    <li class="rank-row">
+      <span class="rank-name">{{ c.name }}<span class="rank-sub mono">{{ c.item }} · AE {{ c.ae }}</span></span>
+      <span class="rank-value mono">{{ c.region_id[:8] }}…</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if report.wage %}
+<section class="card">
+  <h2 class="subhead">Wage terakhir</h2>
+  <div class="kv-grid">
+    <div><span class="text-muted">Gold</span><span class="mono">{{ report.wage.gold | amount }}</span></div>
+    <div><span class="text-muted">PP</span><span class="mono">{{ report.wage.pp | amount }}</span></div>
+    <div><span class="text-muted">Gold/PP</span><span class="mono">{{ report.wage.gold_per_pp | price }}</span></div>
+    <div><span class="text-muted">Perusahaan</span><span class="mono">{{ report.wage.company_name or '—' }}</span></div>
+    <div><span class="text-muted">Bos</span><span class="mono">{{ report.wage.boss_name or '—' }}</span></div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

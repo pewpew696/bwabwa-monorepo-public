@@ -1,0 +1,7 @@
+{% set p = request.url.path %}
+<nav class="subnav" aria-label="Sub-navigasi Market">
+  <a class="subnav-chip{% if p == '/market' or p.startswith('/market/item/') %} is-active{% endif %}" href="/market">Harga</a>
+  <a class="subnav-chip{% if p == '/market/bonus' %} is-active{% endif %}" href="/market/bonus">Bonus</a>
+  <a class="subnav-chip{% if p == '/market/fairprice' %} is-active{% endif %}" href="/market/fairprice">Fairprice</a>
+  <a class="subnav-chip{% if p.startswith('/market/companies') %} is-active{% endif %}" href="/market/companies">Companies</a>
+</nav>

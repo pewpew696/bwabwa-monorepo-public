@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Intel · Bwabwa{% endblock %}
+{% block subnav %}{% include "partials/subnav_intel.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+  <h1 class="section-title">Cari pemain</h1>
+  <form class="filter-form" method="get" action="" id="player-search">
+    <input class="input" type="text" name="q" placeholder="Username WarEra" required autocomplete="off">
+    <button type="submit" class="button">Cari</button>
+  </form>
+  <p class="text-muted footnote">Gated VIP. Hasil: profil, gear, perusahaan, wage terakhir.</p>
+</section>
+
+<section class="card">
+  <h1 class="section-title">Cari MU</h1>
+  <form class="filter-form" method="get" action="" id="mu-search">
+    <input class="input" type="text" name="q" placeholder="Nama MU (mis. Clan Akatsuki)" required autocomplete="off">
+    <button type="submit" class="button">Cari</button>
+  </form>
+  <p class="text-muted footnote">Hasil: roster member + level upgrade.</p>
+</section>
+
+<script src="/static/search_forms.js"></script>
+
+
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">Pengguna aktif</h2>
+    <span class="badge">{{ data.users | length }} dalam {{ data.window_minutes }} menit</span>
+  </div>
+  {% if data.users %}
+  <ul class="rank-list">
+    {% for u in data.users %}
+    <li class="rank-row">
+      <span class="rank-name">{{ u.name }}</span>
+      <span class="rank-value mono">{{ u.last_seen_at | wib }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Tidak ada pengguna aktif dalam {{ data.window_minutes }} menit terakhir.</p>
+  {% endif %}
+</section>
+{% endblock %}

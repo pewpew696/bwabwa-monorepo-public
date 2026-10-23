@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ report.name }} · Intel{% endblock %}
+{% block subnav %}{% include "partials/subnav_intel.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+    <div class="player-head">
+        {% if report.avatar_url %}<img class="player-avatar" src="{{ report.avatar_url }}" alt="">{% endif %}
+        <div>
+            <h1 class="section-title">{{ report.name }}</h1>
+            <p class="text-muted">Level {{ report.level }} · {{ report.member_count }} member</p>
+            <p class="text-muted">Weekly {{ report.weekly_dmg | amount }} · Total {{ report.total_dmg | amount }}</p>
+        </div>
+    </div>
+</section>
+
+{% if report.hq or report.dormitory %}
+<section class="card">
+    <h2 class="subhead">Upgrade</h2>
+    <ul class="stat-list">
+        {% if report.hq %}
+        <li><span class="text-muted">Headquarters</span><span class="mono">Lv {{ report.hq.level }}{% if report.hq.active %} · active{% endif %}</span></li>
+        {% endif %}
+        {% if report.dormitory %}
+        <li><span class="text-muted">Dormitory</span><span class="mono">Lv {{ report.dormitory.level }} · {{ report.dormitory.capacity }} kapasitas</span></li>
+        {% endif %}
+    </ul>
+</section>
+{% endif %}
+
+<section class="card">
+    <h2 class="subhead">Roster ({{ report.roster | length }} dari {{ report.member_count }})</h2>
+    <div class="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Lv</th>
+                    <th>Build</th>
+                    <th>Role</th>
+                    <th class="num">HP</th>
+                    <th class="num">Hunger</th>
+                    <th>Pill</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in report.roster %}
+                <tr>
+                    <td>{{ m.username }}</td>
+                    <td class="mono">{{ m.level }}</td>
+                    <td>{{ m.build }}</td>
+                    <td>{{ m.role }}</td>
+                    <td class="num mono">{{ m.hp[0] }}/{{ m.hp[1] }}</td>
+                    <td class="num mono">{{ m.hunger[0] }}/{{ m.hunger[1] }}</td>
+                    <td class="mono">{{ m.pill }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}

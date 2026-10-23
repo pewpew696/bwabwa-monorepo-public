@@ -1,0 +1,86 @@
+[
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_LABELS",
+    "body_normalized": "Dict(keys=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='mysterious_plant'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='pill'), Constant(value='cooked_fish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='light_ammo'), Constant(value='heavy_ammo'), Constant(value='case1'), Constant(value='case2'), Constant(value='wooden_case')], values=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_SHORT",
+    "body_normalized": "Dict(keys=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')], values=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Myst.Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='CookedFish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='LightAmmo'), Constant(value='HeavyAmmo'), Constant(value='Case1'), Constant(value='Case2'), Constant(value='WoodCase')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "EQUIPMENT_GRADES",
+    "body_normalized": "Dict(keys=[Constant(value='Common'), Constant(value='Uncommon'), Constant(value='Rare'), Constant(value='Epic'), Constant(value='Legendary'), Constant(value='Mythic')], values=[Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=6), Constant(value=1), Constant(value=6)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=18), Constant(value=2), Constant(value=18)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=54), Constant(value=4), Constant(value=54)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=162), Constant(value=8), Constant(value=162)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=486), Constant(value=16), Constant(value=486)]), Dict(keys=[Constant(value='craft_scraps'), Constant(value='craft_steel'), Constant(value='dismantle_scraps')], values=[Constant(value=1458), Constant(value=32), Constant(value=1458)])])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "API_KEY_TO_ITEM_ID",
+    "body_normalized": "Dict(keys=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='coca'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='cocain'), Constant(value='cookedFish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='lightAmmo'), Constant(value='heavyAmmo'), Constant(value='case1'), Constant(value='case2'), Constant(value='woodenCase')], values=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='mysterious_plant'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='pill'), Constant(value='cooked_fish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='light_ammo'), Constant(value='heavy_ammo'), Constant(value='case1'), Constant(value='case2'), Constant(value='wooden_case')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_ID_TO_API_KEY",
+    "body_normalized": "DictComp(key=Name(id='v', ctx=Load()), value=Name(id='k', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='k', ctx=Store()), Name(id='v', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Name(id='API_KEY_TO_ITEM_ID', ctx=Load()), attr='items', ctx=Load()), args=[], keywords=[]), ifs=[], is_async=0)])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "AMMO_OR_CONSTRUCTION_IDS",
+    "body_normalized": "Set(elts=[Constant(value='limestone'), Constant(value='iron'), Constant(value='concrete'), Constant(value='steel'), Constant(value='wood'), Constant(value='paper'), Constant(value='lead'), Constant(value='light_ammo'), Constant(value='ammo'), Constant(value='heavy_ammo'), Constant(value='petroleum'), Constant(value='oil')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "FOOD_OR_BUFF_IDS",
+    "body_normalized": "Set(elts=[Constant(value='grain'), Constant(value='livestock'), Constant(value='fish'), Constant(value='mysterious_plant')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_LABEL_TO_CODE",
+    "body_normalized": "DictComp(key=Name(id='v', ctx=Load()), value=Name(id='k', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='k', ctx=Store()), Name(id='v', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Dict(keys=[Constant(value='iron'), Constant(value='grain'), Constant(value='wood'), Constant(value='oil'), Constant(value='limestone'), Constant(value='lead'), Constant(value='coca'), Constant(value='fish'), Constant(value='livestock'), Constant(value='scraps'), Constant(value='steel'), Constant(value='bread'), Constant(value='paper'), Constant(value='concrete'), Constant(value='petroleum'), Constant(value='cocain'), Constant(value='cookedFish'), Constant(value='steak'), Constant(value='ammo'), Constant(value='lightAmmo'), Constant(value='heavyAmmo'), Constant(value='case1'), Constant(value='case2'), Constant(value='woodenCase')], values=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')]), attr='items', ctx=Load()), args=[], keywords=[]), ifs=[], is_async=0)])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_EMOJI",
+    "body_normalized": "Dict(keys=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Oil'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Scraps'), Constant(value='Steel'), Constant(value='Bread'), Constant(value='Paper'), Constant(value='Concrete'), Constant(value='Petroleum'), Constant(value='Pill'), Constant(value='Cooked Fish'), Constant(value='Steak'), Constant(value='Ammo'), Constant(value='Light Ammo'), Constant(value='Heavy Ammo'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')], values=[Constant(value='⚙️'), Constant(value='🌾'), Constant(value='🪵'), Constant(value='🛢️'), Constant(value='🪨'), Constant(value='🪨'), Constant(value='🌿'), Constant(value='🐟'), Constant(value='🐄'), Constant(value='🔩'), Constant(value='🔧'), Constant(value='🍞'), Constant(value=' 📄'), Constant(value='🧱'), Constant(value='⛽'), Constant(value='💊'), Constant(value='🍣'), Constant(value='🥩'), Constant(value='🟡'), Constant(value='🔴'), Constant(value='🔵'), Constant(value='📦'), Constant(value='📦'), Constant(value='🎁')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "ITEM_NOT_PRODUCIBLE",
+    "body_normalized": "Set(elts=[Constant(value='Scraps'), Constant(value='Case 1'), Constant(value='Case 2'), Constant(value='Wooden Case')])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "PRODUCTION_CHAIN",
+    "body_normalized": "Dict(keys=[Constant(value='Iron'), Constant(value='Grain'), Constant(value='Wood'), Constant(value='Petroleum'), Constant(value='Limestone'), Constant(value='Lead'), Constant(value='Mysterious Plant'), Constant(value='Fish'), Constant(value='Livestock'), Constant(value='Oil'), Constant(value='Steel'), Constant(value='Concrete'), Constant(value='Paper'), Constant(value='Light Ammo'), Constant(value='Ammo'), Constant(value='Heavy Ammo'), Constant(value='Bread'), Constant(value='Steak'), Constant(value='Cooked Fish'), Constant(value='Pill')], values=[Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=40), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=20), Constant(value=None)]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Tuple(elts=[Constant(value='Petroleum'), Constant(value=1)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=10), Tuple(elts=[Constant(value='Iron'), Constant(value=10)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=10), Tuple(elts=[Constant(value='Limestone'), Constant(value=10)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Tuple(elts=[Constant(value='Wood'), Constant(value=1)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=1), Tuple(elts=[Constant(value='Lead'), Constant(value=1)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=4), Tuple(elts=[Constant(value='Lead'), Constant(value=4)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=16), Tuple(elts=[Constant(value='Lead'), Constant(value=16)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=10), Tuple(elts=[Constant(value='Grain'), Constant(value=10)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=20), Tuple(elts=[Constant(value='Livestock'), Constant(value=1)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=40), Tuple(elts=[Constant(value='Fish'), Constant(value=1)], ctx=Load())]), Dict(keys=[Constant(value='pp'), Constant(value='input')], values=[Constant(value=200), Tuple(elts=[Constant(value='Mysterious Plant'), Constant(value=200)], ctx=Load())])])"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "CONFIDENCE_GATE",
+    "body_normalized": "Constant(value=70.0)"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "LIQ_DISPLAY_HIGH",
+    "body_normalized": "Constant(value=0.65)"
+  },
+  {
+    "file": "services/economy/constants.py",
+    "kind": "constant",
+    "name": "LIQ_DISPLAY_MED",
+    "body_normalized": "Constant(value=0.35)"
+  }
+]

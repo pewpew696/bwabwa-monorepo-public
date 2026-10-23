@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>🔍 Open Orders</h2>
+    <p class="text-muted">Scan semua order aktif (Bid & Ask) milik player di seluruh market. (Hanya scan top 100 order per item).</p>
+
+    <form method="get" action="/intel/open-orders" class="mb-4 d-flex gap-2">
+        <input type="text" name="q" value="{{ query }}" placeholder="Username atau ID" class="form-control" style="max-width: 300px;">
+        <button type="submit" class="btn btn-primary">Scan</button>
+    </form>
+
+    {% if report %}
+        <h4>Hasil untuk: <strong>{{ report.username }}</strong></h4>
+        {% if report.orders %}
+            <table class="table table-sm table-striped table-hover mt-3">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Side</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for o in report.orders %}
+                    <tr>
+                        <td>{{ o.item_name }}</td>
+                        <td>
+                            {% if o.side == "BUY" %}
+                                <span class="badge bg-success">BUY</span>
+                            {% else %}
+                                <span class="badge bg-danger">SELL</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ "%.3f"|format(o.price) }}</td>
+                        <td>{{ "{:,}".format(o.qty) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info mt-3">Tidak ada order aktif ditemukan di top 100 order book setiap item.</div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

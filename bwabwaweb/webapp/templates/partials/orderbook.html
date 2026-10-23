@@ -1,0 +1,50 @@
+{% if orderbook.orderbook %}
+{% set ob = orderbook.orderbook %}
+{% set rows = 15 %}
+{% set bids = (ob.bids or [])[:rows] %}
+{% set asks = (ob.asks or [])[:rows] %}
+{% set max_bid = (bids | map(attribute='qty') | max) if bids else 1 %}
+{% set max_ask = (asks | map(attribute='qty') | max) if asks else 1 %}
+
+<div class="obk-book">
+
+  <div class="obk-head">
+    <span class="obk-l">Depth</span>
+    <span class="obk-l">Size</span>
+    <span class="obk-ord-cell obk-l">Ord</span>
+    <span class="obk-center-l">Bid</span>
+    <span class="obk-center-r">Ask</span>
+    <span class="obk-ord-cell obk-r">Ord</span>
+    <span class="obk-r">Size</span>
+    <span class="obk-r">Depth</span>
+  </div>
+
+  {% for i in range(rows) %}
+  {% set b = bids[i] if i < bids | length else none %}
+  {% set a = asks[i] if i < asks | length else none %}
+  <div class="obk-row">
+    {% if b %}<div class="obk-bar obk-bar-bid" style="--w: {{ (b.qty / max_bid * 100) | round(2) }}"></div>{% endif %}
+    {% if a %}<div class="obk-bar obk-bar-ask" style="--w: {{ (a.qty / max_ask * 100) | round(2) }}"></div>{% endif %}
+
+    <span class="obk-cell obk-l mono">{% if b %}{{ b.cumQty | amount }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-l mono">{% if b %}{{ b.qty | amount }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-ord-cell obk-l mono">{% if b %}{{ b.count }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-center-l mono bid">{% if b %}{{ b.price | price }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-center-r mono ask">{% if a %}{{ a.price | price }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-ord-cell obk-r mono">{% if a %}{{ a.count }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-r mono">{% if a %}{{ a.qty | amount }}{% else %}—{% endif %}</span>
+    <span class="obk-cell obk-r mono">{% if a %}{{ a.cumQty | amount }}{% else %}—{% endif %}</span>
+  </div>
+  {% endfor %}
+
+  {% if ob.best_bid is not none and ob.best_ask is not none %}
+  <div class="obk-last">
+    <div class="obk-last-value mono">{{ ((ob.best_bid + ob.best_ask) / 2) | price }}</div>
+    <div class="obk-last-label">Last Market Price</div>
+  </div>
+  {% endif %}
+
+</div>
+{% else %}
+<p class="empty">Orderbook tidak tersedia saat ini.</p>
+{% endif %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ data.country_name }} · Territory{% endblock %}
+{% block subnav %}{% include "partials/subnav_territory.html" %}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">{{ data.country_name }}</h1>
+    <span class="badge">{{ data.from }} → {{ data.to }}</span>
+  </div>
+  {% if data.error %}
+  <p class="empty">{{ data.error }}</p>
+  {% endif %}
+
+  {% if data.summary and data.summary.collected %}
+  {% set c = data.summary.collected %}
+  <div class="kv-grid">
+    <div><span class="text-muted">Tax collected</span><span class="mono">{{ c.tax_collected | amount }}</span></div>
+    <div><span class="text-muted">Gross tax</span><span class="mono">{{ c.gross_tax_total | amount }}</span></div>
+    <div><span class="text-muted">Wage volume</span><span class="mono">{{ c.wage_volume | amount }}</span></div>
+    <div><span class="text-muted">Transaksi</span><span class="mono">{{ c.tx_count }}</span></div>
+    <div><span class="text-muted">Perusahaan</span><span class="mono">{{ c.company_count }}</span></div>
+    <div><span class="text-muted">Domestik / asing</span><span class="mono">{{ c.domestic_tx_count }} / {{ c.foreign_tx_count }}</span></div>
+  </div>
+  {% endif %}
+
+  {% if data.summary and data.summary.sent_to_citizens_abroad %}
+  <p class="footnote">Pajak warga di luar negeri: {{ data.summary.sent_to_citizens_abroad.tax_sent | amount }} ({{ data.summary.sent_to_citizens_abroad.tx_count }} tx).</p>
+  {% endif %}
+
+  {% if data.daily %}
+  <h2 class="subhead">Harian</h2>
+  <ul class="rank-list">
+    {% for day in data.daily %}
+    <li class="rank-row">
+      <span class="rank-name">{{ day.day }}<span class="rank-sub mono">{{ day.tx_count }} tx</span></span>
+      <span class="rank-value mono">{{ day.tax_collected | amount }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Tidak ada data harian.</p>
+  {% endif %}
+</section>
+
+<section class="card" id="events-panel">
+  <div class="card-head">
+    <h2 class="section-title">Event terakhir</h2>
+    <button class="button button-secondary"
+            hx-get="/territory/country/{{ data.country_name | urlencode }}/events"
+            hx-target="#events-panel"
+            hx-swap="innerHTML">Muat</button>
+  </div>
+  <p class="text-muted">Audit trail transaksi wage terbaru.</p>
+</section>
+{% endblock %}

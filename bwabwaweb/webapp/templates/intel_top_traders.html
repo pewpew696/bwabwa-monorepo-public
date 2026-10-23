@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Top Traders · Tools{% endblock %}
+{% block subnav %}{% include "partials/subnav_intel.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+  <h1 class="section-title">Top traders per negara</h1>
+  <form class="form-stack" method="get" action="/intel/top-traders">
+    <div class="fs-field">
+      <label class="fs-label" for="tt-q">Negara</label>
+      <input class="input" id="tt-q" type="text" name="q" value="{{ query }}" placeholder="Nama / ID negara" required autocomplete="off">
+    </div>
+    <div class="fs-row">
+      <label class="fs-inline">
+        <input class="input fs-num" type="number" name="days" value="{{ days }}" min="1" placeholder="20">
+        <span class="fs-unit">hari</span>
+      </label>
+      <label class="fs-inline">
+        <input class="input fs-num" type="number" name="min_tx" value="{{ min_tx }}" min="1" placeholder="20">
+        <span class="fs-unit">transaksi</span>
+      </label>
+    </div>
+    <button type="submit" class="button">Lihat</button>
+  </form>
+  <p class="text-muted footnote">Top 5 trader berdasarkan profit (FIFO) di negara ini.</p>
+</section>
+
+{% if report %}
+<section class="card">
+  <div class="card-head">
+    <h2 class="section-title">{{ report.country_name }}</h2>
+    <span class="badge">{{ report.days }} hari · min {{ report.min_tx }} tx</span>
+  </div>
+
+  {% if report.traders %}
+  <ul class="rank-list">
+    {% for t in report.traders %}
+    <li class="rank-row">
+      <span class="rank-name">{{ t.rank }}. {{ t.username }}<span class="rank-sub mono">ROI {{ t.roi_pct }}% · vol {{ t.volume | amount }} · {{ t.wins }}W/{{ t.losses }}L · {{ t.tx_count }} tx · biggest loss {{ t.biggest_loss | amount }}</span></span>
+      <span class="rank-value mono {{ t.profit | trend }}">{{ t.profit | amount }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Tidak ada trader yang memenuhi min {{ report.min_tx }} tx dalam {{ report.days }} hari.</p>
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}

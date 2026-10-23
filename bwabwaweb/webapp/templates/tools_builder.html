@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+{% block title %}Build Optimizer · Simulator{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="/static/builder.css">
+
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">Build Optimizer</h1>
+    <span class="badge" id="mode-badge">Balance</span>
+  </div>
+  <p class="text-muted footnote">Balance ranks by lowest net cost per 1K damage (negative = profit). Farmer ranks by highest case income. Glass Cannon ranks by highest damage (gold per 1K as tiebreak). Simplified: gear by rarity, live market prices.</p>
+
+  <h2 class="subhead">Import player</h2>
+  <p class="text-muted footnote">Fill the form from a WarEra username (skills, gear, companies, wage).</p>
+  <div class="rarity-grid">
+    <label class="rarity-cell"><span class="rank-sub">WarEra username</span>
+      <input class="input" type="text" id="import-username" maxlength="40" placeholder="username" autocomplete="off">
+    </label>
+    <label class="rarity-cell"><span class="rank-sub">&nbsp;</span>
+      <button type="button" class="button" id="import-btn">Import</button>
+    </label>
+  </div>
+  <p class="text-muted footnote" id="import-status"></p>
+  <script nonce="{{ csp_nonce }}">
+  (function(){
+    var btn = document.getElementById('import-btn');
+    var input = document.getElementById('import-username');
+    var status = document.getElementById('import-status');
+    function setVal(name, val){
+      var el = document.querySelector("[name='"+name+"']");
+      if (el && !el.disabled) el.value = val;  // hormati skill yang di-pin
+    }
+    function fillForm(d){
+      setVal('char_level', d.char_level);
+      Object.keys(d.skills || {}).forEach(function(k){ setVal('skill_'+k, d.skills[k]); });
+      Object.keys(d.eco_levels || {}).forEach(function(k){ setVal('eco_'+k, d.eco_levels[k]); });
+      Object.keys(d.equipment || {}).forEach(function(s){ setVal('equip_'+s+'_rarity', d.equipment[s]); });
+      setVal('wage_net', d.wage_net);
+      var box = document.getElementById('company-rows');
+      var addBtn = document.getElementById('company-add');
+      box.innerHTML = '';
+      (d.companies || []).forEach(function(c){
+        addBtn.click();
+        var rows = box.querySelectorAll('.company-card');
+        var row = rows[rows.length - 1];
+        if (!row) return;
+        row.querySelector("select[name$='_ae']").value = c.ae_level;
+        row.querySelector("select[name$='_target']").value = c.production_target;
+        row.querySelector("input[name$='_bonus']").value = c.bonus_pct;
+      });
+      if (!(d.companies || []).length) addBtn.click();
+    }
+    btn.addEventListener('click', async function(){
+      var username = input.value.trim();
+      if (!username){ status.textContent = 'Enter a username first.'; return; }
+      btn.disabled = true;
+      status.textContent = 'Importing ' + username + ' ...';
+      try {
+        var resp = await fetch('/sim/builder/import', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({username: username})
+        });
+        var data = await resp.json();
+        if (!resp.ok){ status.textContent = 'Import failed: ' + (data.error || resp.status); return; }
+        fillForm(data);
+        status.textContent = 'Imported: ' + data.username;
+      } catch (e) {
+        status.textContent = 'Import failed: network error.';
+      }
+      btn.disabled = false;
+    });
+  })();
+  </script>
+
+  <form id="builder-form" class="modal-form" hx-post="/sim/builder/calculate" hx-target="#builder-result" hx-swap="innerHTML" autocomplete="off">
+    <label class="text-muted">Build name</label>
+    <input class="input" type="text" name="build_name" maxlength="40" value="Build 1">
+    <label class="text-muted" id="mode-label">Mode</label>
+    <div class="seg" role="radiogroup" aria-labelledby="mode-label">
+      <input type="radio" id="mode-balance" name="mode" value="balance" checked>
+      <label for="mode-balance">Balance<small>lowest gold/1K</small></label>
+      <input type="radio" id="mode-farmer" name="mode" value="farmer">
+      <label for="mode-farmer">Farmer<small>most case income</small></label>
+      <input type="radio" id="mode-glass_cannon" name="mode" value="glass_cannon">
+      <label for="mode-glass_cannon">Glass Cannon<small>max damage</small></label>
+    </div>
+    <label class="text-muted" id="detail-label">Detail</label>
+    <div class="seg" role="radiogroup" aria-labelledby="detail-label">
+      <input type="radio" id="detail-simplified" name="detail" value="simplified" checked>
+      <label for="detail-simplified">Simplified<small>rarity gear</small></label>
+      <input type="radio" id="detail-advanced" name="detail" value="advanced">
+      <label for="detail-advanced">Advanced<small>exact stats</small></label>
+    </div>
+    <script nonce="{{ csp_nonce }}">
+    (function(){
+      var badge = document.getElementById('mode-badge');
+      var names = {balance: 'Balance', farmer: 'Farmer', glass_cannon: 'Glass Cannon'};
+      document.querySelectorAll("input[type=radio][name='mode']").forEach(function(r){
+        r.addEventListener('change', function(){
+          if (r.checked) badge.textContent = names[r.value] || r.value;
+        });
+      });
+    })();
+    </script>
+    <label class="text-muted">Character level (1–50)</label>
+    <input class="input" type="number" name="char_level" min="1" max="50" value="50">
+
+    <h2 class="subhead">Skills</h2>
+    <p class="text-muted footnote">Check pin to lock a skill at its level for every calculation.</p>
+    <div class="skill-grid">
+      {% for s in skill_options %}
+      <div class="skill-cell{% if s.skill_key in pins %} is-locked{% endif %}">
+        <span class="skill-label">{{ s.name }}<span class="rank-sub">unlock Lv {{ s.unlock }}</span></span>
+        <input class="input" type="number" name="skill_{{ s.skill_key }}"
+               min="0" max="{{ s.max_level }}"
+               value="{{ pins[s.skill_key] if s.skill_key in pins else 0 }}"{% if s.skill_key in pins %} disabled{% endif %}>
+        <label class="switch"><input type="checkbox" name="pin_{{ s.skill_key }}"{% if s.skill_key in pins %} checked{% endif %}><span class="track" aria-hidden="true"></span><span>pin</span>{% if s.skill_key in pins %} <span class="badge">locked</span>{% endif %}</label>
+      </div>
+      {% endfor %}
+    </div>
+    <script nonce="{{ csp_nonce }}">
+    (function(){
+      // Uncheck pin -> input aktif lagi (tanpa render ulang).
+      document.querySelectorAll("input[type=checkbox][name^='pin_']").forEach(function(cb){
+        cb.addEventListener("change", function(){
+          if (cb.checked) return;
+          var cell = cb.closest(".skill-cell");
+          var inp = cell ? cell.querySelector("input[name='skill_"+cb.name.slice(4)+"']") : null;
+          if (inp) inp.disabled = false;
+          if (cell) cell.classList.remove("is-locked");
+        });
+      });
+    })();
+    </script>
+
+    <h2 class="subhead">Equipment</h2>
+    <div id="equip-simplified">
+      <p class="text-muted footnote">Stats = midpoint of official range. Durability 100.</p>
+      <div class="rarity-grid">
+        {% for slot in equipment_slots %}
+        <label class="rarity-cell">
+          <span class="rank-sub">{{ slot|capitalize }}</span>
+          <select class="input" name="equip_{{ slot }}_rarity">
+            <option value="">Empty</option>
+            {% for rr in allowed_rarities %}
+            <option value="{{ rr }}">{{ rr }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    <div id="equip-advanced" style="display:none">
+      <p class="text-muted footnote">Exact stats from your own gear. Empty = no gear in that slot. Gear value = gold used for wear cost (empty = craft cost).</p>
+      {% for slot in equipment_slots %}
+      <h3 class="subhead">{{ slot|capitalize }}</h3>
+      <div class="rarity-grid">
+        {% for stat in equipment_stat_keys[slot] %}
+        <label class="rarity-cell"><span class="rank-sub">{{ stat|replace("_", " ")|title }} (max {{ stat_max[stat] }})</span>
+          <input class="input" type="number" name="adv_{{ slot }}_{{ stat }}" min="0" max="{{ stat_max[stat] }}" step="any" placeholder="0">
+        </label>
+        {% endfor %}
+        <label class="rarity-cell"><span class="rank-sub">Durability % (1–100)</span>
+          <input class="input" type="number" name="adv_{{ slot }}_dur" min="1" max="100" step="any" placeholder="100">
+        </label>
+        <label class="rarity-cell"><span class="rank-sub">Gear value (gold)</span>
+          <input class="input" type="number" name="adv_{{ slot }}_value" min="0" step="any" placeholder="craft cost">
+        </label>
+      </div>
+      {% endfor %}
+    </div>
+    <script nonce="{{ csp_nonce }}">
+    (function(){
+      // Toggle Simplified <-> Advanced (equipment + price overrides).
+      var simp = document.getElementById('equip-simplified');
+      var adv = document.getElementById('equip-advanced');
+      var pov = document.getElementById('price-ov-section');
+      function isAdv(){
+        var r = document.querySelector("input[type=radio][name='detail']:checked");
+        return r && r.value === 'advanced';
+      }
+      function toggle(){
+        var on = isAdv();
+        simp.style.display = on ? 'none' : '';
+        adv.style.display = on ? '' : 'none';
+        if (pov) pov.style.display = on ? '' : 'none';
+      }
+      document.querySelectorAll("input[type=radio][name='detail']").forEach(function(r){
+        r.addEventListener('change', toggle);
+      });
+      toggle();
+    })();
+    </script>
+
+    <h2 class="subhead">Battle setup</h2>
+    <label class="text-muted">Pill</label>
+    <select class="input" name="pill">
+      <option value="buff">Buff pill</option>
+      <option value="none">No pill</option>
+    </select>
+    <label class="text-muted">Ammo</label>
+    <select class="input" name="ammo_tier">
+      <option value="none">No ammo</option>
+      <option value="light">Light Ammo (+10%)</option>
+      <option value="ammo" selected>Ammo (+20%)</option>
+      <option value="heavy">Heavy Ammo (+40%)</option>
+    </select>
+    <label class="text-muted">Food</label>
+    <select class="input" name="food_type">
+      <option value="Steak" selected>Steak (15%)</option>
+      <option value="Bread">Bread (10%)</option>
+      <option value="Cooked Fish">Cooked Fish (20%)</option>
+      <option value="none">None</option>
+    </select>
+    <label class="text-muted">Battle bonus % (0–135)</label>
+    <input class="input" type="number" name="battle_bonus_pct" min="0" max="135" step="1" value="0">
+    <label class="text-muted">Rank bonus % (0–37.5)</label>
+    <input class="input" type="number" name="rank_bonus_pct" min="0" max="37.5" step="0.25" value="0">
+    <label class="text-muted">Window</label>
+    <select class="input" name="window">
+      <option value="8h">8h (buff phase)</option>
+      <option value="16h">16h (buff + debuff)</option>
+      <option value="24h">24h (buff + debuff + neutral)</option>
+    </select>
+
+    <h2 class="subhead">Economy</h2>
+    <p class="text-muted footnote">Work &amp; company income from economy skills (port cogs/economy). Entrepreneurship actions go all-in to the highest region bonus.</p>
+    <div class="skill-grid">
+      {% for key in eco_skill_keys %}
+      <label class="skill-cell">
+        <span class="skill-label">{{ key|capitalize }}</span>
+        <input class="input" type="number" name="eco_{{ key }}"
+               min="0" max="10" value="0">
+      </label>
+      {% endfor %}
+    </div>
+    <label class="text-muted">Net wage per PP (as worker)</label>
+    <input class="input" type="number" name="wage_net" min="0" step="0.001" value="0">
+
+    <h2 class="subhead">Companies</h2>
+    <p class="text-muted footnote">Max active = 2 + Companies skill level. Each card is one company: pick its AE level, product, and region bonus.</p>
+    <div id="company-rows"></div>
+    <button type="button" class="button button-secondary" id="company-add">+ Add company</button>
+    <select id="company-target-tpl" style="display:none" aria-hidden="true">
+      {% for it in production_items %}<option value="{{ it }}">{{ it }}</option>{% endfor %}
+    </select>
+    <script nonce="{{ csp_nonce }}">
+    // Company cards: satu card = satu company (bernilai nomor). JS defensif:
+    // null-check semua elemen, addEventListener, jalan setelah DOM siap.
+    document.addEventListener('DOMContentLoaded', function(){
+      var box = document.getElementById('company-rows');
+      var addBtn = document.getElementById('company-add');
+      var tpl = document.getElementById('company-target-tpl');
+      if (!box || !addBtn || !tpl) return;  // elemen hilang -> diam, jangan error
+      var maxRows = {{ max_company_rows }};
+      var itemOptions = tpl.innerHTML;
+      var n = 0;
+      function aeOptions(){
+        var h = '';
+        for (var a = 1; a <= 7; a++) h += '<option value="'+a+'">AE '+a+'</option>';
+        return h;
+      }
+      function renumber(){
+        var cards = box.querySelectorAll('.company-card');
+        for (var i = 0; i < cards.length; i++){
+          var label = cards[i].querySelector('.company-num');
+          if (label) label.textContent = 'Company ' + (i + 1);
+        }
+      }
+      function addRow(){
+        if (box.querySelectorAll('.company-card').length >= maxRows) return;
+        var i = n++;
+        var div = document.createElement('div');
+        div.className = 'company-card';
+        div.innerHTML =
+          '<div class="company-card-head"><span class="company-num"></span>' +
+          '<button type="button" class="button button-secondary small" data-del>Remove</button></div>' +
+          '<div class="rarity-grid">' +
+          '<label class="rarity-cell"><span class="rank-sub">AE level (1-7)</span>' +
+          '<select class="input" name="company_'+i+'_ae">'+aeOptions()+'</select></label>' +
+          '<label class="rarity-cell"><span class="rank-sub">Produces</span>' +
+          '<select class="input" name="company_'+i+'_target">'+itemOptions+'</select></label>' +
+          '<label class="rarity-cell"><span class="rank-sub">Region bonus %</span>' +
+          '<input class="input" type="number" name="company_'+i+'_bonus" min="0" step="0.5" value="0"></label>' +
+          '</div>';
+        var del = div.querySelector('[data-del]');
+        if (del) del.addEventListener('click', function(){ div.remove(); renumber(); });
+        box.appendChild(div);
+        renumber();
+      }
+      addBtn.addEventListener('click', addRow);
+      addRow();  // selalu ada 1 baris saat halaman dibuka
+    });
+    </script>
+
+    <div id="price-ov-section" style="display:none">
+      <h2 class="subhead">Price overrides (Advanced only)</h2>
+      <p class="text-muted footnote">Empty price = use live DB price. Override to value items your way (e.g. self-crafted). Explicit input, not a hardcoded guess.</p>
+      <div id="price-ov-rows"></div>
+      <button type="button" class="button button-secondary" id="price-ov-add">+ Add override</button>
+      <select id="price-key-tpl" style="display:none" aria-hidden="true">
+        {% for k in price_keys %}<option value="{{ k }}">{{ k }}{% if k in db_prices %} (DB: {{ db_prices[k]|format_price }}){% endif %}</option>{% endfor %}
+      </select>
+      <script nonce="{{ csp_nonce }}">
+      // Price override cards: pola sama seperti company (defensif + bernomor).
+      document.addEventListener('DOMContentLoaded', function(){
+        var box = document.getElementById('price-ov-rows');
+        var addBtn = document.getElementById('price-ov-add');
+        var tpl = document.getElementById('price-key-tpl');
+        if (!box || !addBtn || !tpl) return;
+        var maxRows = {{ max_price_override_rows }};
+        var itemOptions = tpl.innerHTML;
+        var n = 0;
+        function renumber(){
+          var cards = box.querySelectorAll('.priceov-card');
+          for (var i = 0; i < cards.length; i++){
+            var label = cards[i].querySelector('.priceov-num');
+            if (label) label.textContent = 'Override ' + (i + 1);
+          }
+        }
+        function addRow(){
+          if (box.querySelectorAll('.priceov-card').length >= maxRows) return;
+          var i = n++;
+          var div = document.createElement('div');
+          div.className = 'priceov-card';
+          div.innerHTML =
+            '<div class="company-card-head"><span class="priceov-num"></span>' +
+            '<button type="button" class="button button-secondary small" data-del>Remove</button></div>' +
+            '<div class="rarity-grid">' +
+            '<label class="rarity-cell"><span class="rank-sub">Item</span>' +
+            '<select class="input" name="price_ov_'+i+'_item">'+itemOptions+'</select></label>' +
+            '<label class="rarity-cell"><span class="rank-sub">Your price</span>' +
+            '<input class="input" type="number" name="price_ov_'+i+'_price" min="0" step="any" placeholder="DB price"></label>' +
+            '</div>';
+          var del = div.querySelector('[data-del]');
+          if (del) del.addEventListener('click', function(){ div.remove(); renumber(); });
+          box.appendChild(div);
+          renumber();
+        }
+        addBtn.addEventListener('click', addRow);
+      });
+      </script>
+    </div>
+
+    <div class="builder-actions">
+      <button type="submit" class="button">Calculate &amp; compare</button>
+    </div>
+  </form>
+</section>
+
+<div id="builder-result"></div>
+
+{% endblock %}

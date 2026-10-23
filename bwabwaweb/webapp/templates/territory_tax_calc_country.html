@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}{{ detail.country_name }} · Tax Calc{% endblock %}
+{% block subnav %}{% include "partials/subnav_territory.html" %}{% endblock %}
+{% block content %}
+
+<section class="card">
+  <div class="card-head">
+    <h1 class="section-title">{{ detail.country_name }}</h1>
+    <span class="badge">{{ detail.window }}</span>
+  </div>
+  <p class="text-muted footnote"><a href="/territory/tax-calc?window={{ detail.window }}">Back to leaderboard</a></p>
+
+  <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+    {% for w in detail.windows %}
+    <a class="badge" style="{% if w == detail.window %}color:var(--accent);border-color:var(--accent){% endif %};text-decoration:none" href="/territory/tax-calc/{{ detail.country_id }}?window={{ w }}">{{ w }}</a>
+    {% endfor %}
+  </div>
+
+  <div class="kv-grid">
+    <div><span class="text-muted">Tax income</span><span class="mono">{{ detail.total.tax_income|price }}</span></div>
+    <div><span class="text-muted">Wages paid</span><span class="mono">{{ detail.total.wages_paid|price }}</span></div>
+    <div><span class="text-muted">Transactions</span><span class="mono">{{ detail.total.transactions|amount }}</span></div>
+    <div><span class="text-muted">Avg tax rate</span><span class="mono">{{ detail.total.avg_tax_rate }}%</span></div>
+    <div><span class="text-muted">Foreign worker tax</span><span class="mono">{{ detail.total.foreign_tax|price }} ({{ detail.total.foreign_share_pct }}%)</span></div>
+    <div><span class="text-muted">Domestic worker tax</span><span class="mono">{{ detail.total.domestic_tax|price }}</span></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2 class="section-title">Hourly tax income</h2>
+  <div class="chart-wrap"><div id="country-chart" style="height:100%"></div></div>
+  <p class="text-muted footnote" id="country-status"></p>
+  <p class="text-muted footnote">Blue = total, green = domestic workers, orange = foreign workers.</p>
+</section>
+
+<section class="card">
+  <h2 class="section-title">By Owner Country</h2>
+  <p class="text-muted footnote">Citizenship of company owners operating in {{ detail.country_name }}.</p>
+  {% if detail.by_owner %}
+  <table class="tbl">
+    <thead><tr><th>Owner Country</th><th class="num">Tax Income</th><th class="num">Wages Paid</th><th class="num">Tx</th></tr></thead>
+    <tbody>
+    {% for r in detail.by_owner %}
+      <tr><td>{{ r.country_name }}</td><td class="num mono">{{ r.tax_income|price }}</td><td class="num mono">{{ r.wages_paid|price }}</td><td class="num mono">{{ r.transactions|amount }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted footnote">No breakdown data yet.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2 class="section-title">By Produced Item</h2>
+  <p class="text-muted footnote">Items produced by companies in {{ detail.country_name }}.</p>
+  {% if detail.by_item %}
+  <table class="tbl">
+    <thead><tr><th>Item</th><th class="num">Tax Income</th><th class="num">Wages Paid</th><th class="num">Tx</th></tr></thead>
+    <tbody>
+    {% for r in detail.by_item %}
+      <tr><td>{{ r.item_code }}</td><td class="num mono">{{ r.tax_income|price }}</td><td class="num mono">{{ r.wages_paid|price }}</td><td class="num mono">{{ r.transactions|amount }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted footnote">No breakdown data yet.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2 class="section-title">By Region</h2>
+  <p class="text-muted footnote">Regions within {{ detail.country_name }}.</p>
+  {% if detail.by_region %}
+  <table class="tbl">
+    <thead><tr><th>Region</th><th class="num">Tax Income</th><th class="num">Wages Paid</th><th class="num">Tx</th></tr></thead>
+    <tbody>
+    {% for r in detail.by_region %}
+      <tr><td class="mono">{{ r.region_id[:8] if r.region_id != 'Unknown' else 'Unknown' }}</td><td class="num mono">{{ r.tax_income|price }}</td><td class="num mono">{{ r.wages_paid|price }}</td><td class="num mono">{{ r.transactions|amount }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted footnote">No breakdown data yet.</p>
+  {% endif %}
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script src="/static/lightweight-charts.umd.js" defer></script>
+<script defer nonce="{{ csp_nonce }}">
+(function(){
+  var el = document.getElementById('country-chart');
+  var st = document.getElementById('country-status');
+  if (!el || typeof LightweightCharts === 'undefined') {
+    if (st) st.textContent = 'Chart library not loaded.';
+    return;
+  }
+  var total = [
+    {% for p in detail.trend %}
+    { time: {{ p.ts }}, value: {{ p.tax_income }} },
+    {% endfor %}
+  ];
+  var domestic = [
+    {% for p in detail.trend %}
+    { time: {{ p.ts }}, value: {{ p.domestic_tax }} },
+    {% endfor %}
+  ];
+  var foreign = [
+    {% for p in detail.trend %}
+    { time: {{ p.ts }}, value: {{ p.foreign_tax }} },
+    {% endfor %}
+  ];
+  if (!total.length) { if (st) st.textContent = 'No data for this window.'; return; }
+  var chart = LightweightCharts.createChart(el, {
+    layout: { background: { color: 'transparent' }, textColor: '#9a9a9a' },
+    grid: { vertLines: { visible: false }, horzLines: { color: '#2a2a2a' } },
+    timeScale: { timeVisible: true },
+  });
+  chart.addAreaSeries({ lineColor: '#4a9eff', topColor: 'rgba(74,158,255,0.4)', bottomColor: 'rgba(74,158,255,0)' }).setData(total);
+  chart.addLineSeries({ color: '#4ade80', lineWidth: 1 }).setData(domestic);
+  chart.addLineSeries({ color: '#f59e0b', lineWidth: 1 }).setData(foreign);
+  chart.timeScale().fitContent();
+})();
+</script>
+{% endblock %}

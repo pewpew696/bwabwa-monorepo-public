@@ -1,0 +1,12 @@
+{% if data.events %}
+<ul class="rank-list">
+  {% for ev in data.events %}
+  <li class="rank-row">
+    <span class="rank-name mono">{{ ev.tx_id[:10] }}…<span class="rank-sub mono">{{ ev.created_at | wib }} · {{ ev.money | amount }}</span></span>
+    <span class="rank-value mono">{{ ev.gross_tax | amount }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="empty">Belum ada event.</p>
+{% endif %}

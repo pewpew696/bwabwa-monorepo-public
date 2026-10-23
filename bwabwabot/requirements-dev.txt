@@ -1,0 +1,4 @@
+# Dev-only deps — jangan install ke production
+# Pakai: python3 -m venv .venv-test && .venv-test/bin/pip install -r requirements-dev.txt
+ruff==0.16.9
+pytest==9.1.1
